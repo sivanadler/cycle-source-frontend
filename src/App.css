@@ -1,3 +1,19 @@
+body {
+  background-color: #FFF688;
+}
+/* .App {
+  background-image: url('https://thumbs.gfycat.com/FarflungCharmingHectorsdolphin-small.gif');
+  background-repeat: no-repeat;
+  background-position: right;
+} */
+
+.wheel-gif {
+  float: right;
+  height: 900px;
+  position: inline-block;
+  z-index: -1;
+}
+
 .nav {
   color: white;
   padding: 20px;
@@ -16,4 +32,15 @@
   color: black;
   height: 300px;
   text-decoration: none;
+}
+
+.logo {
+  font-size: 150px;
+  margin-left: 40px;
+}
+
+.login {
+  float: right;
+  position: inline-block;
+  margin-right: 200px;
 }
