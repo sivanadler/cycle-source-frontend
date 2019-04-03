@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <Nav />
+        {this.props.loggedIn ? null : <Nav />}
         <span>
           <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
         </span>
@@ -33,7 +33,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loginClicked: state.loginClicked,
-    newUser: state.newUser
+    newUser: state.newUser,
+    loggedIn: state.loggedIn
   }
 }
 
