@@ -83,11 +83,11 @@ body {
 }
 
 #map {
-  width: 48%;
+  width: 47.2%;
   float: right;
   height: 1140px;
   background-color: grey;
-  margin: 20px;
+  margin: 30px;
   border: 10px solid white;
 }
 
@@ -98,7 +98,7 @@ body {
 
 .search-box {
   float: left;
-  margin-left: 20px;
+  margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 48%;
@@ -147,5 +147,27 @@ body {
   float: right;
   margin-right: 30px;
   display: inline;
+}
 
+.profile-information {
+  width: 20%;
+  float: left;
+  height: 1000px;
+  background-color: white;
+  margin-left: 30px;
+  border-radius: 5px;
+}
+
+.profile-picture {
+  margin-left: 70px;
+  margin-top: 40px;
+  height: 300px;
+}
+
+.profile-details-container {
+  width: 75%;
+  float: right;
+  height: 1000px;
+  background-color: white;
+  margin-right: 30px;
 }

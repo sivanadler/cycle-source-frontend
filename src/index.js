@@ -8,6 +8,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import Login from './components/Login'
 import SearchContainer from './components/SearchContainer'
+import ProfileContainer from './components/ProfileContainer'
+import ReservationContainer from './components/ReservationContainer'
 
 
 ReactDOM.render(
@@ -15,6 +17,8 @@ ReactDOM.render(
     <Router>
       <Route exact path="/" component={App} />
       <Route exact path="/search" component={SearchContainer} />
+      <Route exact path="/reserve" component={ReservationContainer} />
+      <Route exact path="/profile" component={ProfileContainer} />
     </Router>
   </Provider>
   , document.getElementById('root'));
