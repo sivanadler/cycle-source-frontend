@@ -4,6 +4,8 @@ const initialState = {
   loggedIn: true,
   newUserType: null,
   searchInput: "",
+  myReservations: true,
+  myFavorites: false,
 }
 
 const reducer = (state=initialState, action) => {
@@ -19,6 +21,10 @@ const reducer = (state=initialState, action) => {
       return {...state, newUserType: action.payload}
     case "UPDATE_SEARCH_INPUT":
       return {...state, searchInput: action.payload}
+    case "RENDER_USERS_RESERVATIONS":
+      return {...state, myReservations: true, myFavorites: false}
+    case "RENDER_USERS_FAVORITES":
+      return {...state, myReservations: false, myFavorites: true}
     default:
       return state
   }
