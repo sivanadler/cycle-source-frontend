@@ -7,12 +7,14 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './store'
 import Login from './components/Login'
+import SearchContainer from './components/SearchContainer'
 
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path="/" component={App} />
+      <Route exact path="/search" component={SearchContainer} />
     </Router>
   </Provider>
   , document.getElementById('root'));

@@ -10,8 +10,10 @@ import Nav from './components/Nav'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import HamburgerNav from  './components/HamburgerNav'
+import SearchContainer from './components/SearchContainer'
 
 class App extends Component {
+
   render() {
     return (
       <Router>

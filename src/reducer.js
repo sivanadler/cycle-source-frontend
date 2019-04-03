@@ -3,6 +3,7 @@ const initialState = {
   newUser: false,
   loggedIn: true,
   newUserType: null,
+  searchInput: "",
 }
 
 const reducer = (state=initialState, action) => {
@@ -16,6 +17,8 @@ const reducer = (state=initialState, action) => {
       return {...state, loggedIn: true}
     case "SET_NEW_USER_TYPE":
       return {...state, newUserType: action.payload}
+    case "UPDATE_SEARCH_INPUT":
+      return {...state, searchInput: action.payload}
     default:
       return state
   }
