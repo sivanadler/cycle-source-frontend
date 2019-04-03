@@ -8,9 +8,9 @@ const SearchBar = (props) => {
   }
 
   return (
-  <div className="">
-    <label>Search: </label>
-    <input type="text" name="searchInput" placeholder="Search by Studio" value={props.searchInput} onChange={handleSearchChange}/>
+  <div>
+    <h1 className="search-label">Find Your Ride </h1>
+    <input className="search-bar" type="text" name="searchInput" placeholder="Search by Studio" value={props.searchInput} onChange={handleSearchChange}/>
   </div>
   )
 }

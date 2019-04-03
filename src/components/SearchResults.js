@@ -1,4 +1,5 @@
 import React from "react"
+import like from '../images/like.png'
 
 const SearchResults = () => {
   return (
@@ -9,6 +10,7 @@ const SearchResults = () => {
       <p>Location: address</p>
       <p>Phone Number: number</p>
       <p>Email: email</p>
+
     </div>
 
     <div className="search-result-card">
