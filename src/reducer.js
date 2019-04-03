@@ -1,8 +1,8 @@
 const initialState = {
   loginClicked: false,
   newUser: false,
-  loggedIn: false,
-  newUserType: null
+  loggedIn: true,
+  newUserType: null,
 }
 
 const reducer = (state=initialState, action) => {

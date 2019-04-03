@@ -17,7 +17,6 @@ const Nav = (props) => {
     props.newUser()
   }
 
-  console.log(props.loginClicked);
   return (
   <div className="nav">
     <Router>

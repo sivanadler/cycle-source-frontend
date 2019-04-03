@@ -3,11 +3,6 @@
 body {
   background-color: #FFF688;
 }
-/* .App {
-  background-image: url('https://thumbs.gfycat.com/FarflungCharmingHectorsdolphin-small.gif');
-  background-repeat: no-repeat;
-  background-position: right;
-} */
 
 .wheel-gif {
   float: right;
@@ -55,4 +50,33 @@ body {
   float: right;
   position: inline-block;
   margin-right: 200px;
+}
+
+.collapsed-nav {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+  border-radius: 5px;
+}
+
+.hamburger {
+  margin: 15px;
+}
+
+.exposed-nav {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  border-radius: 5px;
+}
+
+.exposed-hamburger {
+  padding: 15px;
+  height: 1000px;
+  width: 200px;
+  background-color: black;
+  z-index: 5;
+  position: inline;
 }

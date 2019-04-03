@@ -9,13 +9,14 @@ import wheelGif from './images/wheel-gif.gif'
 import Nav from './components/Nav'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import HamburgerNav from  './components/HamburgerNav'
 
 class App extends Component {
   render() {
     return (
       <Router>
       <div className="App">
-        {this.props.loggedIn ? null : <Nav />}
+        {this.props.loggedIn ? <HamburgerNav /> : <Nav />}
         <span>
           <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
         </span>
