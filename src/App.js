@@ -12,7 +12,13 @@ import SignUp from './components/SignUp'
 import HamburgerNav from  './components/HamburgerNav'
 import SearchContainer from './components/SearchContainer'
 
+import Adapter from './apis/UserAdapter'
+
 class App extends Component {
+
+  componentDidMount(){
+    Adapter.getUsers()
+  }
 
   render() {
     return (
@@ -29,6 +35,7 @@ class App extends Component {
         {this.props.newUser ? <SignUp /> : null}
       </div>
       </Router>
+
     );
   }
 }

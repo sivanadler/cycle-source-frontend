@@ -85,7 +85,7 @@ body {
 #map {
   width: 47.2%;
   float: right;
-  height: 1140px;
+  height: 100%;
   background-color: grey;
   margin: 30px;
   border: 10px solid white;
@@ -101,9 +101,11 @@ body {
   margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 48%;
-  height: 1160px;
+  width: 46%;
+  height: 920px;
+  padding: 10px;
   background-color: white;
+  overflow: scroll;
 }
 
 .search-header {
@@ -170,4 +172,22 @@ body {
   height: 1000px;
   background-color: white;
   margin-right: 30px;
+}
+
+.schedule-container {
+  width: 1764px;
+  height: 320px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.calendar-day {
+  width: 250px;
+  height: 240px;
+  background-color: black;
+  color: white;
+  float: left;
+  border: 1px solid white;
 }

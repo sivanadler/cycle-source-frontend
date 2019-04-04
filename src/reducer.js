@@ -6,6 +6,8 @@ const initialState = {
   searchInput: "",
   myReservations: true,
   myFavorites: false,
+  locations: [],
+  studios: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -25,6 +27,10 @@ const reducer = (state=initialState, action) => {
       return {...state, myReservations: true, myFavorites: false}
     case "RENDER_USERS_FAVORITES":
       return {...state, myReservations: false, myFavorites: true}
+    case "GET_LOCATIONS":
+      return {...state, locations: action.payload}
+    case "GET_STUDIOS":
+      return {...state, studios: action.payload}
     default:
       return state
   }

@@ -1,27 +1,38 @@
 import React from "react"
 import like from '../images/like.png'
+import { connect } from 'react-redux'
 
-const SearchResults = () => {
+
+const SearchResults = (props) => {
+  function getStudioName(){
+    console.log(props);
+    if (props.studios) {
+      let studio = props.studios.find(studio => studio.id === props.location.studio_id)
+      return studio.name
+    }
+  }
+
   return (
   <div className="">
-    <div className="search-result-card">
-      <h2>FlyWheel Sports Midtown East</h2>
-      <p>Rating: **** </p>
-      <p>Location: address</p>
-      <p>Phone Number: number</p>
-      <p>Email: email</p>
-
-    </div>
-
-    <div className="search-result-card">
-      <h2>FlyWheel Sports Williamsburg</h2>
-      <p>Rating: **** </p>
-      <p>Location: address</p>
-      <p>Phone Number: number</p>
-      <p>Email: email</p>
-    </div>
+    {props !== undefined
+      ?
+      <div className="search-result-card">
+        <h2>{getStudioName()} {props.location.name}</h2>
+        <p>Rating: **** </p>
+        <p>{props.location.address}</p>
+        <p>{props.location.phone_number}</p>
+        <p>{props.location.email}</p>
+      </div>
+      :
+      null
+    }
   </div>
   )
 }
+const mapStateToProps = state => {
+  return {
+    studios: state.studios
+  }
+}
 
-export default SearchResults
+export default connect(mapStateToProps)(SearchResults)
