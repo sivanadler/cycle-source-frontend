@@ -4,20 +4,20 @@ import { connect } from 'react-redux'
 
 
 const SearchResults = (props) => {
-  function getStudioName(){
-    console.log(props);
-    if (props.studios) {
-      let studio = props.studios.find(studio => studio.id === props.location.studio_id)
-      return studio.name
-    }
-  }
+  // function getStudioName(){
+  //   console.log(props);
+  //   if (props.studios) {
+  //     let studio = props.studios.find(studio => studio.id === props.location.studio_id)
+  //     return studio.name
+  //   }
+  
 
   return (
   <div className="">
     {props !== undefined
       ?
       <div className="search-result-card">
-        <h2>{getStudioName()} {props.location.name}</h2>
+        <h2>PLACEHOLDER {props.location.name}</h2>
         <p>Rating: **** </p>
         <p>{props.location.address}</p>
         <p>{props.location.phone_number}</p>
@@ -29,6 +29,7 @@ const SearchResults = (props) => {
   </div>
   )
 }
+
 const mapStateToProps = state => {
   return {
     studios: state.studios

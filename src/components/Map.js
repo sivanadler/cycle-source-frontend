@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Pin from './Pin'
 import { connect } from 'react-redux'
+import LocationAdapter from '../apis/LocationAdapter'
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-let lat
-let lng
+let latPin
+let lngPin
+let coordinatesArray = []
 
 class Map extends Component {
   state = {
     lat: null,
     lng: null,
+    coordinates: []
   }
 
   static defaultProps = {
@@ -33,20 +36,27 @@ class Map extends Component {
     const Geocoder = new maps.Geocoder();
   };
 
-  componentDidMount(){
-    let addressToGeocode = this.props.locations[0].address
-    console.log(addressToGeocode);
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressToGeocode}&key=${key}`)
+  renderPins = () => {
+    LocationAdapter.getLocations()
+    .then(locations => {
+      locations.forEach(location => this.getGeoCode(location.address))
+    })
+  }
+
+  getGeoCode = (address) => {
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`)
     .then(res => res.json())
     .then(res => {
-      lat = res.results[0].geometry.location.lat
-      lng = res.results[0].geometry.location.lng
-      return <Pin
-        lat={lat}
-        lng={lng}
-        text= "NEW"
-      />
+      latPin = res.results[0].geometry.location.lat
+      lngPin = res.results[0].geometry.location.lng
+      this.setState({
+        coordinates: [...this.state.coordinates, {latPin, lngPin}]
+      })
     })
+  }
+
+  componentDidMount(){
+    this.renderPins()
   }
 
   render() {
@@ -61,6 +71,9 @@ class Map extends Component {
             defaultCenter={{lat, lng}}
             defaultZoom={this.props.zoom}
           >
+            {this.state.coordinates.length !== 0 ? this.state.coordinates.map(coordinate =>{
+              return <Pin lat={coordinate.latPin} lng={coordinate.lngPin} text= "MY MARKER"/>
+            }): null}
           </GoogleMapReact>
         </div>
       </div>
@@ -70,7 +83,7 @@ class Map extends Component {
 
 const mapStateToProps = state => {
   return {
-    locations: state.locations,
+    locations: state.locations.length !== 0,
   }
 }
 

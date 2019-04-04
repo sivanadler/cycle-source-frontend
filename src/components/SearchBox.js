@@ -25,7 +25,7 @@ class SearchBox extends React.Component {
         <SearchBar />
         <Sort />
         {this.props.locations.map(location => {
-          return <SearchResults location={location}/>
+          return <SearchResults key={location.id} location={location}/>
         })}
 
       </div>
