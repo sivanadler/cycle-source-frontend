@@ -1,26 +1,15 @@
 import React from "react"
 import like from '../images/like.png'
 import { connect } from 'react-redux'
-import StudioAdapter from '../apis/StudioAdapter'
 
 
 class SearchResults extends React.Component {
-  state = {
-    studios: []
-  }
 
   getStudioName = () => {
-    if (this.state.studios.length !== 0) {
-      let studio = this.state.studios.find(studio => studio.id === this.props.location.studio_id)
+    if (this.props.studios.length !== 0) {
+      let studio = this.props.studios.find(studio => studio.id === this.props.location.studio_id)
       return studio.name
     }
-  }
-
-  componentDidMount(){
-    StudioAdapter.getStudios()
-    .then(studios => {
-      this.setState({studios})
-    })
   }
 
   render() {

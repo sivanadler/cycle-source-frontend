@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Pin from './Pin'
 import { connect } from 'react-redux'
-import LocationAdapter from '../apis/LocationAdapter'
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 let latPin
@@ -13,7 +12,8 @@ class Map extends Component {
   state = {
     lat: null,
     lng: null,
-    coordinates: []
+    coordinates: [],
+    filteredCoordinates: []
   }
 
   static defaultProps = {
@@ -36,11 +36,16 @@ class Map extends Component {
     const Geocoder = new maps.Geocoder();
   };
 
+
+  //right now, pins are not rendering
   renderPins = () => {
-    LocationAdapter.getLocations()
-    .then(locations => {
-      locations.forEach(location => this.getGeoCode(location.address))
-    })
+    if (this.props.searchTerm) {
+      this.props.filteredLocations.forEach(location => this.getFilteredGeoCodes(location.address))
+    } else if (this.props.locations.length !== 0) {
+      this.props.locations.forEach(location => this.getGeoCode(location.address))
+    }
+
+    this.props.locations.forEach(location => this.getGeoCode(location.address))
   }
 
   getGeoCode = (address) => {
@@ -49,17 +54,33 @@ class Map extends Component {
     .then(res => {
       latPin = res.results[0].geometry.location.lat
       lngPin = res.results[0].geometry.location.lng
+      this.props.setCoordinates({latPin, lngPin})
+      // this.setState({
+      //   coordinates: [...this.state.coordinates, {latPin, lngPin}],
+      //   filteredCoordinates: []
+      // })
+    })
+  }
+
+  getGeoFilteredCodes = (address) => {
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`)
+    .then(res => res.json())
+    .then(res => {
+      latPin = res.results[0].geometry.location.lat
+      lngPin = res.results[0].geometry.location.lng
       this.setState({
-        coordinates: [...this.state.coordinates, {latPin, lngPin}]
+        filteredCoordinates: [...this.state.filteredCoordinates, {latPin, lngPin}],
+        coordinates: []
       })
     })
   }
 
   componentDidMount(){
-    this.renderPins()
+    // this.renderPins()
   }
 
   render() {
+    console.log(this.props.locations);
     const lat = this.state.lat
     const lng = this.state.lng
     return (
@@ -71,9 +92,16 @@ class Map extends Component {
             defaultCenter={{lat, lng}}
             defaultZoom={this.props.zoom}
           >
-            {this.state.coordinates.length !== 0 ? this.state.coordinates.map(coordinate =>{
-              return <Pin lat={coordinate.latPin} lng={coordinate.lngPin} text= "MY MARKER"/>
-            }): null}
+          {this.renderPins}
+            {
+              this.props.coordinates.length !== 0
+              ? this.props.coordinates.map(coordinate =>{
+                return <Pin lat={coordinate.latPin} lng={coordinate.lngPin} text= "MY MARKER"/>
+              })
+              :
+              this.state.filteredCoordinates.map(coordinate =>{
+                return <Pin lat={coordinate.latPin} lng={coordinate.lngPin} text= "MY MARKER"/>
+            })}
           </GoogleMapReact>
         </div>
       </div>
@@ -83,8 +111,17 @@ class Map extends Component {
 
 const mapStateToProps = state => {
   return {
-    locations: state.locations.length !== 0,
+    locations: state.locations,
+    searchTerm: state.searchTerm,
+    filteredLocations: state.filteredLocations,
+    coordinates: state.coordinates
   }
 }
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchtoProps = dispatch => {
+  return {
+    setCoordinates: ({coordinates}) => dispatch({ type: "SET_COORDINATES", payload: {coordinates}})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Map);

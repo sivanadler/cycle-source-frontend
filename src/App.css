@@ -128,6 +128,14 @@ body {
   margin-left: 20px;
 }
 
+.search-bar-div {
+  top: 0;
+  position: sticky;
+  margin-top: 0px;
+  background-color: white;
+  padding: 10px;
+}
+
 .search-label {
   text-align: center;
 }
@@ -190,4 +198,10 @@ body {
   color: white;
   float: left;
   border: 1px solid white;
+}
+
+#clear-filter {
+  margin-top: 20px;
+  text-align: center;
+  color: blue;
 }

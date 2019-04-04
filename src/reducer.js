@@ -8,7 +8,10 @@ const initialState = {
   myFavorites: false,
   locations: [],
   studios: [],
-  filteredLocations: []
+  filteredLocations: [],
+  searchTerm: null,
+  coordinates: [],
+  filteredCoordinates: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -33,8 +36,13 @@ const reducer = (state=initialState, action) => {
     case "GET_STUDIOS":
       return {...state, studios: action.payload}
     case "RENDER_FILTERED_RESULTS":
-    debugger
       return {...state, filteredLocations: action.payload}
+    case "SAVE_SEARCH_TERM":
+      return {...state, searchTerm: action.payload}
+    case "CLEAR_SEARCH_FILTER":
+      return {...state, filteredLocations: [], searchTerm: null}
+    case "SET_COORDINATES":
+      return {...state, coordinates: [...state.coordinates, action.payload]}
     default:
       return state
   }

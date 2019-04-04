@@ -1,8 +1,5 @@
 import React from "react"
 import { connect } from 'react-redux'
-import LocationAdapter from '../apis/LocationAdapter'
-import StudioAdapter from '../apis/StudioAdapter'
-
 
 class SearchBar extends React.Component {
   state = {
@@ -19,19 +16,21 @@ class SearchBar extends React.Component {
     e.preventDefault()
     let searchTerm = e.target.searchInput.value.toLowerCase()
     this.renderResults(searchTerm)
+    this.props.saveSearchTerm(searchTerm)
+    this.props.clearSearchInput()
   }
 
   renderResults = (searchTerm) => {
-    if (this.state.locations.length !== 0) {
+    if (this.props.locations.length !== 0) {
       let filteredStudioIds = []
       let filteredLocations = []
 
-      this.state.studios.filter(studio =>{
+      this.props.studios.filter(studio =>{
         if (studio.name.toLowerCase().includes(searchTerm)) {
           filteredStudioIds.push(studio.id)
         }
       })
-      this.state.locations.filter(location => {
+      this.props.locations.filter(location => {
         if (filteredStudioIds.includes(location.studio_id)) {
           filteredLocations.push(location)
           }
@@ -41,20 +40,9 @@ class SearchBar extends React.Component {
 
   }
 
-  componentDidMount(){
-    LocationAdapter.getLocations()
-    .then(json => {
-      this.setState({locations: json})
-    })
-    StudioAdapter.getStudios()
-    .then(json => {
-      this.setState({ studios: json})
-    })
-  }
-
   render() {
     return (
-      <div>
+      <div >
         <h1 className="search-label">Find Your Ride </h1>
         <form onSubmit={this.handleSubmit}>
           <input className="search-bar" type="text" name="searchInput" placeholder="Search by Studio" value={this.props.searchInput} onChange={this.handleSearchChange}/>
@@ -67,14 +55,18 @@ class SearchBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    searchInput: state.searchInput
+    searchInput: state.searchInput,
+    locations: state.locations,
+    studios: state.studios,
   }
 }
 
 const mapDispatchtoProps = dispatch => {
   return {
     updateSearchInput: (value) => dispatch({ type: "UPDATE_SEARCH_INPUT", payload: value}),
-    renderFilteredResults: (array) => dispatch({ type: "RENDER_FILTERED_RESULTS", payload: array})
+    renderFilteredResults: (array) => dispatch({ type: "RENDER_FILTERED_RESULTS", payload: array}),
+    saveSearchTerm: (searchTerm) => dispatch({ type: "SAVE_SEARCH_TERM", payload: searchTerm}),
+    clearSearchInput: () => dispatch({ type: "UPDATE_SEARCH_INPUT", payload: ""})
   }
 }
 export default connect(mapStateToProps, mapDispatchtoProps)(SearchBar)

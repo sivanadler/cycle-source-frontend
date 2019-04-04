@@ -2,32 +2,43 @@ import React from "react"
 import SearchBar from "./SearchBar"
 import SearchResults from "./SearchResults"
 import Sort from "./Sort"
-import LocationAdapter from '../apis/LocationAdapter'
 import StudioAdapter from '../apis/StudioAdapter'
+import LocationAdapter from '../apis/LocationAdapter'
+
 import { connect } from 'react-redux'
 
 class SearchBox extends React.Component {
-  state = {
-    studios: []
+
+  handleClearFilter = () => {
+    this.props.clearFilterLocations()
   }
 
   componentDidMount(){
     LocationAdapter.getLocations()
-    .then(json => {
-      this.props.storeLocations(json)
-    })
+    .then(locations => {this.props.storeLocations(locations)})
+
     StudioAdapter.getStudios()
-    .then(json => {
-      this.setState({ studios: json})
-    })
+    .then(studios => {this.props.storeStudios(studios)})
   }
 
   render() {
-    console.log("searchbox", this.props.searchInput);
+    console.log("here", this.props.locations);
     return (
       <div className="search-box">
-        <SearchBar />
-        <Sort />
+        <div className="search-bar-div">
+          <SearchBar />
+          <Sort />
+          {console.log(this.props.searchTerm)}
+          {
+            this.props.searchTerm
+            ?
+            <span>
+              <h2 id="search-result-for"> Search Results For {this.props.searchTerm}: </h2>
+              <h2 id="clear-filter" onClick={this.handleClearFilter}>Clear Filter</h2>
+            </span>
+            :
+            null}
+        </div>
         {
           this.props.filteredLocations.length !== 0
           ?
@@ -50,14 +61,16 @@ const mapStateToProps = state => {
     locations: state.locations,
     studios: state.studios,
     searchInput: state.searchInput,
-    filteredLocations: state.filteredLocations
+    filteredLocations: state.filteredLocations,
+    searchTerm: state.searchTerm
   }
 }
 
 const mapDispatchtoProps = dispatch => {
   return {
-    storeLocations: (array) => dispatch({ type: "GET_LOCATIONS", payload: array }),
     storeStudios: (array) => dispatch({ type: "GET_STUDIOS", payload: array }),
+    clearFilterLocations: () => dispatch({ type: "CLEAR_SEARCH_FILTER"}),
+    storeLocations: (array) => dispatch({ type: "GET_LOCATIONS", payload: array }),
 
   }
 }
