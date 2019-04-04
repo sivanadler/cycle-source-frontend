@@ -1,38 +1,52 @@
 import React from "react"
 import like from '../images/like.png'
 import { connect } from 'react-redux'
+import StudioAdapter from '../apis/StudioAdapter'
 
 
-const SearchResults = (props) => {
-  // function getStudioName(){
-  //   console.log(props);
-  //   if (props.studios) {
-  //     let studio = props.studios.find(studio => studio.id === props.location.studio_id)
-  //     return studio.name
-  //   }
-  
+class SearchResults extends React.Component {
+  state = {
+    studios: []
+  }
 
-  return (
-  <div className="">
-    {props !== undefined
-      ?
-      <div className="search-result-card">
-        <h2>PLACEHOLDER {props.location.name}</h2>
-        <p>Rating: **** </p>
-        <p>{props.location.address}</p>
-        <p>{props.location.phone_number}</p>
-        <p>{props.location.email}</p>
-      </div>
-      :
-      null
+  getStudioName = () => {
+    if (this.state.studios.length !== 0) {
+      let studio = this.state.studios.find(studio => studio.id === this.props.location.studio_id)
+      return studio.name
     }
-  </div>
-  )
+  }
+
+  componentDidMount(){
+    StudioAdapter.getStudios()
+    .then(studios => {
+      this.setState({studios})
+    })
+  }
+
+  render() {
+    return (
+      <div className="">
+        {this.props !== undefined
+          ?
+          <div className="search-result-card">
+            <h2>{this.getStudioName()} {this.props.location.name}</h2>
+            <p>Rating: **** </p>
+            <p>{this.props.location.address}</p>
+            <p>{this.props.location.phone_number}</p>
+            <p>{this.props.location.email}</p>
+          </div>
+          :
+          null
+        }
+      </div>
+    )
+  }
 }
+
 
 const mapStateToProps = state => {
   return {
-    studios: state.studios
+    studios: state.studios,
   }
 }
 

@@ -7,7 +7,8 @@ const initialState = {
   myReservations: true,
   myFavorites: false,
   locations: [],
-  studios: []
+  studios: [],
+  filteredLocations: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -31,6 +32,9 @@ const reducer = (state=initialState, action) => {
       return {...state, locations: action.payload}
     case "GET_STUDIOS":
       return {...state, studios: action.payload}
+    case "RENDER_FILTERED_RESULTS":
+    debugger
+      return {...state, filteredLocations: action.payload}
     default:
       return state
   }

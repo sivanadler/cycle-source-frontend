@@ -7,6 +7,9 @@ import StudioAdapter from '../apis/StudioAdapter'
 import { connect } from 'react-redux'
 
 class SearchBox extends React.Component {
+  state = {
+    studios: []
+  }
 
   componentDidMount(){
     LocationAdapter.getLocations()
@@ -15,18 +18,27 @@ class SearchBox extends React.Component {
     })
     StudioAdapter.getStudios()
     .then(json => {
-      this.props.storeStudios(json)
+      this.setState({ studios: json})
     })
   }
 
   render() {
+    console.log("searchbox", this.props.searchInput);
     return (
       <div className="search-box">
         <SearchBar />
         <Sort />
-        {this.props.locations.map(location => {
-          return <SearchResults key={location.id} location={location}/>
-        })}
+        {
+          this.props.filteredLocations.length !== 0
+          ?
+          this.props.filteredLocations.map(location => {
+            return <SearchResults key={location.id} location={location}/>
+          })
+          :
+          this.props.locations.map(location => {
+            return <SearchResults key={location.id} location={location}/>
+          })
+        }
 
       </div>
     )
@@ -37,6 +49,8 @@ const mapStateToProps = state => {
   return {
     locations: state.locations,
     studios: state.studios,
+    searchInput: state.searchInput,
+    filteredLocations: state.filteredLocations
   }
 }
 
