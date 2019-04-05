@@ -42,7 +42,9 @@ const reducer = (state=initialState, action) => {
     case "CLEAR_SEARCH_FILTER":
       return {...state, filteredLocations: [], searchTerm: null}
     case "SET_COORDINATES":
-      return {...state, coordinates: [...state.coordinates, action.payload]}
+      return {...state, coordinates: [...state.coordinates, action.payload], filteredCoordinates: []}
+    case "SET_COORDINATES":
+      return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: []}
     default:
       return state
   }
