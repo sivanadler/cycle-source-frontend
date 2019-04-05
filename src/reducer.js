@@ -1,7 +1,9 @@
 const initialState = {
+  currentUser: null,
+  users: [],
   loginClicked: false,
   newUser: false,
-  loggedIn: true,
+  loggedIn: false,
   newUserType: null,
   searchInput: "",
   myReservations: true,
@@ -17,8 +19,14 @@ const initialState = {
 const reducer = (state=initialState, action) => {
 
   switch (action.type) {
+    case "SET_CURRENT_USER":
+      return {...state, currentUser: action.payload}
+    case "LOGOUT":
+      return {...state, currentUser: null, loggedIn: false, loginClicked: false}
     case "SHOW_LOGIN_FORM":
       return {...state, loginClicked: true, newUser: false}
+    case "STORE_USERS":
+      return {...state, users: action.payload}
     case "NEW_USER":
       return {...state, loginClicked: false, newUser: true}
     case "LOG_USER_IN":

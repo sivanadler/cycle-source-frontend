@@ -10,12 +10,14 @@ import Login from './components/Login'
 import SearchContainer from './components/SearchContainer'
 import ProfileContainer from './components/ProfileContainer'
 import ReservationContainer from './components/ReservationContainer'
-
+import Home from './components/Home'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path="/" component={App} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/home" component={Home} />
       <Route exact path="/search" component={SearchContainer} />
       <Route exact path="/reserve" component={ReservationContainer} />
       <Route exact path="/profile" component={ProfileContainer} />

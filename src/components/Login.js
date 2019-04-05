@@ -1,27 +1,96 @@
 import React from "react"
+import { Redirect } from 'react-router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router'
 
 
-const Login = (props) => {
-  function handleSubmit(e){
-    e.preventDefault()
-    props.logUserIn()
+class Login extends React.Component {
+  state = {
+    username: "",
+    password: "",
+    checkedRider: false,
+    checkedInstructor: false
   }
 
-  return (
-  <div className="login">
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="username" /> <br/>
-      <input type="password" name="password" /> <br/>
-      <input type="submit" name="submit" value="Log In" />
-    </form>
-  </div>
-  )
+  handleSubmit = e => {
+    e.preventDefault()
+    fetch("http://localhost:3000/api/v1/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accepts": "application/json",
+			},
+			body: JSON.stringify(this.state)
+		})
+		.then(res => res.json())
+		.then((response) => {
+      if (this.state.checkedRider && response.user.user.role === 'rider') {
+        debugger
+        // this.props.setCurrentUser(response.user)
+        localStorage.setItem('jwt', response.jwt)
+        this.props.history.push(`/home`)
+      } else if (this.state.checkedInstructor){
+        alert("Looks like you're not an instructor... Please log in with the correct account type!")
+      } else if(response.errors) {
+				alert(response.errors)
+			} })
+  }
+
+  handleOnChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleOnCheck = e => {
+    if (e.target.value === "Instructor") {
+      this.setState({
+        checkedInstructor: true,
+        checkedRider: false
+      })
+    } else {
+      this.setState({
+        checkedInstructor: false,
+        checkedRider: true
+      })
+    }
+  }
+
+  render() {
+    return (
+      <div className="login">
+        <form onSubmit={this.handleSubmit}>
+
+        <div className="radio">
+          <h1>Log In</h1>
+          <h3>Please Check Off Your Account Type: </h3>
+          <label>
+            <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck}/>
+            Rider
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input type="radio" value="Instructor" checked={this.state.checkedInstructor} onChange={this.handleOnCheck}/>
+            Instructor
+          </label>
+        </div>
+          <label>Username: </label>
+          <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username}/> <br/>
+          <label>Password: </label>
+          <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password}/> <br/>
+          <input type="submit" name="submit" value="Log In" />
+        </form>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    users: state.users,
   }
 }
 
@@ -29,7 +98,8 @@ const mapStateToProps = state => {
 const mapDispatchtoProps = dispatch => {
   return {
     logUserIn: () => dispatch({ type: "LOG_USER_IN" }),
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user})
   }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Login)
+export default connect(mapStateToProps, mapDispatchtoProps)(withRouter(Login))
