@@ -26,15 +26,17 @@ class Login extends React.Component {
 		.then(res => res.json())
 		.then((response) => {
       if (this.state.checkedRider && response.user.user.role === 'rider') {
-        debugger
-        // this.props.setCurrentUser(response.user)
         localStorage.setItem('jwt', response.jwt)
         this.props.history.push(`/home`)
+        return(response.user)
       } else if (this.state.checkedInstructor){
         alert("Looks like you're not an instructor... Please log in with the correct account type!")
       } else if(response.errors) {
 				alert(response.errors)
 			} })
+    .then(res => {
+      this.props.setCurrentUser(res.user)
+    })
   }
 
   handleOnChange = e => {
@@ -98,7 +100,8 @@ const mapStateToProps = state => {
 const mapDispatchtoProps = dispatch => {
   return {
     logUserIn: () => dispatch({ type: "LOG_USER_IN" }),
-    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user})
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
+    dispatch
   }
 }
 
