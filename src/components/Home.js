@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import wheelGif from '../images/wheel-gif.gif'
 import HamburgerNav from  './HamburgerNav'
-
+import Header from './Header'
 
 
 class Home extends React.Component {
@@ -13,7 +13,12 @@ class Home extends React.Component {
     console.log("am i logged in", this.props);
     return (
       <div className="">
-        <HamburgerNav />
+        <span>
+          <HamburgerNav />
+        </span>
+        <span>
+          <Header />
+        </span>
         <span>
           <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
         </span>
@@ -29,12 +34,15 @@ const mapStateToProps = state => {
   return {
     loginClicked: state.loginClicked,
     newUser: state.newUser,
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    currentUser: state.currentUser,
+    users: state.users
   }
 }
 
 const mapDispatchtoProps = dispatch => {
   return {
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
 
   }
 }

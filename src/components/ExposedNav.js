@@ -5,13 +5,15 @@ import { connect } from 'react-redux'
 
 class ExposedNav extends React.Component {
   logout = () => {
-    debugger
     localStorage.removeItem('jwt')
     this.props.logOut()
+    return <Redirect to="/welcome" />
   }
+
   render() {
     return (
       <div className="">
+        {this.props.currentUser ? <h1>Welcome {this.props.currentUser.first_name}!</h1> : null}
         <div className="exposed-hamburger" onClick={this.props.handleToggleHamburgerNav}>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>
@@ -23,19 +25,24 @@ class ExposedNav extends React.Component {
             <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}>Reserve</NavLink><br/>
             <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
 
-            <NavLink to="/" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+            <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
           </Router>
         </div>
       </div>
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
 const mapDispatchtoProps = dispatch => {
   return {
     logOut: () => dispatch({ type: "LOGOUT" }),
-
   }
 }
 
 
-export default connect(null, mapDispatchtoProps)(ExposedNav)
+export default connect(mapStateToProps, mapDispatchtoProps)(ExposedNav)

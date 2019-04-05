@@ -1,13 +1,28 @@
 import React from "react"
+import { connect } from 'react-redux'
 
-const ProfileInformation = () => {
+const ProfileInformation = (props) => {
+  function returnUserInfo(){
+    return(
+      <div className="profile-information">
+        <img className="profile-picture" src="./images/sivan.jpg" alt="photo" />
+        <h1>{props.currentUser.first_name} {props.currentUser.last_name}</h1>
+        <h1>{props.currentUser.first_name}</h1>
+      </div>
+    )
+  }
+
   return (
-  <div className="profile-information">
-    <img className="profile-picture" src="http://profilepicturesdp.com/wp-content/uploads/2018/07/profile-picture-avatars-6.png" alt="photo" />
-    <h1>Full Name</h1>
-    <h1>Username</h1>
-  </div>
+    <div className="profile-information">
+      {props.currentUser ? returnUserInfo() : null}
+    </div>
   )
 }
 
-export default ProfileInformation
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(ProfileInformation)

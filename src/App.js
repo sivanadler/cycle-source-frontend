@@ -20,12 +20,11 @@ class App extends Component {
     .then(users => {
       this.props.storeUsers(users)
     })
-
   }
 
   render() {
     return (
-      <Router>
+
       <div className="App">
         {this.props.currentUser ? <Redirect to='/home' /> : <Nav />}
         <span>
@@ -37,7 +36,7 @@ class App extends Component {
         {this.props.loginClicked ? <Login /> : null}
         {this.props.newUser ? <SignUp /> : null}
       </div>
-      </Router>
+
 
     );
   }

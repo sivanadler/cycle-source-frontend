@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -15,12 +15,15 @@ import Home from './components/Home'
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={App} />
-      <Route exact path="/login" component={Login} />
+      <Switch>
+      <Route exact path="/welcome" component={App} />
+      <Route exact path="/login" render={routerProps => <Login {...routerProps}/>}/>
       <Route exact path="/home" component={Home} />
       <Route exact path="/search" component={SearchContainer} />
       <Route exact path="/reserve" component={ReservationContainer} />
       <Route exact path="/profile" component={ProfileContainer} />
+      <Redirect from="/" to="/welcome" />
+      </Switch>
     </Router>
   </Provider>
   , document.getElementById('root'));

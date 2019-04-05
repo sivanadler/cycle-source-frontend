@@ -4,13 +4,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
 
-
 class Login extends React.Component {
   state = {
     username: "",
     password: "",
     checkedRider: false,
-    checkedInstructor: false
+    checkedInstructor: false,
   }
 
   handleSubmit = e => {
@@ -24,19 +23,14 @@ class Login extends React.Component {
 			body: JSON.stringify(this.state)
 		})
 		.then(res => res.json())
-		.then((response) => {
-      if (this.state.checkedRider && response.user.user.role === 'rider') {
+		.then(response => {
+      if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
         localStorage.setItem('jwt', response.jwt)
-        this.props.history.push(`/home`)
-        return(response.user)
+        this.props.setCurrentUser(response.user.user)
+        this.props.history.push('/home')
       } else if (this.state.checkedInstructor){
         alert("Looks like you're not an instructor... Please log in with the correct account type!")
-      } else if(response.errors) {
-				alert(response.errors)
-			} })
-    .then(res => {
-      this.props.setCurrentUser(res.user)
-    })
+      }})
   }
 
   handleOnChange = e => {
@@ -60,10 +54,10 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log('login', this.props);
     return (
       <div className="login">
         <form onSubmit={this.handleSubmit}>
-
         <div className="radio">
           <h1>Log In</h1>
           <h3>Please Check Off Your Account Type: </h3>
@@ -101,8 +95,8 @@ const mapDispatchtoProps = dispatch => {
   return {
     logUserIn: () => dispatch({ type: "LOG_USER_IN" }),
     setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
-    dispatch
+    something: () => dispatch({type: "NEW_USER"})
   }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(withRouter(Login))
+export default connect(mapStateToProps, mapDispatchtoProps)(Login)

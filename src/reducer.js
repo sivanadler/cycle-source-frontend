@@ -22,7 +22,6 @@ const reducer = (state=initialState, action) => {
     case "SET_CURRENT_USER":
       return {...state, currentUser: action.payload}
     case "ADD_NEW_USER":
-    debugger
       return {...state, users: [...state.users, action.payload]}
     case "LOGOUT":
       return {...state, currentUser: null, loggedIn: false, loginClicked: false}
