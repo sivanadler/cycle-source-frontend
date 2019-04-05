@@ -10,10 +10,25 @@ class Header extends React.Component {
 
   componentDidMount(){
     const jwt = localStorage.getItem('jwt')
+    const jwtInstructor = localStorage.getItem('jwtInstructor')
     if (jwt) {
       fetch("http://localhost:3000/api/v1/auto_login", {
         headers: {
           "Authorization": jwt
+        }
+      })
+        .then(res => res.json())
+        .then(response => {
+          if (response.errors) {
+            alert(response.errors)
+          } else {
+            this.props.setCurrentUser(response)
+          }
+        })
+    } else if (jwtInstructor) {
+      fetch("http://localhost:3000/api/v1/instructor_auto_login", {
+        headers: {
+          "Authorization": jwtInstructor
         }
       })
         .then(res => res.json())

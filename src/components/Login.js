@@ -14,7 +14,31 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    fetch("http://localhost:3000/api/v1/login", {
+    if (this.state.checkedInstructor) {
+      this.handleInstructorLogIn()
+    } else {
+      fetch("http://localhost:3000/api/v1/login", {
+  			method: "POST",
+  			headers: {
+  				"Content-Type": "application/json",
+  				"Accepts": "application/json",
+  			},
+  			body: JSON.stringify(this.state)
+  		})
+  		.then(res => res.json())
+  		.then(response => {
+        if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
+          localStorage.setItem('jwt', response.jwt)
+          this.props.setCurrentUser(response.user.user)
+          this.props.history.push('/home')
+        } else if (this.state.checkedInstructor){
+          alert("Looks like you're not an instructor... Please log in with the correct account type!")
+        }})
+    }
+  }
+
+  handleInstructorLogIn = () => {
+    fetch("http://localhost:3000/api/v1/instructor_login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -24,12 +48,12 @@ class Login extends React.Component {
 		})
 		.then(res => res.json())
 		.then(response => {
-      if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
-        localStorage.setItem('jwt', response.jwt)
-        this.props.setCurrentUser(response.user.user)
+      if (response.instructor && response.instructor.instructor.role === 'instructor') {
+        localStorage.setItem('jwtInstructor', response.jwt)
+        this.props.setCurrentUser(response.instructor.instructor)
         this.props.history.push('/home')
-      } else if (this.state.checkedInstructor){
-        alert("Looks like you're not an instructor... Please log in with the correct account type!")
+      } else if (this.state.checkedRider){
+        alert("Looks like you're not an Rider... Please log in with the correct account type!")
       }})
   }
 
@@ -54,7 +78,6 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log('login', this.props);
     return (
       <div className="login">
         <form onSubmit={this.handleSubmit}>
