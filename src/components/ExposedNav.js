@@ -15,13 +15,6 @@ class ExposedNav extends React.Component {
   render() {
     return (
       <div className="">
-        {
-          this.props.currentUser
-          ?
-          <h1>Welcome {this.props.currentUser.name}!</h1>
-          :
-          null
-        }
         <div className="exposed-hamburger" onClick={this.props.handleToggleHamburgerNav}>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>

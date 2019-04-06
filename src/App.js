@@ -53,7 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchtoProps = dispatch => {
   return {
-    storeUsers: (users) => dispatch ({ type: "STORE_USERS", payload: users})
+    storeUsers: (users) => dispatch ({ type: "STORE_USERS", payload: users}),
   }
 }
 

@@ -13,7 +13,9 @@ const initialState = {
   filteredLocations: [],
   searchTerm: null,
   coordinates: [],
-  filteredCoordinates: []
+  filteredCoordinates: [],
+  instructors: [],
+  bookThisClass: null,
 }
 
 const reducer = (state=initialState, action) => {
@@ -29,6 +31,8 @@ const reducer = (state=initialState, action) => {
       return {...state, loginClicked: true, newUser: false}
     case "STORE_USERS":
       return {...state, users: action.payload}
+    case "GET_INSTRUCTORS":
+      return {...state, instructors: action.payload}
     case "NEW_USER":
       return {...state, loginClicked: false, newUser: true}
     case "LOG_USER_IN":
@@ -55,6 +59,8 @@ const reducer = (state=initialState, action) => {
       return {...state, coordinates: [...state.coordinates, action.payload], filteredCoordinates: []}
     case "SET_COORDINATES":
       return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: []}
+    case "OPEN_BOOK_CLASS_WINDOW":
+      return {...state, bookThisClass: action.payload}
     default:
       return state
   }

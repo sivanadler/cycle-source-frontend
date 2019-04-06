@@ -4,18 +4,30 @@ import 'react-big-scheduler/lib/css/style.css'
 import CalendarDay from './CalendarDay'
 import Calendar from './Calendar'
 import moment from 'moment'
-
+import { connect } from 'react-redux'
+import BookingMap from './BookingMap'
 
 class ScheduleContainer extends React.Component {
 
   render() {
+    console.log(this.props.bookThisClass);
     return (
       <div className="schedule-container">
-        <h1>BOOK YOUR RIDE</h1>
-
-        <Calendar />
+        {
+          this.props.bookThisClass
+          ?
+          <BookingMap />
+          :
+          <Calendar />
+        }
       </div>
     )
   }
 }
-export default ScheduleContainer
+
+const mapStateToProps = state => {
+  return {
+    bookThisClass: state.bookThisClass
+  }
+}
+export default connect(mapStateToProps)(ScheduleContainer)
