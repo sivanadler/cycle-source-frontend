@@ -18,7 +18,7 @@ class ExposedNav extends React.Component {
         {
           this.props.currentUser
           ?
-          <h1>Welcome {this.props.currentUser.first_name}!</h1>
+          <h1>Welcome {this.props.currentUser.name}!</h1>
           :
           null
         }
