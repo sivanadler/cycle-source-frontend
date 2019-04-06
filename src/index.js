@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route exact path="/login" render={routerProps => <Login {...routerProps}/>}/>
       <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
       <Route exact path="/search" component={SearchContainer} />
-      <Route exact path="/reserve" component={ReservationContainer} />
+      <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>
       <Route exact path="/profile" component={ProfileContainer} />
       <Redirect from="/" to="/welcome" />
       </Switch>

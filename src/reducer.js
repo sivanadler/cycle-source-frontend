@@ -16,6 +16,9 @@ const initialState = {
   filteredCoordinates: [],
   instructors: [],
   bookThisClass: null,
+  selectedBike: null,
+  userClasses: [],
+  spinClasses: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -61,6 +64,12 @@ const reducer = (state=initialState, action) => {
       return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: []}
     case "OPEN_BOOK_CLASS_WINDOW":
       return {...state, bookThisClass: action.payload}
+    case "SET_SELECTED_BIKE":
+      return {...state, selectedBike: action.payload}
+    case "GET_USER_CLASSES":
+      return {...state, userClasses: action.payload}
+    case "SAVE_SPIN_CLASSES":
+      return {...state, spinClasses: action.payload}
     default:
       return state
   }

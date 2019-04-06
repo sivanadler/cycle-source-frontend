@@ -98,6 +98,7 @@ class Calendar extends React.Component {
           location_id: spinClasses[i].location_id,
           studio_id: spinClasses[i].studio_id,
           instructor_id: spinClasses[i].instructor_id,
+          class_id: spinClasses[i].id
         }]
         })
       }

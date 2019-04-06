@@ -217,3 +217,24 @@ body {
 .booking-map {
   text-align: center;
 }
+
+.booking-map-instructor {
+  border: 2px solid black;
+  border-radius: 15em;
+  height: 200px;
+}
+
+.bike {
+  border: 2px solid black;
+  border-radius: 15em;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  margin: 20px;
+}
+.my-reservations {
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 10px;
+}
