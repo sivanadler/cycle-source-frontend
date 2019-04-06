@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 
 const ProfileInformation = (props) => {
   function returnUserInfo(){
+    console.log(props.currentUser);
     return(
       <div className="profile-information">
         <img className="profile-picture" src="./images/sivan.jpg" alt="photo" />
-        <h1>{props.currentUser.first_name} {props.currentUser.last_name}</h1>
-        <h1>{props.currentUser.first_name}</h1>
+        <h1>{props.currentUser.name} </h1>
+        <h1>{props.currentUser.username}</h1>
       </div>
     )
   }

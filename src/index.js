@@ -18,7 +18,7 @@ ReactDOM.render(
       <Switch>
       <Route exact path="/welcome" component={App} />
       <Route exact path="/login" render={routerProps => <Login {...routerProps}/>}/>
-      <Route exact path="/home" component={Home} />
+      <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
       <Route exact path="/search" component={SearchContainer} />
       <Route exact path="/reserve" component={ReservationContainer} />
       <Route exact path="/profile" component={ProfileContainer} />

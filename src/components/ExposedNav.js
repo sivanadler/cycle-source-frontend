@@ -1,31 +1,52 @@
-import React from "react"
+import React, { Fragment }from "react"
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 
 class ExposedNav extends React.Component {
   logout = () => {
+    let history = this.props.history
     localStorage.removeItem('jwt')
+    localStorage.removeItem('jwtInstructor')
+    history.push('/welcome')
     this.props.logOut()
-    return <Redirect to="/welcome" />
   }
 
   render() {
     return (
       <div className="">
-        {this.props.currentUser ? <h1>Welcome {this.props.currentUser.first_name}!</h1> : null}
+        {
+          this.props.currentUser
+          ?
+          <h1>Welcome {this.props.currentUser.first_name}!</h1>
+          :
+          null
+        }
         <div className="exposed-hamburger" onClick={this.props.handleToggleHamburgerNav}>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>
           <br/>
           <Router>
-            <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}>Home</NavLink><br/>
-            <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}>Search</NavLink><br/>
-            <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}>Reserve</NavLink><br/>
-            <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
+            {
+              this.props.currentUser.role === "rider"
+              ?
+              <Fragment>
+                <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}>Home</NavLink><br/>
+                <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}>Search</NavLink><br/>
+                <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}>Reserve</NavLink> <br/>
+                <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
 
-            <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+                <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+              </Fragment>
+              :
+              <Fragment>
+                <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}>Home</NavLink><br/>
+                <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}>Search</NavLink><br/>
+                <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
+                <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+              </Fragment>
+            }
           </Router>
         </div>
       </div>
