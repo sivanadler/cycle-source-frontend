@@ -123,7 +123,14 @@ class ReviewsDiv extends React.Component {
       <div className="reviews-div">
         <h1 className="header">REVIEWS</h1>
         <div className="button-div">
+        {
+          this.props.currentUser.role === "rider"
+          ?
           <button className="post-review-btn" onClick={this.renderReviewForm}>Post Review</button>
+          :
+          null
+        }
+
         </div>
         {
           this.props.reviewForm

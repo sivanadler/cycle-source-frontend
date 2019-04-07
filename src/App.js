@@ -33,8 +33,8 @@ class App extends Component {
         <span>
           <h1 className="logo">CYCLE SOURCE</h1>
         </span>
-        {this.props.loginClicked ? <Login /> : null}
-        {this.props.newUser ? <SignUp /> : null}
+        {this.props.loginClicked ? this.props.history.push("/login") : null}
+        {this.props.newUser ? this.props.history.push("/signup") : null}
       </div>
 
 

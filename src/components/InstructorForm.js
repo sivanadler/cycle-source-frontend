@@ -1,9 +1,9 @@
 import React from "react"
+import { connect } from 'react-redux'
 
 class InstructorForm extends React.Component {
   state = {
-    first_name: '',
-    last_name: '',
+    name: '',
     username: '',
     password: '',
     hometown: '',
@@ -38,16 +38,44 @@ class InstructorForm extends React.Component {
     })
   }
 
+  //creating an instructor isnt working...
+  handleSubmit = e => {
+    e.preventDefault()
+    let data = {
+      username: this.state.username,
+      password: this.state.password,
+      name: this.state.name,
+      hometown: this.state.hometown,
+      fun_fact: this.state.fun_fact,
+      teaching_style: this.state.teaching_style,
+      role: "instructor"
+    }
+    debugger
+    fetch("http://localhost:3000/api/v1/instructors", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accepts": "application/json",
+			},
+			body: JSON.stringify({user: data})
+		})
+    .then(res => res.json())
+    .then(json => {
+      debugger
+      localStorage.setItem('jwtInstructor', json.jwt)
+      let history = this.props.history.history
+      history.push('/home')
+      this.props.setCurrentUser(json.user)
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Instructor Form</h1>
-        <form className="instructor-sign-up">
-          <label for="first_name">First Name: </label><br/>
-          <input type="text" name="first_name" value={this.state.first_name} onChange={this.handleFormChange}/><br/><br/>
-
-          <label for="last_name">Last Name: </label><br/>
-          <input type="text" name="last_name" value={this.state.last_name} onChange={this.handleFormChange}/><br/><br/>
+        <form className="instructor-sign-up" onSubmit={this.handleSubmit}>
+          <label for="first_name">Full Name: </label><br/>
+          <input type="text" name="name" value={this.state.name} onChange={this.handleFormChange}/><br/><br/>
 
           <label for="username">Username: </label><br/>
           <input type="text" name="username" value={this.state.username} onChange={this.handleFormChange}/><br/><br/>
@@ -87,4 +115,19 @@ class InstructorForm extends React.Component {
     )
   }
 }
-export default InstructorForm
+
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.loggedIn,
+  }
+}
+
+
+const mapDispatchtoProps = dispatch => {
+  return {
+    addNewUser: () => dispatch({ type: "ADD_NEW_USER" }),
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(InstructorForm)

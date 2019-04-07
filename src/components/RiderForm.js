@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from 'react-redux'
-
+import ActiveStorageProvider from 'react-activestorage-provider'
 
 class RiderForm extends React.Component {
   state = {
-    first_name: '',
-    last_name: '',
+    name: '',
     username: '',
     password: '',
+    photo: null
   }
 
   handleOnChange = e => {
@@ -21,10 +21,9 @@ class RiderForm extends React.Component {
     let data = {
       username: this.state.username,
       password: this.state.password,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
+      name: this.state.name,
       city: "New York City",
-      role: "rider"
+      role: "rider",
     }
     fetch("http://localhost:3000/api/v1/users", {
 			method: "POST",
@@ -37,6 +36,8 @@ class RiderForm extends React.Component {
     .then(res => res.json())
     .then(json => {
       localStorage.setItem('jwt', json.jwt)
+      let history = this.props.history.history
+      history.push('/home')
       this.props.setCurrentUser(json.user)
     })
   }
@@ -46,11 +47,8 @@ class RiderForm extends React.Component {
       <div>
         <h1>Rider Form</h1>
         <form className="rider-sign-up" onSubmit={this.handleSubmit}>
-          <label for="first_name">First Name: </label><br/>
-          <input type="text" name="first_name" value={this.state.first_name} onChange={this.handleOnChange}/><br/><br/>
-
-          <label for="last_name">Last Name: </label><br/>
-          <input type="text" name="last_name" value={this.state.last_name} onChange={this.handleOnChange}/><br/><br/>
+          <label for="name">Full Name: </label><br/>
+          <input type="text" name="name" value={this.state.name} onChange={this.handleOnChange}/><br/><br/>
 
           <label for="username">Username: </label><br/>
           <input type="text" name="username" value={this.state.username} onChange={this.handleOnChange}/><br/><br/>
@@ -58,6 +56,47 @@ class RiderForm extends React.Component {
           <label for="password">Password: </label><br/>
           <input type="password" name="password" value={this.state.password} onChange={this.handleOnChange}/><br/><br/>
 
+          <ActiveStorageProvider
+          endpoint={{
+            path: "/users",
+            model: 'User',
+            attribute: 'photo',
+            method: 'PUT',
+          }}
+          onSubmit={user => this.setState({ photo: user.photo })}
+          render={({ handleUpload, uploads, ready }) => (
+            <div>
+              <input
+                type="file"
+                disabled={!ready}
+                onChange={e => handleUpload(e.currentTarget.files)}
+              />
+
+              {uploads.map(upload => {
+                switch (upload.state) {
+                  case 'waiting':
+                    return <p key={upload.id}>Waiting to upload {upload.file.name}</p>
+                  case 'uploading':
+                    return (
+                      <p key={upload.id}>
+                        Uploading {upload.file.name}: {upload.progress}%
+                      </p>
+                    )
+                  case 'error':
+                    return (
+                      <p key={upload.id}>
+                        Error uploading {upload.file.name}: {upload.error}
+                      </p>
+                    )
+                  case 'finished':
+                    return (
+                      <p key={upload.id}>Finished uploading {upload.file.name}</p>
+                    )
+                }
+              })}
+            </div>
+          )}
+          />
           <input type="submit" value="Create Account" />
         </form>
       </div>

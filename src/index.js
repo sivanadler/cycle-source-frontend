@@ -7,17 +7,21 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './store'
 import Login from './components/Login'
+import SignUp from './components/SignUp'
 import SearchContainer from './components/SearchContainer'
 import ProfileContainer from './components/ProfileContainer'
 import ReservationContainer from './components/ReservationContainer'
 import Home from './components/Home'
 import StudioShowContainer from './components/StudioShowContainer'
+
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
       <Route exact path="/welcome" component={App} />
       <Route exact path="/login" render={routerProps => <Login {...routerProps}/>} />
+      <Route exact path="/signup" render={routerProps => <SignUp {...routerProps}/>} />
       <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
       <Route exact path="/search" render={routerProps => <SearchContainer {...routerProps}/>} />
       <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>

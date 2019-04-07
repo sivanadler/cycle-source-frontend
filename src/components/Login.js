@@ -3,6 +3,7 @@ import { Redirect } from 'react-router'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
+import wheelGif from '../images/wheel-gif.gif'
 
 class Login extends React.Component {
   state = {
@@ -32,8 +33,6 @@ class Login extends React.Component {
           let history = this.props.history
           history.push('/home')
           this.props.setCurrentUser(response.user.user)
-        } else if (this.state.checkedInstructor){
-          alert("Looks like you're not an instructor... Please log in with the correct account type!")
         }})
     }
   }
@@ -82,6 +81,12 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
+        <span>
+          <h1 className="logo">CYCLE SOURCE</h1>
+        </span>
+        <span>
+          <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
+        </span>
         <form onSubmit={this.handleSubmit}>
         <div className="radio">
           <h1>Log In</h1>

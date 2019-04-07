@@ -6,7 +6,7 @@ import logo from '../images/flywheel.png'
 import UserAdapter from '../apis/UserAdapter'
 
 class StudioShowContainer extends React.Component {
-  
+
   render() {
     return (
       <div>
