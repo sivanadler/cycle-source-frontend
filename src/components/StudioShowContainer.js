@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 import LocationsDiv from './LocationsDiv'
+import ReviewsDiv from './ReviewsDiv'
 import logo from '../images/flywheel.png'
 
 class StudioShowContainer extends React.Component {
@@ -17,6 +18,7 @@ class StudioShowContainer extends React.Component {
           </span>
         </div>
         <LocationsDiv studio_id={this.props.studio.id}/>
+        <ReviewsDiv studio={this.props.studio}/>
       </div>
     )
   }

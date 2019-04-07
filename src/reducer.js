@@ -21,7 +21,9 @@ const initialState = {
   spinClasses: [],
   searchCleared: false,
   isFetching: true,
-  selectedStudio: null
+  selectedStudio: null,
+  reviews: [],
+  reviewForm: false
 }
 
 const reducer = (state=initialState, action) => {
@@ -75,6 +77,8 @@ const reducer = (state=initialState, action) => {
       return {...state, spinClasses: action.payload}
     case "SET_SELECTED_STUDIO":
       return {...state, selectedStudio: action.payload}
+    case "TOGGLE_REVIEW_FORM":
+      return {...state, reviewForm: !state.reviewForm}
     default:
       return state
   }

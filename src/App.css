@@ -302,3 +302,20 @@ body {
   padding: 10px;
   border: 1px solid black;
 }
+
+.review-input {
+  bottom: 0;
+  position: sticky;
+  width: 500px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.post-review-btn {
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  margin-left: 450px;
+}
