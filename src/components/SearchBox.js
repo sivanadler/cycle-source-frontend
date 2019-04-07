@@ -13,22 +13,35 @@ class SearchBox extends React.Component {
     this.props.clearFilterLocations()
   }
 
-  componentDidMount(){
-    LocationAdapter.getLocations()
-    .then(locations => {this.props.storeLocations(locations)})
+  renderSearchResults = () => {
+    if (this.props.locations.length !== 0) {
+      return this.props.locations.map(location => {
+        return <SearchResults key={location.id} location={location}/>
+      })
+    } else {
+      return null
+    }
+  }
 
+  renderFilteredResults = () => {
+    return this.props.filteredLocations.map(location => {
+      return <SearchResults key={location.id} location={location}/>
+    })
+  }
+
+  componentDidMount(){
     StudioAdapter.getStudios()
     .then(studios => {this.props.storeStudios(studios)})
+    LocationAdapter.getLocations()
+    .then(locations => {this.props.storeLocations(locations)})
   }
 
   render() {
-    console.log("here", this.props.locations);
     return (
       <div className="search-box">
         <div className="search-bar-div">
           <SearchBar />
           <Sort />
-          {console.log(this.props.searchTerm)}
           {
             this.props.searchTerm
             ?
@@ -39,17 +52,7 @@ class SearchBox extends React.Component {
             :
             null}
         </div>
-        {
-          this.props.filteredLocations.length !== 0
-          ?
-          this.props.filteredLocations.map(location => {
-            return <SearchResults key={location.id} location={location}/>
-          })
-          :
-          this.props.locations.map(location => {
-            return <SearchResults key={location.id} location={location}/>
-          })
-        }
+        {this.props.filteredLocations.length !== 0 ? this.renderFilteredResults() : this.renderSearchResults()}
 
       </div>
     )

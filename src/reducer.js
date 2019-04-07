@@ -18,7 +18,8 @@ const initialState = {
   bookThisClass: null,
   selectedBike: null,
   userClasses: [],
-  spinClasses: []
+  spinClasses: [],
+  searchCleared: false
 }
 
 const reducer = (state=initialState, action) => {
@@ -57,11 +58,11 @@ const reducer = (state=initialState, action) => {
     case "SAVE_SEARCH_TERM":
       return {...state, searchTerm: action.payload}
     case "CLEAR_SEARCH_FILTER":
-      return {...state, filteredLocations: [], searchTerm: null}
+      return {...state, filteredLocations: [], searchTerm: null, searchCleared: true}
     case "SET_COORDINATES":
       return {...state, coordinates: [...state.coordinates, action.payload], filteredCoordinates: []}
-    case "SET_COORDINATES":
-      return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: []}
+    case "SET_FILTERED_COORDINATES":
+      return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: [], filteredLocations: []}
     case "OPEN_BOOK_CLASS_WINDOW":
       return {...state, bookThisClass: action.payload}
     case "SET_SELECTED_BIKE":
