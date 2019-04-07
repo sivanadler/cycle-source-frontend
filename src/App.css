@@ -319,3 +319,12 @@ body {
   padding: 5px;
   margin-left: 450px;
 }
+
+.review-card {
+  text-align: left;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-left: 10px;
+  height: 200px;
+  margin: 25px;
+}

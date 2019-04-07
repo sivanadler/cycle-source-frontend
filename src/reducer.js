@@ -79,6 +79,10 @@ const reducer = (state=initialState, action) => {
       return {...state, selectedStudio: action.payload}
     case "TOGGLE_REVIEW_FORM":
       return {...state, reviewForm: !state.reviewForm}
+    case "SET_REVIEWS":
+      return {...state, reviews: [action.payload]}
+    case "SAVE_REVIEW":
+      return {...state, reviews: [...state.reviews, action.payload], reviewForm: false}
     default:
       return state
   }

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import LocationsDiv from './LocationsDiv'
 import ReviewsDiv from './ReviewsDiv'
 import logo from '../images/flywheel.png'
+import UserAdapter from '../apis/UserAdapter'
 
 class StudioShowContainer extends React.Component {
-
+  
   render() {
     return (
       <div>
@@ -23,4 +24,16 @@ class StudioShowContainer extends React.Component {
     )
   }
 }
-export default connect()(StudioShowContainer)
+
+const mapStateToProps = state => {
+  return {
+    users: state.users
+  }
+}
+
+const mapDispatchtoProps = dispatch => {
+  return {
+    setUsers: (array) => dispatch({ type: "STORE_USERS", payload: array}),
+  }
+}
+export default connect(mapStateToProps, mapDispatchtoProps)(StudioShowContainer)
