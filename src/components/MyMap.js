@@ -4,6 +4,7 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker  } from 'google-maps-react';
 import Pin from './Pin'
 import { connect } from 'react-redux'
 import LocationAdapter from '../apis/LocationAdapter'
+import wheelGif from '../images/wheel-gif.gif'
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 let latPin
@@ -77,17 +78,21 @@ class MyMap extends React.Component {
   }
 
   putFilteredMarkersOnPage = () => {
-    return this.props.filteredCoordinates.map(coordinate => {
-      latPin = coordinate.latPin
-      lngPin = coordinate.lngPin
-      let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
-      return (<Marker
-        onClick={this.onMarkerClick}
-        name={"something"}
-        position = {{lat: latPin, lng: lngPin}}
-        name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
-      />
-    )})
+    if (this.state.isFetching) {
+      return <img src={wheelGif} alt="loading" />
+    } else {
+      return this.props.filteredCoordinates.map(coordinate => {
+        latPin = coordinate.latPin
+        lngPin = coordinate.lngPin
+        let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
+        return (<Marker
+          onClick={this.onMarkerClick}
+          name={"something"}
+          position = {{lat: latPin, lng: lngPin}}
+          name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
+        />
+      )})
+    }
   }
 
   getGeoCode = (location) => {
@@ -112,6 +117,7 @@ class MyMap extends React.Component {
     })
   }
 
+  //pins filter but now this function needs to get all locations and put pins for them all back on the map
   getUnFilteredLocations = () => {
     debugger
     this.props.locations.map(location => this.getGeoCode(location))
@@ -125,7 +131,6 @@ class MyMap extends React.Component {
   }
 
   render() {
-    console.log(this.props.searchCleared);
     return (
       <div id="map">
         <Map

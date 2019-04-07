@@ -6,6 +6,7 @@ import StudioAdapter from '../apis/StudioAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
 
 import { connect } from 'react-redux'
+import wheelGif from '../images/wheel-gif.gif'
 
 class SearchBox extends React.Component {
 
@@ -16,17 +17,22 @@ class SearchBox extends React.Component {
   renderSearchResults = () => {
     if (this.props.locations.length !== 0) {
       return this.props.locations.map(location => {
-        return <SearchResults key={location.id} location={location}/>
+        return <SearchResults key={location.id} location={location} history={this.props.history}/>
       })
     } else {
-      return null
+      return <img src={wheelGif} alt="loading" />
     }
   }
 
   renderFilteredResults = () => {
-    return this.props.filteredLocations.map(location => {
-      return <SearchResults key={location.id} location={location}/>
-    })
+    debugger
+    if (this.props.filteredLocations.length !== 0) {
+      return this.props.filteredLocations.map(location => {
+        return <SearchResults key={location.id} location={location} history={this.props.history}/>
+      })
+    } else {
+      return <img src={wheelGif} alt="loading" />
+    }
   }
 
   componentDidMount(){
@@ -65,7 +71,8 @@ const mapStateToProps = state => {
     studios: state.studios,
     searchInput: state.searchInput,
     filteredLocations: state.filteredLocations,
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
+    isFetching: state.isFetching
   }
 }
 

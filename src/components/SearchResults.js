@@ -1,7 +1,7 @@
 import React from "react"
 import like from '../images/like.png'
 import { connect } from 'react-redux'
-
+import { Redirect } from 'react-router'
 
 class SearchResults extends React.Component {
 
@@ -12,12 +12,18 @@ class SearchResults extends React.Component {
     }
   }
 
+  handleOnClick = location => {
+    let studio = this.props.studios.find(studio => studio.id === location.studio_id)
+    let studioName = studio.name.toLowerCase().replace(" ","_")
+    this.props.setSelectedStudio(studio)
+  }
+
   render() {
     return (
       <div className="">
         {this.props !== undefined
           ?
-          <div className="search-result-card">
+          <div className="search-result-card" onClick={() => this.handleOnClick(this.props.location)}>
             <h2>{this.getStudioName()} {this.props.location.name}</h2>
             <p>Rating: **** </p>
             <p>{this.props.location.address}</p>
@@ -39,4 +45,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(SearchResults)
+const mapDispatchtoProps = dispatch => {
+  return {
+    setSelectedStudio: (studio) => dispatch({ type: "SET_SELECTED_STUDIO", payload: studio})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(SearchResults)

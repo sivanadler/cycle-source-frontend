@@ -11,17 +11,19 @@ import SearchContainer from './components/SearchContainer'
 import ProfileContainer from './components/ProfileContainer'
 import ReservationContainer from './components/ReservationContainer'
 import Home from './components/Home'
-
+import StudioShowContainer from './components/StudioShowContainer'
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
       <Route exact path="/welcome" component={App} />
-      <Route exact path="/login" render={routerProps => <Login {...routerProps}/>}/>
+      <Route exact path="/login" render={routerProps => <Login {...routerProps}/>} />
       <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
-      <Route exact path="/search" component={SearchContainer} />
+      <Route exact path="/search" render={routerProps => <SearchContainer {...routerProps}/>} />
       <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>
       <Route exact path="/profile" component={ProfileContainer} />
+      <Route exact path="/flywheel_sports" component={StudioShowContainer} />
+      <Route exact path="/soulcycle" component={StudioShowContainer} />
       <Redirect from="/" to="/welcome" />
       </Switch>
     </Router>

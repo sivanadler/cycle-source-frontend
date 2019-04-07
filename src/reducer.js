@@ -19,7 +19,9 @@ const initialState = {
   selectedBike: null,
   userClasses: [],
   spinClasses: [],
-  searchCleared: false
+  searchCleared: false,
+  isFetching: true,
+  selectedStudio: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -54,9 +56,9 @@ const reducer = (state=initialState, action) => {
     case "GET_STUDIOS":
       return {...state, studios: action.payload}
     case "RENDER_FILTERED_RESULTS":
-      return {...state, filteredLocations: action.payload}
+      return {...state, filteredLocations: action.payload, isFetching: false}
     case "SAVE_SEARCH_TERM":
-      return {...state, searchTerm: action.payload}
+      return {...state, searchTerm: action.payload, isFetching: false}
     case "CLEAR_SEARCH_FILTER":
       return {...state, filteredLocations: [], searchTerm: null, searchCleared: true}
     case "SET_COORDINATES":
@@ -71,6 +73,8 @@ const reducer = (state=initialState, action) => {
       return {...state, userClasses: action.payload}
     case "SAVE_SPIN_CLASSES":
       return {...state, spinClasses: action.payload}
+    case "SET_SELECTED_STUDIO":
+      return {...state, selectedStudio: action.payload}
     default:
       return state
   }
