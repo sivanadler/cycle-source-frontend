@@ -13,6 +13,7 @@ import ProfileContainer from './components/ProfileContainer'
 import ReservationContainer from './components/ReservationContainer'
 import Home from './components/Home'
 import StudioShowContainer from './components/StudioShowContainer'
+import ProfileDetails from './components/ProfileDetails'
 
 
 ReactDOM.render(
@@ -25,8 +26,10 @@ ReactDOM.render(
       <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
       <Route exact path="/search" render={routerProps => <SearchContainer {...routerProps}/>} />
       <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>
-      <Route exact path="/profile" component={ProfileContainer} />
-      <Route exact path="/flywheel_sports" component={StudioShowContainer} />
+      <Route exact path="/profile" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+      <Route exact path="/profile/favorites" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+      <Route exact path="/profile/reservations" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+      <Route exact path="/flywheel_sports" render={routerProps => <StudioShowContainer {...routerProps}/>}/>
       <Route exact path="/soulcycle" component={StudioShowContainer} />
       <Redirect from="/" to="/welcome" />
       </Switch>

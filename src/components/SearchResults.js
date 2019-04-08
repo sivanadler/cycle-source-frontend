@@ -16,6 +16,7 @@ class SearchResults extends React.Component {
     let studio = this.props.studios.find(studio => studio.id === location.studio_id)
     let studioName = studio.name.toLowerCase().replace(" ","_")
     this.props.setSelectedStudio(studio)
+    this.props.history.push(`/${studioName}`)
   }
 
   render() {

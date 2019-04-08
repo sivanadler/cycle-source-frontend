@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 const ProfileInformation = (props) => {
   function returnUserInfo(){
-    debugger
     console.log(props.currentUser);
     return(
       <div className="profile-information">

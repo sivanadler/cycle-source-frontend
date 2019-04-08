@@ -21,7 +21,7 @@ const SearchContainer = (props) => {
     {
       props.selectedStudio
       ?
-      <StudioShowContainer studio={props.selectedStudio}/>
+      <StudioShowContainer studio={props.selectedStudio} currentUser={props.currentUser}/>
       :
         <Fragment >
         <SearchBox history={props.history}/>
