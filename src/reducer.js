@@ -80,9 +80,9 @@ const reducer = (state=initialState, action) => {
     case "TOGGLE_REVIEW_FORM":
       return {...state, reviewForm: !state.reviewForm}
     case "SET_REVIEWS":
-      return {...state, reviews: [action.payload]}
+      return {...state, reviews: action.payload}
     case "SAVE_REVIEW":
-      return {...state, reviews: [...state.reviews, action.payload], reviewForm: false}
+      return {...state, reviews: [action.payload, ...state.reviews], reviewForm: false}
     default:
       return state
   }

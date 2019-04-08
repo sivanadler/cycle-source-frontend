@@ -89,7 +89,7 @@ class ReviewsDiv extends React.Component {
   }
 
   getReviews = () => {
-    let filteredReviews = this.props.reviews[0].filter(review => review.studio_id === this.props.studio.id)
+    let filteredReviews = this.props.reviews.filter(review => review.studio_id === this.props.studio.id)
     return filteredReviews.map(review => {
       return (
         <div className="review-card">
@@ -117,6 +117,7 @@ class ReviewsDiv extends React.Component {
   }
 
   render() {
+    console.log(this.props.reviews)
     const { rating } = this.state
 
     return (
