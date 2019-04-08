@@ -103,8 +103,10 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 46%;
-  height: 920px;
-  padding: 10px;
+  height: 1300px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
   background-color: white;
   overflow: scroll;
 }
@@ -135,6 +137,8 @@ body {
   margin-top: 0px;
   background-color: white;
   padding: 10px;
+  z-index: 2;
+  padding-bottom: 40px;
 }
 
 .search-label {
@@ -445,9 +449,8 @@ width: 85%;
 
 .filter {
   float: left;
-  padding: 20px;
-  height: 960px;
-  width: 200px;
+  height: 1000px;
+  width: 240px;
   background-color: #efefef;
   border-radius: 5px;
   border: 2px solid black;
@@ -523,4 +526,50 @@ width: 85%;
   font-size: 25px;
   text-align: center;
   padding: 5px;
+}
+
+.filter-header {
+  background-color: black;
+  color: white;
+  width: 220px;
+  padding: 10px;
+}
+
+.studio-filter {
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.inputs-ptag {
+  font-size: 20px;
+}
+
+.stars {
+  z-index: 0;
+}
+
+.favorite-text-search {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  float: right;
+  position: inline;
+  font-size: 10px;
+}
+
+.favorite-search {
+  float: right;
+  background-color: #efefef;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-right: 60px;
+  margin-top: 55px;
+  padding: 10px;
+  position: inline-block;
+}
+
+.favorite-search:hover {
+  background-color: black;
+  color: white;
 }

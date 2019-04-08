@@ -15,8 +15,7 @@ class Filter extends React.Component {
     return this.props.studios.map(studio => {
       return (
         <div>
-          <input type="radio" name="test" value={studio.name} onChange={this.handleChange}/> {studio.name}
-          <br/>
+          <p className="inputs-ptag"><input type="radio" name="test" value={studio.name} onChange={this.handleChange}/>  {studio.name}</p>
         </div>
       )
     })
@@ -36,13 +35,13 @@ class Filter extends React.Component {
     console.log(this.props)
     return (
       <div className="filter">
-        <h1>Filter:</h1>
+        <h1 className="filter-header">Filter:</h1>
         {this.props.filterByStudio ? this.clearFilter() : null}
         {
           this.props.studios
           ?
-          <div>
-          <h3>Studios: </h3>
+          <div className="studio-filter">
+          <h2 >Studios: </h2>
           {this.renderStudioRadioBtns()}
           </div>
           :
