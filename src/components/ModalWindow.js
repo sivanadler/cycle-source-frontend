@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 
-class Modal extends React.Component {
+class ModalWindow extends React.Component {
   state = {
     location: null,
     studio: null,
@@ -76,4 +76,4 @@ const mapDispatchtoProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Modal)
+export default connect(mapStateToProps, mapDispatchtoProps)(ModalWindow)

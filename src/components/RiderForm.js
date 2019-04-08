@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 import ActiveStorageProvider from 'react-activestorage-provider'
+import { DirectUploadProvider } from 'react-activestorage-provider'
 
 class RiderForm extends React.Component {
   state = {
@@ -57,12 +58,12 @@ class RiderForm extends React.Component {
           <input type="password" name="password" value={this.state.password} onChange={this.handleOnChange}/><br/><br/>
 
           <ActiveStorageProvider
-          endpoint={{
-            path: "/users",
+            endpoint={{
+            path: `api/vi/users`,
             model: 'User',
-            attribute: 'photo',
-            method: 'PUT',
-          }}
+            host: 'localhost:3000',
+            method: 'POST'
+            }}
           onSubmit={user => this.setState({ photo: user.photo })}
           render={({ handleUpload, uploads, ready }) => (
             <div>

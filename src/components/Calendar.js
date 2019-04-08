@@ -2,7 +2,7 @@ import React from 'react'
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import Modal from './Modal'
+import ModalWindow from './ModalWindow'
 import { connect } from 'react-redux'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
@@ -12,7 +12,7 @@ import InstructorAdapter from '../apis/InstructorAdapter'
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
-const views=['week', 'day', 'month']
+const views=['week']
 
 const minTime = new Date();
    minTime.setHours(5,30,0);
@@ -33,15 +33,16 @@ class Calendar extends React.Component {
     event: null,
     minTime: minTime,
     maxTime: maxTime,
+    address: null
   }
 
   static defaultProps = {
     elementProps: {},
 
     popup: false,
-    toolbar: true,
-    view: [views.WEEK, views.MONTH, views.DAY],
-    step: 30,
+    toolbar: false,
+    view: [views.WEEK],
+    step: 60,
     length: 30,
 
     drilldownView: views.WEEK,
@@ -84,6 +85,7 @@ class Calendar extends React.Component {
   }
 
   getSpinClasses = (spinClasses) => {
+    debugger
       for (let i = 0; i < spinClasses.length; i++) {
         let start = moment.utc(spinClasses[i].start).toDate();
         var startEST = this.convertUTCDateToLocalDate(new Date(start));
@@ -96,6 +98,7 @@ class Calendar extends React.Component {
           end: endEST,
           allDay: false,
           location_id: spinClasses[i].location_id,
+          address: spinClasses[i].address,
           studio_id: spinClasses[i].studio_id,
           instructor_id: spinClasses[i].instructor_id,
           class_id: spinClasses[i].id
@@ -104,11 +107,32 @@ class Calendar extends React.Component {
       }
   }
 
+  eventStyleGetter = (event, start, end, isSelected) => {
+    console.log(this.props.studios);
+    let studio = this.props.studios.find(studio => studio.id === event.studio_id)
+    var backgroundColor = studio.color;
+    var style = {
+        backgroundColor: backgroundColor,
+        borderRadius: '5px',
+        opacity: 0.8,
+        color: 'black',
+        border: '0px',
+        display: 'block',
+        fontFamily: "sans-serif",
+        textAlign: "center"
+    };
+    return {
+        style: style
+    };
+  }
+
   render() {
     return (
-      <div>
+      <div style={{ height: 900 }}>
       <h1>BOOK YOUR RIDE</h1>
         <BigCalendar
+          step={30}
+          views={['week']}
           className="calendar"
           localizer={localizer}
           defaultView='week'
@@ -118,10 +142,11 @@ class Calendar extends React.Component {
           endAccessor="end"
           min = {this.state.minTime}
           max = {this.state.maxTime}
+          eventPropGetter={(this.eventStyleGetter)}
           onSelectEvent={(event) => {
             this.setState({ showModal: true, event })}}
         />
-        {this.state.showModal && <Modal events={this.state.event}/>}
+        {this.state.showModal && <ModalWindow events={this.state.event}/>}
       </div>
     )
   }
@@ -129,7 +154,8 @@ class Calendar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    locations: state.locations
+    locations: state.locations,
+    studios: state.studios
   }
 }
 
