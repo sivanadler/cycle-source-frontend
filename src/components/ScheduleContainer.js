@@ -6,19 +6,26 @@ import Calendar from './Calendar'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import BookingMap from './BookingMap'
+import LocationAdapter from '../apis/LocationAdapter'
 
 class ScheduleContainer extends React.Component {
 
+  componentDidMount(){
+    LocationAdapter.getLocations()
+    .then(locations => {
+      this.props.storeLocations(locations)})
+  }
+
   render() {
-    console.log(this.props.bookThisClass);
+    console.log(this.props.history)
     return (
       <div className="schedule-container">
         {
           this.props.bookThisClass
           ?
-          <BookingMap />
+          <BookingMap history={this.props.history}/>
           :
-          <Calendar />
+          <Calendar locations={this.props.locations}/>
         }
       </div>
     )
@@ -27,7 +34,15 @@ class ScheduleContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    bookThisClass: state.bookThisClass
+    bookThisClass: state.bookThisClass,
+    locations: state.locations
   }
 }
-export default connect(mapStateToProps)(ScheduleContainer)
+
+const mapDispatchtoProps = dispatch => {
+  return {
+    storeLocations: (array) => dispatch({ type: "GET_LOCATIONS", payload: array }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(ScheduleContainer)

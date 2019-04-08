@@ -10,22 +10,35 @@ import StudioAdapter from '../apis/StudioAdapter'
 import heart from '../images/heart.png'
 import HamburgerNav from './HamburgerNav'
 import Header from './Header'
+import wheel from '../images/cyclewheel.png'
 
 class StudioShowContainer extends React.Component {
   state = {
-    favorited: false
+    favorited: false,
+    favorites: []
   }
 
   handleFavorite = () => {
-    let props = this.props
-    let currentUser_id = this.props.currentUser.id
-    let studio_id = this.props.selectedStudio.id
-    FavoriteAdapter.createFavorite(studio_id, currentUser_id)
-    .then(favorite => {
+    if (this.state.favorited) {
+      let favorite = this.state.favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
+      FavoriteAdapter.destroyFavorite(favorite)
+      .then(res =>{
+        this.getMyFavorites()
         this.setState({
-          favorited: true
+          favorited: false
         })
-    })
+      })
+    } else {
+      let props = this.props
+      let currentUser_id = this.props.currentUser.id
+      let studio_id = this.props.selectedStudio.id
+      FavoriteAdapter.createFavorite(studio_id, currentUser_id)
+      .then(favorite => {
+          this.setState({
+            favorited: true
+          })
+      })
+    }
   }
 
   getSelectedStudio = () => {
@@ -38,12 +51,16 @@ class StudioShowContainer extends React.Component {
     })
   }
 
+  directToReservation = () => {
+    this.props.history.push('/reserve')
+  }
+
   renderPage = () => {
     if (this.props.selectedStudio) {
       let selectedStudio = this.props.selectedStudio
       return (
-        <div className="studio-show-header">
-          <div>
+        <div>
+          <div className="studio-show-header">
             <span>
             <img className="studio-logo" src={logo} alt="logo" />
             </span>
@@ -53,7 +70,13 @@ class StudioShowContainer extends React.Component {
             <span className={this.state.favorited ? "favorited" : "favorite"} onClick={this.handleFavorite}>
               <img className="heart" src={heart} alt="favorite" />
               <span className="favorite-text">
-              <h1>FAVORITE</h1>
+                <h1>FAVORITE</h1>
+              </span>
+            </span>
+            <span className= "favorite" onClick={this.directToReservation}>
+              <img className="wheel" src={wheel} alt="favorite" />
+              <span className="favorite-text">
+                <h1>BOOK A CLASS</h1>
               </span>
             </span>
           </div>
@@ -64,6 +87,23 @@ class StudioShowContainer extends React.Component {
       )
 
     }
+  }
+
+  getMyFavorites = () => {
+    FavoriteAdapter.getFavorites()
+    .then(favorites => {
+      let favs = favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
+      if (favs) {
+        this.setState({
+          favorites: favorites,
+          favorited: true
+        })
+      }
+    })
+  }
+
+  componentDidMount(){
+    this.getMyFavorites()
   }
 
   render() {

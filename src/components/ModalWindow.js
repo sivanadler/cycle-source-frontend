@@ -19,7 +19,7 @@ class ModalWindow extends React.Component {
   getModalInfo = () => {
     if (this.state.instructor && this.state.location && this.state.studio) {
       return (
-        <div>
+        <div className="modal-main">
           <h1>{this.props.events.title}</h1>
           <a href={null}>
             <h1>Instructor: {this.state.instructor.name}</h1>

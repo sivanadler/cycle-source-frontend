@@ -23,7 +23,8 @@ const initialState = {
   isFetching: true,
   selectedStudio: null,
   reviews: [],
-  reviewForm: false
+  reviewForm: false,
+  filterByStudio: null,
 }
 
 const reducer = (state=initialState, action) => {
@@ -83,6 +84,10 @@ const reducer = (state=initialState, action) => {
       return {...state, reviews: action.payload}
     case "SAVE_REVIEW":
       return {...state, reviews: [action.payload, ...state.reviews], reviewForm: false}
+    case "SET_FILTER_BY_STUDIO":
+      return {...state, filterByStudio: action.payload}
+    case "CLEAR_FILTER_BY_STUDIO":
+      return {...state, filterByStudio: null}
     default:
       return state
   }

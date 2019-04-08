@@ -4,8 +4,10 @@ import Bike from './Bike'
 import { Redirect } from 'react-router'
 import UserClassAdapter from '../apis/UserClassAdapter'
 
-
 class BookingMap extends React.Component {
+  state = {
+    booked: null
+  }
 
   getInstructorInfo = () => {
     if (this.props.bookThisClass) {
@@ -22,18 +24,32 @@ class BookingMap extends React.Component {
   confirmBooking = () => {
     UserClassAdapter.createUserClass(this.props.bookThisClass, this.props.currentUser.id, this.props.selectedBike)
     .then(res => {
-      console.log(res);
+      this.setState({
+        booked: res
+      })
     })
-    debugger
+  }
+
+  redirect = () => {
+    this.props.history.push('/profile')
+    this.setState({
+      booked: null
+    })
+  }
+
+  //need to fix go back button route
+  handleGoBack = () => {
+    // let props = this.props
+    // debugger
+    // this.props.history.goBack()
   }
 
   render() {
     return (
-      <div>
-        <h1>BOOK YOUR RIDE</h1>
-        <div className="booking-map">
-          <h2>{this.props.bookThisClass.title}</h2>
-          <h2>{this.props.bookThisClass.start.toString()}</h2>
+      <div className="modal">
+        <div className="booking-map modal-main" >
+          <h1>{this.props.bookThisClass.title}</h1>
+          <h1>{this.props.bookThisClass.start.toString()}</h1>
           {!this.props.selectedBike ? <h3>Select an available bike from the map below to make your reservation.</h3> : null}
           {this.getInstructorInfo()}
           <img className="booking-map-instructor" src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile" />
@@ -43,13 +59,23 @@ class BookingMap extends React.Component {
             ?
             this.renderBikes()
             :
-            <div className="booking-map">
-              <h3>Are you sure you want to book bike {this.props.selectedBike}?</h3>
-              <button onClick={this.confirmBooking}>BOOK</button>
-              <button onClick={<Redirect to='/reserve' />}>GO BACK</button>
-            </div>
+              <div className="booking-map">
+                <h3>Are you sure you want to book bike {this.props.selectedBike}?</h3>
+                <button onClick={this.confirmBooking}>BOOK</button>
+                <button onClick={this.handleGoBack}>GO BACK</button>
+              </div>
           }
-
+          {
+            this.state.booked
+            ?
+            <div className="modal-main2">
+              <h1>Success! You Have booked: </h1>
+              <h3>Bike {this.state.booked.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</h3>
+              <div className="go-back" onClick={this.redirect}>Back To Reservation Page</div>
+            </div>
+            :
+            null
+          }
         </div>
       </div>
     )

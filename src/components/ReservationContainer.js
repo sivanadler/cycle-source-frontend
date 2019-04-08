@@ -14,7 +14,7 @@ const ReservationContainer = (props) => {
         <Header />
       </span>
       <h1 className="search-header">CYCLE SOURCE</h1>
-      <ScheduleContainer />
+      <ScheduleContainer history={props.history}/>
     </div>
   )
 }
