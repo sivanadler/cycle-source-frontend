@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
+import remove from '../images/remove.png'
 
 class ModalWindow extends React.Component {
   state = {
@@ -18,15 +19,19 @@ class ModalWindow extends React.Component {
 
   getModalInfo = () => {
     if (this.state.instructor && this.state.location && this.state.studio) {
+      let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
       return (
         <div className="modal-main">
+          <span onClick={this.props.closeModal}>
+            <img className="remove" src={remove} alt="remove" />
+          </span>
           <h1>{this.props.events.title}</h1>
           <a href={null}>
             <h1>Instructor: {this.state.instructor.name}</h1>
             <img src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile" />
           </a>
           <h1>{this.props.events.start.toString()}</h1>
-          <a href={this.state.studio.website}><h1>{this.state.studio.name}</h1></a>
+          <a href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
           <h4>{this.state.location.name}</h4>
           <h4>{this.state.location.address}</h4>
 

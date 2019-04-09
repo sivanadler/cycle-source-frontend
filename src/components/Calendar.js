@@ -9,6 +9,7 @@ import LocationAdapter from '../apis/LocationAdapter'
 import StudioAdapter from '../apis/StudioAdapter'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import Filter from './Filter'
+import EventWrapper from "./EventWrapper";
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
@@ -125,14 +126,20 @@ class Calendar extends React.Component {
         borderRadius: '5px',
         opacity: 0.8,
         color: 'black',
+        fontWeight: 'bold',
         border: '0px',
         display: 'block',
         fontFamily: "sans-serif",
-        textAlign: "center"
+        textAlign: "center",
     };
     return {
         style: style
     };
+  }
+  closeModal = () => {
+    this.setState({
+      showModal: false
+    })
   }
 
   render() {
@@ -157,7 +164,7 @@ class Calendar extends React.Component {
             this.setState({ showModal: true, event })}}
         />
 
-        {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event}/></div>}
+        {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal}/></div>}
       </div>
     )
   }

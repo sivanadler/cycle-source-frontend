@@ -6,13 +6,11 @@ export default class UserClass {
   }
 
   static createUserClass(spinClass, id, selectedBike) {
-    debugger
     let data = {
       user_id: id,
       spin_class_id: spinClass.class_id,
       bike: selectedBike
     }
-    debugger
     return fetch('http://localhost:3000/api/v1/user_classes',{
       method: "POST",
       headers: {

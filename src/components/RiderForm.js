@@ -8,7 +8,10 @@ class RiderForm extends React.Component {
     name: '',
     username: '',
     password: '',
-    photo: null
+    selectedFile: null,
+    profile_pic: "",
+    city: "New York City",
+    role: "rider"
   }
 
   handleOnChange = e => {
@@ -19,13 +22,16 @@ class RiderForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    let data = {
-      username: this.state.username,
-      password: this.state.password,
-      name: this.state.name,
-      city: "New York City",
-      role: "rider",
-    }
+    const data = new FormData();
+      data.append('name', this.state.name)
+      data.append('username', this.state.username)
+      data.append('password', this.state.password)
+      data.append('photo', this.state.selectedFile, this.state.selectedFile.name)
+      data.append('profile_pic', this.state.profile_pic)
+      data.append('city', this.state.city)
+      data.append('role', this.state.role)
+      console.log(data);
+      debugger
     fetch("http://localhost:3000/api/v1/users", {
 			method: "POST",
 			headers: {
@@ -36,10 +42,17 @@ class RiderForm extends React.Component {
 		})
     .then(res => res.json())
     .then(json => {
+      debugger
       localStorage.setItem('jwt', json.jwt)
       let history = this.props.history.history
       history.push('/home')
       this.props.setCurrentUser(json.user)
+    })
+  }
+
+  fileSelectedHandler = (e) => {
+    this.setState({
+      selectedFile: e.target.files[0]
     })
   }
 
@@ -57,47 +70,7 @@ class RiderForm extends React.Component {
           <label for="password">Password: </label><br/>
           <input type="password" name="password" value={this.state.password} onChange={this.handleOnChange}/><br/><br/>
 
-          <ActiveStorageProvider
-            endpoint={{
-            path: `api/vi/users`,
-            model: 'User',
-            host: 'localhost:3000',
-            method: 'POST'
-            }}
-          onSubmit={user => this.setState({ photo: user.photo })}
-          render={({ handleUpload, uploads, ready }) => (
-            <div>
-              <input
-                type="file"
-                disabled={!ready}
-                onChange={e => handleUpload(e.currentTarget.files)}
-              />
-
-              {uploads.map(upload => {
-                switch (upload.state) {
-                  case 'waiting':
-                    return <p key={upload.id}>Waiting to upload {upload.file.name}</p>
-                  case 'uploading':
-                    return (
-                      <p key={upload.id}>
-                        Uploading {upload.file.name}: {upload.progress}%
-                      </p>
-                    )
-                  case 'error':
-                    return (
-                      <p key={upload.id}>
-                        Error uploading {upload.file.name}: {upload.error}
-                      </p>
-                    )
-                  case 'finished':
-                    return (
-                      <p key={upload.id}>Finished uploading {upload.file.name}</p>
-                    )
-                }
-              })}
-            </div>
-          )}
-          />
+          <input type="file" onChange={this.fileSelectedHandler}/>
           <input type="submit" value="Create Account" />
         </form>
       </div>
@@ -120,3 +93,48 @@ const mapDispatchtoProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchtoProps)(RiderForm)
+
+
+
+//
+// <ActiveStorageProvider
+//   endpoint={{
+//   path: `api/vi/users`,
+//   model: 'User',
+//   host: 'localhost:3000',
+//   method: 'POST'
+//   }}
+// onSubmit={user => this.setState({ photo: user.photo })}
+// render={({ handleUpload, uploads, ready }) => (
+//   <div>
+//     <input
+//       type="file"
+//       disabled={!ready}
+//       onChange={e => handleUpload(e.currentTarget.files)}
+//     />
+//
+//     {uploads.map(upload => {
+//       switch (upload.state) {
+//         case 'waiting':
+//           return <p key={upload.id}>Waiting to upload {upload.file.name}</p>
+//         case 'uploading':
+//           return (
+//             <p key={upload.id}>
+//               Uploading {upload.file.name}: {upload.progress}%
+//             </p>
+//           )
+//         case 'error':
+//           return (
+//             <p key={upload.id}>
+//               Error uploading {upload.file.name}: {upload.error}
+//             </p>
+//           )
+//         case 'finished':
+//           return (
+//             <p key={upload.id}>Finished uploading {upload.file.name}</p>
+//           )
+//       }
+//     })}
+//   </div>
+// )}
+// />

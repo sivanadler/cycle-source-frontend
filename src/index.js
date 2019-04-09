@@ -31,6 +31,13 @@ ReactDOM.render(
       <Route exact path="/profile/reservations" render={routerProps => <ProfileContainer {...routerProps}/>}/>
       <Route exact path="/flywheel_sports" render={routerProps => <StudioShowContainer {...routerProps}/>}/>
       <Route exact path="/soulcycle" component={StudioShowContainer} />
+      <Route exact path="/peleton" component={StudioShowContainer} />
+      <Route exact path="/crank" component={StudioShowContainer} />
+      <Route exact path="/cyc_fitness" component={StudioShowContainer} />
+      <Route exact path="/ryde_fitness" component={StudioShowContainer} />
+      <Route exact path="/swerve_fitness" component={StudioShowContainer} />
+      <Route exact path="/sync_studio" component={StudioShowContainer} />
+      <Route exact path="/aqua_studio" component={StudioShowContainer} />
       <Redirect from="/" to="/welcome" />
       </Switch>
     </Router>

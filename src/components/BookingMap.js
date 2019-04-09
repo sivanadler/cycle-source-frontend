@@ -71,7 +71,7 @@ class BookingMap extends React.Component {
             <div className="modal-main2">
               <h1>Success! You Have booked: </h1>
               <h3>Bike {this.state.booked.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</h3>
-              <div className="go-back" onClick={this.redirect}>Back To Reservation Page</div>
+              <div className="go-back" onClick={this.redirect}>My Profile</div>
             </div>
             :
             null
