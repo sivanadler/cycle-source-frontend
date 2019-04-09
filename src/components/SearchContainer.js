@@ -10,7 +10,7 @@ import Header from './Header'
 
 const SearchContainer = (props) => {
   return (
-  <div>
+  <div className="search-container">
     <span>
       <HamburgerNav />
     </span>

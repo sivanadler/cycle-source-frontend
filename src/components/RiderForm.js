@@ -22,27 +22,21 @@ class RiderForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const data = new FormData();
-      data.append('name', this.state.name)
-      data.append('username', this.state.username)
-      data.append('password', this.state.password)
-      data.append('photo', this.state.selectedFile, this.state.selectedFile.name)
-      data.append('profile_pic', this.state.profile_pic)
-      data.append('city', this.state.city)
-      data.append('role', this.state.role)
-      console.log(data);
-      debugger
+    const formData = new FormData();
+    formData.append('name', this.state.name)
+    formData.append('username', this.state.username)
+    formData.append('password', this.state.password)
+    formData.append('photo', this.state.selectedFile)
+    formData.append('profile_pic', this.state.profile_pic)
+    formData.append('city', this.state.city)
+    formData.append('role', this.state.role)
+      console.log(formData);
     fetch("http://localhost:3000/api/v1/users", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Accepts": "application/json",
-			},
-			body: JSON.stringify({user: data})
+			body: formData
 		})
     .then(res => res.json())
     .then(json => {
-      debugger
       localStorage.setItem('jwt', json.jwt)
       let history = this.props.history.history
       history.push('/home')

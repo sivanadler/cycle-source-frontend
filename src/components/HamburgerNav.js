@@ -15,7 +15,7 @@ class HamburgerNav extends React.Component {
 
   render() {
     return (
-      <div>
+      <div  className={this.state.clicked ? "ham-modal" : "unclicked"}>
         {this.state.clicked
           ?
           <ExposedNav

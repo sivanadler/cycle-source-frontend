@@ -28,6 +28,7 @@ class Login extends React.Component {
   		})
   		.then(res => res.json())
   		.then(response => {
+        debugger
         if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
           localStorage.setItem('jwt', response.jwt)
           let history = this.props.history

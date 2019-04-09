@@ -2,6 +2,11 @@ import React, { Fragment }from "react"
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
+import search from '../images/search.png'
+import calendar from '../images/calendar.png'
+import logout from '../images/logout.png'
+import avatar from '../images/avatar1.png'
+import home from '../images/home.png'
 
 class ExposedNav extends React.Component {
   logout = () => {
@@ -14,7 +19,7 @@ class ExposedNav extends React.Component {
 
   render() {
     return (
-      <div className="">
+      <div> 
         <div className="exposed-hamburger" onClick={this.props.handleToggleHamburgerNav}>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>
@@ -25,19 +30,20 @@ class ExposedNav extends React.Component {
               this.props.currentUser.role === "rider"
               ?
               <Fragment>
-                <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}>Home</NavLink><br/>
-                <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}>Search</NavLink><br/>
-                <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}>Reserve</NavLink> <br/>
-                <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
+                <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}><img className="icon" src={home}/><p className="nav-link-text">Home</p></NavLink>
+                <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}><img className="icon"src={search}/><p className="nav-link-text">Search</p></NavLink>
+                <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}><img className="icon"src={calendar}/><p className="nav-link-text">Reserve</p></NavLink>
+                <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}><img className="icon" src={avatar}/><p className="nav-link-text">My Profile</p></NavLink>
 
-                <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+                <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}><img className="icon" src={logout}/><p className="nav-link-text">Log Out</p></NavLink>
               </Fragment>
               :
               <Fragment>
-                <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}>Home</NavLink><br/>
-                <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}>Search</NavLink><br/>
-                <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}>My Profile</NavLink><br/>
-                <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}>Log Out</NavLink><br/>
+              <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}><img className="icon" src={home}/><p className="nav-link-text">Home</p></NavLink>
+              <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}><img className="icon"src={search}/><p className="nav-link-text">Search</p></NavLink>
+              <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}><img className="icon" src={avatar}/><p className="nav-link-text">My Profile</p></NavLink>
+
+              <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}><img className="icon" src={logout}/><p className="nav-link-text">Log Out</p></NavLink>
               </Fragment>
             }
           </Router>

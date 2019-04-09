@@ -1,7 +1,7 @@
 import React from "react"
 import SearchBar from "./SearchBar"
 import SearchResults from "./SearchResults"
-import Sort from "./Sort"
+// import Sort from "./Sort"
 import StudioAdapter from '../apis/StudioAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
 
@@ -47,7 +47,6 @@ class SearchBox extends React.Component {
       <div className="search-box">
         <div className="search-bar-div">
           <SearchBar />
-          <Sort />
           {
             this.props.searchTerm
             ?

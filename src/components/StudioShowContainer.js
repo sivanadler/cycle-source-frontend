@@ -62,7 +62,7 @@ class StudioShowContainer extends React.Component {
         <div>
           <div className="studio-show-header">
             <span>
-            <img className="studio-logo" src={logo} alt="logo" />
+            <img className="studio-logo" src={this.props.selectedStudio.logo} alt="logo" />
             </span>
             <span>
             <h1 className="studio-head">{selectedStudio.name}</h1>

@@ -17,12 +17,16 @@ const mapStyles = {
   height: '100%',
 };
 
+const markerStyle = {
+  color: "pink",
+}
 
 class MyMap extends React.Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {}
+    selectedPlace: {},
+    isFetching: true
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -42,13 +46,20 @@ class MyMap extends React.Component {
   };
 
   renderMarkers = () => {
+    var icon = {
+        url: "https://loc8tor.co.uk/wp-content/uploads/2015/08/stencil.png", // url
+        scaledSize: new this.props.google.maps.Size(90, 42), // scaled size
+        color: 'pin'
+    };
     if (this.props.coordinates.length !== 0) {
       return this.props.coordinates.map(coordinate => {
         latPin = coordinate.latPin
         lngPin = coordinate.lngPin
         let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
         return (<Marker
+          style={markerStyle}
           onClick={this.onMarkerClick}
+          // icon={icon}
           name={"something"}
           position = {{lat: latPin, lng: lngPin}}
           name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
@@ -58,6 +69,10 @@ class MyMap extends React.Component {
   }
 
   renderFilteredMarkers = () => {
+    var icon = {
+        url: "https://loc8tor.co.uk/wp-content/uploads/2015/08/stencil.png", // url
+        scaledSize: new this.props.google.maps.Size(90, 42), // scaled size
+    };
     if (this.props.filteredLocations.length !== 0) {
       console.log("this");
       this.props.filteredLocations.map(location => this.getGeoFilteredCodes(location))
@@ -68,6 +83,7 @@ class MyMap extends React.Component {
         lngPin = coordinate.lngPin
         let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
         return (<Marker
+          style={markerStyle}
           onClick={this.onMarkerClick}
           name={"something"}
           position = {{lat: latPin, lng: lngPin}}
@@ -79,8 +95,9 @@ class MyMap extends React.Component {
 
   putFilteredMarkersOnPage = () => {
     if (this.state.isFetching) {
-      return <img src={wheelGif} alt="loading" />
+      return <img className="loading" src={wheelGif} alt="loading" />
     } else {
+      debugger
       return this.props.filteredCoordinates.map(coordinate => {
         latPin = coordinate.latPin
         lngPin = coordinate.lngPin
@@ -120,7 +137,8 @@ class MyMap extends React.Component {
   //pins filter but now this function needs to get all locations and put pins for them all back on the map
   getUnFilteredLocations = () => {
     debugger
-    this.props.locations.map(location => this.getGeoCode(location))
+    this.renderMarkers()
+    // this.props.locations.map(location => this.getGeoCode(location))
   }
 
   componentDidMount(){
@@ -131,6 +149,7 @@ class MyMap extends React.Component {
   }
 
   render() {
+
     return (
       <div id="map">
         <Map

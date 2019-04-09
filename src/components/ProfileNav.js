@@ -16,8 +16,8 @@ const ProfileNav = (props) => {
   return (
     <div className="nav">
       <Router>
-      <NavLink to="/profile/reservations" exact className="nav-link" onClick={handleMyReservations}>My Reservations</NavLink>
-      <NavLink to="/profile/favorites" exact className="nav-link" onClick={handleMyFavorites}>My Favorites</NavLink>
+      <NavLink to="/profile/reservations" exact className="nav-link-profile" onClick={handleMyReservations}>My Reservations</NavLink>
+      <NavLink to="/profile/favorites" exact className="nav-link-profile" onClick={handleMyFavorites}>My Favorites</NavLink>
       </Router>
     </div>
   )

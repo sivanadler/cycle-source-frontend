@@ -11,11 +11,10 @@ class ProfileInformation extends React.Component {
   }
 
   returnUserInfo = () => {
-    debugger
     console.log(this.props.currentUser);
     return(
       <div className="profile-information">
-        <img className="profile-picture" src={this.props.currentUser.profile_pic} alt="photo" />
+        <img className="profile-picture" src={this.props.currentUser.imageUrl} alt="photo" />
         <h1>{this.props.currentUser.name} </h1>
         <h1>{this.props.currentUser.username}</h1>
       </div>

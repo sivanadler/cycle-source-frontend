@@ -108,12 +108,20 @@ class Calendar extends React.Component {
     })
     }
   }
+  //
+  // setRecurringSpinClasses = () => {
+  //   this.state.spinClasses.map(spinClass => {
+  //     var dueDate = moment().add(1,'week').format(spinClass.start)
+  //     debugger
+  //   })
+  
 
   events = () => {
     if (this.props.filterByStudio) {
       let spinClasses = this.state.spinClasses.filter(spinClass => spinClass.studio_id === this.props.filterByStudio.id)
       return spinClasses
     } else {
+      // this.setRecurringSpinClasses()
       return this.state.spinClasses
     }
   }
