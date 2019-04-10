@@ -18,6 +18,7 @@ class Login extends React.Component {
     if (this.state.checkedInstructor) {
       this.handleInstructorLogIn()
     } else {
+      debugger
       fetch("http://localhost:3000/api/v1/login", {
   			method: "POST",
   			headers: {

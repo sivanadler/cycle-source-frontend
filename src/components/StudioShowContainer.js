@@ -82,7 +82,7 @@ class StudioShowContainer extends React.Component {
           </div>
           <LocationsDiv studio_id={selectedStudio.id}/>
           <ReviewsDiv studio={selectedStudio}/>
-          <InstructorsDiv studio={selectedStudio}/>
+          <InstructorsDiv studio={selectedStudio} history={this.props.history}/>
         </div>
       )
 

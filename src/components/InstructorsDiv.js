@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from 'react-redux'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import InstructorAdapter from '../apis/InstructorAdapter'
-
+import InstructorShowContainer from './InstructorShowContainer'
 class InstructorsDiv extends React.Component {
   state = {
     spinClasses: [],
     instructors: [],
     getInstructors: true,
-    getSpinClasses: true
+    getSpinClasses: true,
+    instructorShow: false
   }
 
   getInstructors = () => {
@@ -67,7 +68,7 @@ class InstructorsDiv extends React.Component {
       })
       return filteredInstructors.map(instructor => {
         return (
-          <div className="instructor-card">
+          <div className="instructor-card" onClick={() => this.handleRedirectToInstructors(instructor)}>
             <img src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile-picture" className="instructor-pic"/>
             <h1 >{instructor.name}</h1>
           </div>
@@ -80,12 +81,15 @@ class InstructorsDiv extends React.Component {
     }
   }
 
+  handleRedirectToInstructors = instructor => {
+    let pathName = instructor.name.toLowerCase().replace(" ", "_")
+    this.props.history.push(`/instructors/${pathName}`)
+  }
+
   render() {
     return (
       <div className="instructors-div">
         {this.renderInstructors()}
-
-
       </div>
     )
   }

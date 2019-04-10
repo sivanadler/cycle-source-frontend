@@ -14,12 +14,13 @@ import ReservationContainer from './components/ReservationContainer'
 import Home from './components/Home'
 import StudioShowContainer from './components/StudioShowContainer'
 import ProfileDetails from './components/ProfileDetails'
-
+import Wrapper from './components/Wrapper'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
+      <Route path="/instructors/:customPath" render={routerProps => <Wrapper {...routerProps}/>} />
       <Route exact path="/welcome" component={App} />
       <Route exact path="/login" render={routerProps => <Login {...routerProps}/>} />
       <Route exact path="/signup" render={routerProps => <SignUp {...routerProps}/>} />
@@ -29,7 +30,7 @@ ReactDOM.render(
       <Route exact path="/profile" render={routerProps => <ProfileContainer {...routerProps}/>}/>
       <Route exact path="/profile/favorites" render={routerProps => <ProfileContainer {...routerProps}/>}/>
       <Route exact path="/profile/reservations" render={routerProps => <ProfileContainer {...routerProps}/>}/>
-      
+
       <Route exact path="/flywheel_sports" render={routerProps => <StudioShowContainer {...routerProps}/>}/>
       <Route exact path="/soulcycle" component={StudioShowContainer} />
       <Route exact path="/peleton" component={StudioShowContainer} />
