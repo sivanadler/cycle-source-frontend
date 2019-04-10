@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import Bike from './Bike'
 import { Redirect } from 'react-router'
 import UserClassAdapter from '../apis/UserClassAdapter'
+import remove from '../images/remove.png'
 
 class BookingMap extends React.Component {
   state = {
-    booked: null
+    booked: null,
+    userClasses: []
   }
 
   getInstructorInfo = () => {
@@ -18,7 +20,19 @@ class BookingMap extends React.Component {
 
   renderBikes = () => {
     let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48]
-    return bikes.map(bike => <Bike number={bike}/>)
+    let thisClass = this.props.bookThisClass.class_id
+    let filteredUserClasses = this.state.userClasses.filter(userClass => userClass.spin_class_id === thisClass)
+    let filteredBikes = []
+    filteredUserClasses.map(userClass => {
+      filteredBikes.push(userClass.bike)
+    })
+    return bikes.map(bike => {
+        if (filteredBikes.includes(bike)) {
+          return <Bike number={bike} className={"reserved-bike"}/>
+        } else {
+          return <Bike number={bike} className={"bike"}/>
+        }
+      })
   }
 
   confirmBooking = () => {
@@ -44,10 +58,25 @@ class BookingMap extends React.Component {
     // this.props.history.goBack()
   }
 
+  closeModal = () => {
+    this.props.history.push('/reserve')
+    debugger
+  }
+
+  componentDidMount(){
+    UserClassAdapter.getUserClasses()
+    .then(userClasses => {
+      this.setState({ userClasses })
+    })
+  }
+
   render() {
     return (
       <div className="modal">
         <div className="booking-map modal-main" >
+          <span onClick={this.closeModal}>
+            <img className="remove" src={remove} alt="remove" />
+          </span>
           <h1>{this.props.bookThisClass.title}</h1>
           <h1>{this.props.bookThisClass.start.toString()}</h1>
           {!this.props.selectedBike ? <h3>Select an available bike from the map below to make your reservation.</h3> : null}
@@ -60,6 +89,9 @@ class BookingMap extends React.Component {
             this.renderBikes()
             :
               <div className="booking-map">
+                <span onClick={this.closeModal}>
+                  <img className="remove" src={remove} alt="remove" />
+                </span>
                 <h3>Are you sure you want to book bike {this.props.selectedBike}?</h3>
                 <button onClick={this.confirmBooking}>BOOK</button>
                 <button onClick={this.handleGoBack}>GO BACK</button>
@@ -69,6 +101,9 @@ class BookingMap extends React.Component {
             this.state.booked
             ?
             <div className="modal-main2">
+              <span onClick={this.closeModal}>
+                <img className="remove" src={remove} alt="remove" />
+              </span>
               <h1>Success! You Have booked: </h1>
               <h3>Bike {this.state.booked.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</h3>
               <div className="go-back" onClick={this.redirect}>My Profile</div>
@@ -87,13 +122,15 @@ const mapStateToProps = state => {
     bookThisClass: state.bookThisClass,
     instructors: state.instructors,
     selectedBike: state.selectedBike,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    changeBike: state.changeBike,
+    userClasses: state.userClasses
   }
 }
 
 const mapDispatchtoProps = dispatch => {
   return {
-
+    setSelectedBikeToFalse: () => dispatch({ type: "SET_SELECTED_BIKE", payload: null})
   }
 }
 

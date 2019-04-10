@@ -8,6 +8,7 @@ import InstructorProfile from './InstructorProfile'
 import InstructorReview from './InstructorReview'
 import HamburgerNav from './HamburgerNav'
 import Header from './Header'
+import InstructorCalendar from './InstructorCalendar'
 
 class InstructorShowContainer extends React.Component {
 
@@ -68,7 +69,11 @@ class InstructorShowContainer extends React.Component {
       for (var i = 0; i < ratings.length; i++) {
         sum += ratings[i]
       }
-      return sum / ratings.length
+      if (sum === 0) {
+        return 0
+      } else {
+        return sum / ratings.length
+      }
     }
   }
 
@@ -111,6 +116,7 @@ class InstructorShowContainer extends React.Component {
             </div>
             <InstructorProfile instructor={this.state.selectedInstructor}/>
             <InstructorReview instructor={this.state.selectedInstructor} currentUserPlease={this.props.currentUser}/>
+            <InstructorCalendar instructor={this.state.selectedInstructor}/>
           </div>
         :
         null
@@ -124,7 +130,9 @@ class InstructorShowContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-    instructorReviews: state.instructorReviews
+    instructorReviews: state.instructorReviews,
+    locations: state.locations,
+    studios: state.studios
   }
 }
 

@@ -10,13 +10,22 @@ class Bike extends React.Component {
   }
 
   handleOnClick = e => {
-    let selectedBike = parseInt(e.target.innerText)
-    this.props.selectBike(selectedBike)
+    if (this.props.className === 'reserved-bike') {
+      return null
+    }
+    if (this.props.editBike) {
+      let selectedBike = parseInt(e.target.innerText)
+      this.props.selectChangedBike(selectedBike)
+    } else {
+      let selectedBike = parseInt(e.target.innerText)
+      this.props.selectBike(selectedBike)
+    }
   }
 
   render() {
+    console.log(this.props)
     return (
-      <div className="bike" onClick={this.handleOnClick}>
+      <div className={this.props.className} onClick={this.handleOnClick}>
         <h1>{this.props.number}</h1>
       </div>
     )
@@ -32,7 +41,8 @@ const mapStateToProps = state => {
 
 const mapDispatchtoProps = dispatch => {
   return {
-    selectBike: (bike) => dispatch({ type: "SET_SELECTED_BIKE", payload: bike})
+    selectBike: (bike) => dispatch({ type: "SET_SELECTED_BIKE", payload: bike}),
+    selectChangedBike: (bike => dispatch({ type: "SET_SELECTED_CHANGED_BIKE", payload: bike}))
   }
 }
 export default connect(mapStateToProps, mapDispatchtoProps)(Bike)

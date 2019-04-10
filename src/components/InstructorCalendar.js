@@ -11,9 +11,8 @@ import InstructorAdapter from '../apis/InstructorAdapter'
 import Filter from './Filter'
 import EventWrapper from "./EventWrapper";
 
-const localizer = BigCalendar.momentLocalizer(moment)
-
 const views=['week']
+const localizer = BigCalendar.momentLocalizer(moment)
 
 const minTime = new Date();
    minTime.setHours(5,30,0);
@@ -27,7 +26,7 @@ const minTime = new Date();
      localizer.format(date, 'DDD'),
  }
 
-class Calendar extends React.Component {
+class InstructorCalendar extends React.Component {
   state = {
     spinClasses: [],
     showModal: false,
@@ -63,20 +62,6 @@ class Calendar extends React.Component {
     getNow: () => new Date(),
   }
 
-
-  componentDidMount(){
-    SpinClassAdapter.getSpinClasses()
-    .then(spinClasses => {
-      this.getSpinClasses(spinClasses)
-    })
-
-    StudioAdapter.getStudios()
-    .then(studios => {this.props.storeStudios(studios)})
-
-    InstructorAdapter.getInstructors()
-    .then(instructors => {this.props.storeInstructors(instructors)})
-  }
-
   convertUTCDateToLocalDate = date => {
     var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
     return newDate;
@@ -108,27 +93,14 @@ class Calendar extends React.Component {
     })
     }
   }
-  //
-  // setRecurringSpinClasses = () => {
-  //   this.state.spinClasses.map(spinClass => {
-  //     var dueDate = moment().add(1,'week').format(spinClass.start)
-  //     debugger
-  //   })
-
 
   events = () => {
-    if (this.props.filterByStudio) {
-      let spinClasses = this.state.spinClasses.filter(spinClass => spinClass.studio_id === this.props.filterByStudio.id)
-      return spinClasses
-    } else {
-      // this.setRecurringSpinClasses()
-      return this.state.spinClasses
-    }
+    let spinClasses = this.state.spinClasses.filter(spinClass => spinClass.instructor_id === this.props.instructor.id)
+    return spinClasses
   }
 
   eventStyleGetter = (event, start, end, isSelected) => {
-    let studio = this.props.studios.find(studio => studio.id === event.studio_id)
-    var backgroundColor = studio.color;
+    var backgroundColor = 'pink';
     var style = {
         backgroundColor: backgroundColor,
         borderRadius: '5px',
@@ -150,15 +122,22 @@ class Calendar extends React.Component {
     })
   }
 
+  componentDidMount(){
+    SpinClassAdapter.getSpinClasses()
+    .then(spinClasses => {
+      this.getSpinClasses(spinClasses)
+    })
+  }
+
   render() {
     return (
-      <div style={{ height: 1000 }}>
-      <h1>BOOK YOUR RIDE</h1>
-        <Filter />
+      <div style={{ height: 1000, display: 'block' }}>
+      <div className="instructor-calendar-div">
+        <h1>RIDE WITH ME:</h1>
         <BigCalendar
           step={30}
           views={['week']}
-          className="calendar"
+          className="instructor-calendar"
           localizer={localizer}
           defaultView='week'
           formats={this.formats}
@@ -171,7 +150,7 @@ class Calendar extends React.Component {
           onSelectEvent={(event) => {
             this.setState({ showModal: true, event })}}
         />
-
+      </div>
         {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal}/></div>}
       </div>
     )
@@ -182,17 +161,8 @@ const mapStateToProps = state => {
   return {
     locations: state.locations,
     studios: state.studios,
-    filterByStudio: state.filterByStudio,
-    userClasses: state.userClasses
+    filterByStudio: state.filterByStudio
   }
 }
 
-const mapDispatchtoProps = dispatch => {
-  return {
-    storeLocations: (array) => dispatch({ type: "GET_LOCATIONS", payload: array }),
-    storeStudios: (array) => dispatch({ type: "GET_STUDIOS", payload: array }),
-    storeInstructors: (array) => dispatch({ type: "GET_INSTRUCTORS", payload: array }),
-    clearFilterByStudio: () => dispatch({ type: "CLEAR_FILTER_BY_STUDIO"})
-  }
-}
-export default connect(mapStateToProps, mapDispatchtoProps)(Calendar)
+export default connect(mapStateToProps)(InstructorCalendar)

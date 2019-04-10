@@ -25,7 +25,9 @@ const initialState = {
   reviews: [],
   reviewForm: false,
   filterByStudio: null,
-  InstructorReviews: []
+  InstructorReviews: [],
+  changeBike: null,
+  setSelectedChangedBike: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -93,6 +95,10 @@ const reducer = (state=initialState, action) => {
       return {...state, instructorReviews: action.payload}
     case "SAVE_INSTRUCTOR_REVIEW":
       return {...state, instructorReviews: [action.payload, ...state.instructorReviews], reviewForm: false}
+    case "CHANGE_BIKE":
+      return {...state, changeBike: action.payload}
+    case "SET_SELECTED_CHANGED_BIKE":
+      return {...state, setSelectedChangedBike: action.payload}
     default:
       return state
   }

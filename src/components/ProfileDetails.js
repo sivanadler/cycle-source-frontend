@@ -1,5 +1,6 @@
 import React from "react"
 import ProfileNav from './ProfileNav'
+import ChangeBikeMap from './ChangeBikeMap'
 import UserClassAdapter from '../apis/UserClassAdapter'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import FavoriteAdapter from '../apis/FavoriteAdapter'
@@ -20,18 +21,37 @@ class ProfileDetails extends React.Component {
     }
   }
 
+  cancelClass = userClass => {
+    UserClassAdapter.destroyUserClass(userClass.id)
+    .then(res => {
+      this.getUserClasses()
+    })
+
+  }
+
   getMyReservations = () => {
     if (this.props.userClasses.length !== 0 && this.props.currentUser) {
       let myUserClasses = this.props.userClasses.filter(userClass => userClass.user_id === this.props.currentUser.id)
       return myUserClasses.map(userClass => {
         if (userClass.bike !== 0 ) {
           return (<div className="my-reservations">
+            <span onClick={() => this.cancelClass(userClass)}>
+              <img className="remove-fav" src={remove} alt="remove" />
+            </span>
+            <span onClick={() => this.changeBike(userClass)}>
+              <h1 className="change-bike">Change Bike</h1>
+            </span>
             <h1> {this.getSpinClass(userClass)} </h1>
             <h1>Bike: {userClass.bike} </h1>
+
           </div>
         )}
       })
     }
+  }
+
+  changeBike = spinClass => {
+    this.props.changeBikeNumber(spinClass)
   }
 
   getMyFavorites = () => {
@@ -107,14 +127,19 @@ class ProfileDetails extends React.Component {
     return studio
   }
 
-  componentDidMount(){
+  getUserClasses = () => {
     UserClassAdapter.getUserClasses()
     .then(userClasses => this.props.getUserClasses(userClasses))
+  }
+
+  componentDidMount(){
+    this.getUserClasses()
     SpinClassAdapter.getSpinClasses()
     .then(spinClasses => this.props.saveSpinClasses(spinClasses))
   }
 
   render() {
+    console.log(this.props.changeBike)
     return (
       <div className="profile-details-container">
         <ProfileNav />
@@ -135,6 +160,16 @@ class ProfileDetails extends React.Component {
           </div>
           : null
         }
+
+        {
+          this.props.changeBike
+          ?
+          <ChangeBikeMap changeBike={this.props.changeBike} spinClasses={this.props.spinClasses}
+          studios={this.props.studios} history={this.props.history}/>
+          :
+          null
+        }
+
       </div>
     )
   }
@@ -147,14 +182,16 @@ const mapStateToProps = state => {
     userClasses: state.userClasses,
     currentUser: state.currentUser,
     spinClasses: state.spinClasses,
-    studios: state.studios
+    studios: state.studios,
+    changeBike: state.changeBike
   }
 }
 
 const mapDispatchtoProps = dispatch => {
   return {
-    getUserClasses: (userClasses) => dispatch ({ type: "GET_USER_CLASSES", payload: userClasses}),
-    saveSpinClasses: (spinClasses) => dispatch ({ type: "SAVE_SPIN_CLASSES", payload: spinClasses})
+    getUserClasses: (userClasses) => dispatch({ type: "GET_USER_CLASSES", payload: userClasses}),
+    saveSpinClasses: (spinClasses) => dispatch({ type: "SAVE_SPIN_CLASSES", payload: spinClasses}),
+    changeBikeNumber: (spinClass) => dispatch({ type: "CHANGE_BIKE", payload: spinClass})
   }
 }
 

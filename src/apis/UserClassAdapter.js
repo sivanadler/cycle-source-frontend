@@ -21,4 +21,26 @@ export default class UserClass {
     })
     .then(res => res.json())
   }
+
+  static updateUserClass(userClass, spinClass, id, selectedBike) {
+    let data = {
+      user_id: id,
+      spin_class_id: spinClass.class_id,
+      bike: selectedBike
+    }
+    return fetch(`http://localhost:3000/api/v1/user_classes/${userClass}`,{
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+  }
+
+  static destroyUserClass(userClass) {
+    return fetch(`http://localhost:3000/api/v1/user_classes/${userClass}`,{
+      method: "DELETE"})
+  }
 }
