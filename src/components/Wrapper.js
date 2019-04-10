@@ -1,6 +1,7 @@
 import React from "react";
 import InstructorAdapter from '../apis/InstructorAdapter'
 import InstructorShowContainer from './InstructorShowContainer'
+import { connect } from 'react-redux'
 
 class Wrapper extends React.Component {
   constructor(props) {
@@ -33,4 +34,11 @@ class Wrapper extends React.Component {
     )
   }
 }
-export default Wrapper
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser,
+  }
+}
+
+export default connect(mapStateToProps)(Wrapper)

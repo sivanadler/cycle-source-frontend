@@ -23,7 +23,7 @@ export default class FavoriteAdapter {
   }
 
   static destroyFavorite(favorite) {
-    return fetch(`http://localhost:3000/api/v1/favorites/${favorite.id}`,{
+     return fetch(`http://localhost:3000/api/v1/favorites/${favorite.id}`,{
       method: "DELETE"})
   }
 }

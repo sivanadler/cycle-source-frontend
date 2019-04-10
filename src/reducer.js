@@ -25,6 +25,7 @@ const initialState = {
   reviews: [],
   reviewForm: false,
   filterByStudio: null,
+  InstructorReviews: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -88,6 +89,10 @@ const reducer = (state=initialState, action) => {
       return {...state, filterByStudio: action.payload}
     case "CLEAR_FILTER_BY_STUDIO":
       return {...state, filterByStudio: null}
+    case "SET_INSTRUCTOR_REVIEWS":
+      return {...state, instructorReviews: action.payload}
+    case "SAVE_INSTRUCTOR_REVIEW":
+      return {...state, instructorReviews: [action.payload, ...state.instructorReviews], reviewForm: false}
     default:
       return state
   }

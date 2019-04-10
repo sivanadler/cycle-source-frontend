@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from 'react-redux'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import heart from '../images/heart.png'
+import star from '../images/star.png'
 import FavoriteAdapter from '../apis/FavoriteAdapter'
 import InstructorProfile from './InstructorProfile'
+import InstructorReview from './InstructorReview'
+import HamburgerNav from './HamburgerNav'
+import Header from './Header'
 
 class InstructorShowContainer extends React.Component {
 
@@ -21,6 +26,7 @@ class InstructorShowContainer extends React.Component {
          return instructor
        }
      })
+     console.log(instructor)
      this.setState({
        selectedInstructor: instructor
      })
@@ -51,6 +57,21 @@ class InstructorShowContainer extends React.Component {
     }
   }
 
+  getAverageRating = () => {
+    if (this.props.instructorReviews && this.props.instructorReviews.length !== 0) {
+      let myReviews = this.props.instructorReviews.filter(review => review.instructor_id === this.state.selectedInstructor.id)
+      let ratings = []
+      myReviews.map(review => {
+        ratings.push(review.rating)
+      })
+      let sum = 0
+      for (var i = 0; i < ratings.length; i++) {
+        sum += ratings[i]
+      }
+      return sum / ratings.length
+    }
+  }
+
   componentDidMount(){
     InstructorAdapter.getInstructors()
     .then(instructors => {
@@ -59,13 +80,20 @@ class InstructorShowContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.props)
     return (
       <div>
       {
           this.state.selectedInstructor
           ?
           <div>
+            <span>
+              <HamburgerNav />
+            </span>
+            <span>
+              <Header />
+            </span>
+            <h1 className="search-header">CYCLE SOURCE</h1>
             <div className="studio-show-header">
               <h1 className="studio-head">{this.state.selectedInstructor.name}</h1>
               <span className={this.state.favorited ? "favorited" : "favorite"} onClick={this.handleFavorite}>
@@ -74,8 +102,15 @@ class InstructorShowContainer extends React.Component {
                   <h1>FAVORITE</h1>
                 </span>
               </span>
+              <span className="favorite">
+                <img className="star" src={star} alt="favorite" />
+                <span className="favorite-text">
+                  <h1>AVERAGE RATING: {this.getAverageRating()}</h1>
+                </span>
+              </span>
             </div>
             <InstructorProfile instructor={this.state.selectedInstructor}/>
+            <InstructorReview instructor={this.state.selectedInstructor} currentUserPlease={this.props.currentUser}/>
           </div>
         :
         null
@@ -85,4 +120,12 @@ class InstructorShowContainer extends React.Component {
   }
 }
 
-export default InstructorShowContainer
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser,
+    instructorReviews: state.instructorReviews
+  }
+}
+
+export default connect(mapStateToProps)(InstructorShowContainer)
