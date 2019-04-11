@@ -13,10 +13,10 @@ class ProfileInformation extends React.Component {
   returnUserInfo = () => {
     console.log(this.props.currentUser);
     return(
-      <div className="profile-information">
+      <div>
         <img className="profile-picture" src={this.props.currentUser.imageUrl} alt="photo" />
-        <h1>{this.props.currentUser.name} </h1>
-        <h1>{this.props.currentUser.username}</h1>
+        <h1 className="profile-details-text">{this.props.currentUser.name} </h1>
+        <h3 className="profile-details-text">username: {this.props.currentUser.username}</h3>
       </div>
     )
   }
