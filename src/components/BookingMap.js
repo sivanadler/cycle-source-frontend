@@ -4,6 +4,7 @@ import Bike from './Bike'
 import { Redirect } from 'react-router'
 import UserClassAdapter from '../apis/UserClassAdapter'
 import remove from '../images/remove.png'
+import moment from 'moment'
 
 class BookingMap extends React.Component {
   state = {
@@ -41,6 +42,28 @@ class BookingMap extends React.Component {
       this.setState({
         booked: res
       })
+      this.sendText(res)
+    })
+
+  }
+
+  sendText = (userClass) => {
+    let instructor = this.props.instructors.find(instructor => instructor.id === this.props.bookThisClass.instructor_id)
+    let studio = this.props.studios.find(studio => studio.id === this.props.bookThisClass.studio_id)
+    let location = this.props.locations.find(location => location.id === this.props.bookThisClass.location_id)
+    let date = this.props.bookThisClass.start.toString().slice(0,15)
+    let start = moment(this.props.bookThisClass.start.toString()).format('llll').slice(17, 30)
+    let end = moment(this.props.bookThisClass.end.toString()).format('llll').slice(17, 30)
+    let data = {
+      message: `You are booked on bike ${userClass.bike} for ${this.props.bookThisClass.title} at ${studio.name} (${location.name}: ${location.address}) on ${date} from ${start} - ${end} with ${instructor.name}! See you then!! 😃`
+    }
+    fetch("http://localhost:3000/api/v1/send_text",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
     })
   }
 
@@ -124,7 +147,9 @@ const mapStateToProps = state => {
     selectedBike: state.selectedBike,
     currentUser: state.currentUser,
     changeBike: state.changeBike,
-    userClasses: state.userClasses
+    userClasses: state.userClasses,
+    studios: state.studios,
+    locations: state.locations
   }
 }
 

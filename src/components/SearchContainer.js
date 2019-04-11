@@ -18,6 +18,7 @@ const SearchContainer = (props) => {
       <Header />
     </span>
     <h1 className="search-header">CYCLE SOURCE</h1>
+    <br/>
     {
       props.selectedStudio
       ?

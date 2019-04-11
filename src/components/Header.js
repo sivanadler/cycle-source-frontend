@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 class Header extends React.Component {
   handletitle = () => {
     return (
+      <div>
       <h1 className="logged-in-header">Welcome, {this.props.currentUser.name} !</h1>
+      </div>
+
     )
   }
 

@@ -69,7 +69,7 @@ class InstructorsDiv extends React.Component {
       return filteredInstructors.map(instructor => {
         return (
           <div className="instructor-card" onClick={() => this.handleRedirectToInstructors(instructor)}>
-            <img src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile-picture" className="instructor-pic"/>
+            <img src={instructor.profile_pic} alt="profile-picture" className="instructor-pic"/>
             <h1 >{instructor.name}</h1>
           </div>
         )
