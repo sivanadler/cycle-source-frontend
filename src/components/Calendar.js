@@ -172,7 +172,7 @@ class Calendar extends React.Component {
             this.setState({ showModal: true, event })}}
         />
 
-        {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal}/></div>}
+        {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal} history={this.props.history}/></div>}
       </div>
     )
   }

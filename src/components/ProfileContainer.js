@@ -14,6 +14,8 @@ const ProfileContainer = (props) => {
         <Header />
       </span>
       <h1 className="search-header">CYCLE SOURCE</h1>
+      <br/>
+
       <ProfileInformation history={props.history}/>
       <ProfileDetails history={props.history}/>
     </div>

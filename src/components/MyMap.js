@@ -70,14 +70,16 @@ class MyMap extends React.Component {
 
   renderFilteredMarkers = () => {
     var icon = {
-        url: "https://loc8tor.co.uk/wp-content/uploads/2015/08/stencil.png", // url
-        scaledSize: new this.props.google.maps.Size(90, 42), // scaled size
+        url: "https://loc8tor.co.uk/wp-content/uploads/2015/08/stencil.png",
+        scaledSize: new this.props.google.maps.Size(90, 42),
     };
     if (this.props.filteredLocations.length !== 0) {
+      // debugger
       console.log("this");
       this.props.filteredLocations.map(location => this.getGeoFilteredCodes(location))
     }
     if (this.props.filteredCoordinates.length !== 0) {
+      debugger
       return this.props.filteredCoordinates.map(coordinate => {
         latPin = coordinate.latPin
         lngPin = coordinate.lngPin
@@ -93,24 +95,19 @@ class MyMap extends React.Component {
     }
   }
 
-  putFilteredMarkersOnPage = () => {
-    if (this.state.isFetching) {
-      return <img className="loading" src={wheelGif} alt="loading" />
-    } else {
-      debugger
-      return this.props.filteredCoordinates.map(coordinate => {
-        latPin = coordinate.latPin
-        lngPin = coordinate.lngPin
-        let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
-        return (<Marker
-          onClick={this.onMarkerClick}
-          name={"something"}
-          position = {{lat: latPin, lng: lngPin}}
-          name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
-        />
-      )})
-    }
-  }
+  // putFilteredMarkersOnPage = () => {
+  //   return this.props.filteredCoordinates.map(coordinate => {
+  //     latPin = coordinate.latPin
+  //     lngPin = coordinate.lngPin
+  //     let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
+  //     return (<Marker
+  //       onClick={this.onMarkerClick}
+  //       name={"something"}
+  //       position = {{lat: latPin, lng: lngPin}}
+  //       name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
+  //     />
+  //   )})
+  // }
 
   getGeoCode = (location) => {
     let address = location.address
@@ -163,9 +160,8 @@ class MyMap extends React.Component {
         >
         {this.props.locations.length !== 0 ? this.renderMarkers() : null}
 
-        {this.props.filteredLocations.length !== 0 ? this.renderFilteredMarkers() : null}
+        {this.renderFilteredMarkers()}
 
-        {this.props.filteredCoordinates.length !== 0 ? this.putFilteredMarkersOnPage() : null}
 
         {this.props.searchCleared ? this.getUnFilteredLocations() : null}
 

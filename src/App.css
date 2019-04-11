@@ -264,11 +264,17 @@ body {
   margin-right: auto;
   margin-top: 40px;
   width: 90%;
-  height: 450px;
+  height: 20%;
 }
 
 .profile-details-text {
   margin-left: 20px;
+}
+
+.reserve-image {
+  width: 650px;
+  border-radius: 15px;
+  border: 1px solid black;
 }
 
 .profile-details-container {
@@ -569,6 +575,7 @@ width: 85%;
   border: 2px solid black;
   border-radius: 5px;
   background-color: white;
+  height: 20%;
 }
 
 .favorites-cards:hover {
@@ -816,6 +823,75 @@ width: 85%;
   height: 50px;
   margin-right: 30px;
   margin-top: 15px;
+}
+
+.modal-header {
+  text-align: center;
+  margin-left: 50px;
+  font-size: 50px;
+}
+
+.link {
+  text-decoration: none;
+  color: #4e1b82;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: red;
+  border-radius: 15px;
+}
+
+.profile-studio-logo {
+  height: 100px;
+  float: left;
+  margin-left: 10px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.profile-instructor-logo {
+  height: 150px;
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+}
+
+
+.profile-card-text {
+  margin-left: 220px;
+}
+
+.class-cards {
+  float: left;
+  background-color: white;
+  margin: 30px;
+  text-align: center;
+  padding: 10px;
+  height: 100%;
+  border-radius: 10px;
+  height: 500px;
+  overflow: s
+}
+
+.class-cards-header {
+  background-color: #efefef;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.class-cards-container {
+  width: 90%;
+  background-color: black;
+  border-radius: 10px;
+  margin-top: 100px;
+  margin-left: 100px;
+  text-align: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 /*

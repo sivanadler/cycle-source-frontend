@@ -7,6 +7,8 @@ import FavoriteAdapter from '../apis/FavoriteAdapter'
 import StudioAdapter from '../apis/StudioAdapter'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
+import InstructorFavoriteAdapter from '../apis/InstructorFavoriteAdapter'
+
 import remove from '../images/remove.png'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -16,7 +18,8 @@ class ProfileDetails extends React.Component {
     favorites: [],
     studiosArr: [],
     instructors: [],
-    locations: []
+    locations: [],
+    instructorFavorites: []
   }
 
   getSpinClass = (userClass) => {
@@ -34,11 +37,33 @@ class ProfileDetails extends React.Component {
     }
   }
 
+  getStudioLogo = (userClass) => {
+    if (this.props.spinClasses.length !== 0) {
+      let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
+      let studio = this.state.studiosArr.find(studio => studio.id === spinClass.studio_id)
+      return studio.logo
+    }
+  }
+
+  getStudioLogoFav = (favorite) => {
+    if (this.state.studiosArr.length !== 0) {
+      let studio = this.state.studiosArr.find(studio => studio.id === favorite.studio_id)
+      return studio.logo
+    }
+  }
+
   getInstructorForCard = (userClass) => {
     if (this.props.spinClasses.length !== 0 && this.state.instructors.length !== 0) {
       let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
       let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
       return instructor.name
+    }
+  }
+
+  getInstructorPhoto = (favorite) => {
+    if (this.state.instructors.length !== 0) {
+      let instructor = this.state.instructors.find(instructor => instructor.id === favorite.instructor_id)
+      return instructor.profile_pic
     }
   }
 
@@ -93,10 +118,15 @@ class ProfileDetails extends React.Component {
               <span onClick={() => this.changeBike(userClass)}>
                 <h1 className="change-bike">Change Bike</h1>
               </span>
-              <h1>{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
-              <h3>Instructor: {this.getInstructorForCard(userClass)}</h3>
-              <p> {this.getLocationForCard(userClass)} </p>
-              <p>Bike: {userClass.bike} </p>
+              <span>
+                <img className="profile-studio-logo" src={this.getStudioLogo(userClass)}/>
+              </span>
+              <div className="profile-card-text">
+                <h1>{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
+                <h3>Instructor: {this.getInstructorForCard(userClass)}</h3>
+                <p> {this.getLocationForCard(userClass)} </p>
+                <p>Bike: {userClass.bike} </p>
+              </div>
             </div>
         )}
       })
@@ -117,15 +147,15 @@ class ProfileDetails extends React.Component {
     })
   }
 
-  // removeDups = studios => {
-  //   let unique = {};
-  //   studios.forEach(function(i) {
-  //     if(!unique[i.id]) {
-  //       unique[i.id] = true;
-  //     }
-  //   });
-  //   return Object.keys(unique)
-  // }
+  getMyInstructorFavorites = () => {
+    InstructorFavoriteAdapter.getInstructorFavorites()
+    .then(favorites => {
+      let filtered = favorites.filter(favorite => favorite.user_id === this.props.currentUser.id)
+      this.setState({
+        instructorFavorites: filtered
+      })
+    })
+  }
 
 
   goGetStudios = () => {
@@ -144,6 +174,52 @@ class ProfileDetails extends React.Component {
     })
   }
 
+  removeInstructorFavorite = favorite => {
+    InstructorFavoriteAdapter.destroyInstructorFavorite(favorite)
+    .then(res =>{
+      this.getMyInstructorFavorites()
+    })
+  }
+
+  getInstructorName = favorite => {
+    let instructor = this.state.instructors.find(instructor => instructor.id === favorite.instructor_id)
+    return instructor
+  }
+
+  renderInstructorFavorites = () => {
+    if (this.state.instructorFavorites.length === 0) {
+      this.getMyInstructorFavorites()
+    }
+    if (this.state.instructors.length === 0) {
+      this.getInstructors()
+    }
+
+    else if (this.state.instructorFavorites.length !== 0 && this.state.instructors.length !== 0) {
+      return this.state.instructorFavorites.map(favorite => {
+        let instructor = this.getInstructorName(favorite)
+        return (
+          <div>
+            <span onClick={() => this.removeInstructorFavorite(favorite)}>
+              <img className="remove-fav" src={remove} alt="remove" />
+            </span>
+            <div className="favorites-cards" onClick={() => this.redirectoInstructorShow(favorite)}>
+              <span>
+                <img className="profile-instructor-logo" src={this.getInstructorPhoto(favorite)}/>
+                <br/>
+              </span>
+              <div className="profile-card-text">
+                <h1 className="favorites-h1">{instructor.name}</h1>
+                <p className="favorites-h1">{instructor.teaching_style}</p>
+                <p className="favorites-h1">Fun Fact: {instructor.fun_fact}</p>
+                <br/>
+              </div>
+            </div>
+          </div>
+        )
+      })
+    }
+  }
+
   renderFavorites = () => {
     if (this.state.favorites.length === 0) {
       this.getMyFavorites()
@@ -159,9 +235,16 @@ class ProfileDetails extends React.Component {
               <img className="remove-fav" src={remove} alt="remove" />
             </span>
             <div className="favorites-cards" onClick={() => this.handleRedirectToShowPage(favorite)}>
-              <h1 className="favorites-h1">{studio.name}</h1>
-              <p className="favorites-h1">{studio.bio}</p>
-              <p className="favorites-h1">{studio.website}</p>
+              <span>
+                <img className="profile-studio-logo" src={this.getStudioLogoFav(favorite)}/>
+                <br/>
+              </span>
+              <div className="profile-card-text">
+                <h1 className="favorites-h1">{studio.name}</h1>
+                <p className="favorites-h1">{studio.bio}</p>
+                <a className="link" href={studio.website}><p className="favorites-h1">{studio.website}</p></a>
+                <br/>
+              </div>
             </div>
           </div>
         )
@@ -173,6 +256,12 @@ class ProfileDetails extends React.Component {
     let studio = this.state.studiosArr.find(studio => studio.id === favorite.studio_id)
     let path = studio.name.toLowerCase().replace(" ","_")
     this.props.history.push(`/${path}`)
+  }
+
+  redirectoInstructorShow = favorite => {
+    let instructor = this.state.instructors.find(instructor => instructor.id === favorite.instructor_id)
+    let path = instructor.name.toLowerCase().replace(" ","_")
+    this.props.history.push(`/instructors/${path}`)
   }
 
   getStudioName = (favorite) => {
@@ -210,7 +299,6 @@ class ProfileDetails extends React.Component {
   }
 
   render() {
-    console.log(this.props.changeBike)
     return (
       <div className="profile-details-container">
         <ProfileNav />
@@ -227,7 +315,15 @@ class ProfileDetails extends React.Component {
           ?
           <div>
             <h1 className="favorites-h1"> My Favorites </h1>
-            <div>{this.renderFavorites()}</div>
+            <div>
+            <h1>Studios: </h1>
+            {this.renderFavorites()}
+            </div>
+
+            <div>
+            <h1>Instructors: </h1>
+            {this.renderInstructorFavorites()}
+            </div>
           </div>
           : null
         }

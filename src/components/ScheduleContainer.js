@@ -25,7 +25,7 @@ class ScheduleContainer extends React.Component {
           ?
           <BookingMap history={this.props.history}/>
           :
-          <Calendar locations={this.props.locations}/>
+          <Calendar history={this.props.history} locations={this.props.locations}/>
         }
       </div>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import ModalWindow from './ModalWindow'
+import InstructorModalWindow from './InstructorModalWindow'
 import { connect } from 'react-redux'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
@@ -151,7 +151,7 @@ class InstructorCalendar extends React.Component {
             this.setState({ showModal: true, event })}}
         />
       </div>
-        {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal}/></div>}
+        {this.state.showModal && <div className="modal"><InstructorModalWindow events={this.state.event} instructor={this.props.instructor} closeModal={this.closeModal}/></div>}
       </div>
     )
   }

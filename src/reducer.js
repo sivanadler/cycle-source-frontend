@@ -70,7 +70,7 @@ const reducer = (state=initialState, action) => {
     case "SET_COORDINATES":
       return {...state, coordinates: [...state.coordinates, action.payload], filteredCoordinates: []}
     case "SET_FILTERED_COORDINATES":
-      return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: [], filteredLocations: []}
+      return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: []}
     case "OPEN_BOOK_CLASS_WINDOW":
       return {...state, bookThisClass: action.payload}
     case "SET_SELECTED_BIKE":

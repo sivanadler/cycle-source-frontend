@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import heart from '../images/heart.png'
 import star from '../images/star.png'
-import FavoriteAdapter from '../apis/FavoriteAdapter'
+import InstructorFavoriteAdapter from '../apis/InstructorFavoriteAdapter'
 import InstructorProfile from './InstructorProfile'
 import InstructorReview from './InstructorReview'
 import HamburgerNav from './HamburgerNav'
@@ -38,7 +38,7 @@ class InstructorShowContainer extends React.Component {
   handleFavorite = () => {
     if (this.state.favorited) {
       let favorite = this.state.favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
-      FavoriteAdapter.destroyFavorite(favorite)
+      InstructorFavoriteAdapter.destroyInstructorFavorite(favorite)
       .then(res =>{
         this.getMyFavorites()
         this.setState({
@@ -48,9 +48,11 @@ class InstructorShowContainer extends React.Component {
     } else {
       let props = this.props
       let currentUser_id = this.props.currentUser.id
-      let studio_id = this.props.selectedStudio.id
-      FavoriteAdapter.createFavorite(studio_id, currentUser_id)
+      let instructor_id = this.state.selectedInstructor.id
+      InstructorFavoriteAdapter.createInstructorFavorite(instructor_id, currentUser_id)
       .then(favorite => {
+        console.log(favorite)
+        debugger
           this.setState({
             favorited: true
           })

@@ -12,7 +12,6 @@ class Header extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.currentUser)
     const jwt = localStorage.getItem('jwt')
     const jwtInstructor = localStorage.getItem('jwtInstructor')
     if (jwt) {
@@ -26,7 +25,7 @@ class Header extends React.Component {
           if (response.errors) {
             alert(response.errors)
           } else {
-            this.props.setCurrentUser(response)
+            this.props.setCurrentUser(response.user)
           }
         })
     } else if (jwtInstructor) {
@@ -40,7 +39,7 @@ class Header extends React.Component {
           if (response.errors) {
             alert(response.errors)
           } else {
-            this.props.setCurrentUser(response)
+            this.props.setCurrentUser(response.instructor)
           }
         })
     }
@@ -67,7 +66,7 @@ const mapStateToProps = state => {
 
 const mapDispatchtoProps = dispatch => {
   return{
-    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user.user}),
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
   }
 }
 

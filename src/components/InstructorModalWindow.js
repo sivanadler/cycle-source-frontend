@@ -49,6 +49,7 @@ class ModalWindow extends React.Component {
     //   }
     // }
     if (this.state.instructor && this.state.location && this.state.studio) {
+      debugger
       let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
       let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
       let date = moment(this.props.events.start.toString()).format('llll').slice(0,17)
@@ -80,12 +81,14 @@ class ModalWindow extends React.Component {
     UserClassAdapter.getUserClasses()
     .then(userClasses => {
       this.setState({ userClasses })
-    })
+    }, console.log(this.state.userClasses))
   }
 
   componentDidMount(){
     this.getUserClasses()
+    debugger
     let location = this.props.locations.find(location => location.id === this.props.events.location_id)
+    debugger
     let studio = this.props.studios.find(studio => studio.id === this.props.events.studio_id)
     let instructor = this.props.instructors.find(instructor => instructor.id === this.props.events.instructor_id)
     this.setState({
