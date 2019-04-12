@@ -31,9 +31,7 @@ class Login extends React.Component {
   		.then(response => {
         if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
           localStorage.setItem('jwt', response.jwt)
-          let history = this.props.history
-          history.push('/home')
-          this.props.setCurrentUser(response.user.user)
+          this.props.history.push('/home')
         }})
     }
   }
@@ -49,11 +47,11 @@ class Login extends React.Component {
 		})
 		.then(res => res.json())
 		.then(response => {
-      if (response.instructor && response.instructor.instructor.role === 'instructor') {
-        localStorage.setItem('jwtInstructor', response.jwt)
-        let history = this.props.history
-        history.push('/home')
+      localStorage.setItem('jwtInstructor', response.jwt)
+      if (localStorage.getItem('jwtInstructor')) {
+        this.props.history.push('/home')
         this.props.setCurrentUser(response.instructor.instructor)
+        this.props.history.push('/home')
       } else if (this.state.checkedRider){
         alert("Looks like you're not an Rider... Please log in with the correct account type!")
       }})

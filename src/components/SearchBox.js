@@ -17,21 +17,17 @@ class SearchBox extends React.Component {
   handleClearFilter = () => {
     this.props.clearFilterLocations()
     this.findAllLocations()
-    this.renderSearchResults()
-  }
-
-  getCorrectLocationsArray = () => {
-    if (this.props.locations.length !== 0) {
-      if (this.props.filteredLocations.length !== 0) {
-        this.renderSearchResults(this.props.filteredLocations)
-      } else {
-        this.renderSearchResults(this.props.locations)
-      }
-    }
+    this.setState({
+      filteredLocations: []
+    })
   }
 
   renderSearchResults = (locations) => {
-    console.log(this.props.filteredLocations)
+    if (this.props.filteredLocations.length !== 0) {
+      this.setState({
+        filteredLocations: this.props.filteredLocations
+      })
+    }
     if (this.props.locations.length !== 0) {
       return this.props.locations.map(location => {
         return <SearchResults key={location.id} location={location} history={this.props.history}/>
@@ -40,12 +36,9 @@ class SearchBox extends React.Component {
   }
 
   renderFilteredResults = () => {
-    console.log(this.props.filteredLocations)
-    debugger
-      return this.props.filteredLocations.map(location => {
-        debugger
-        return <SearchResults key={location.id} location={location} history={this.props.history}/>
-      })
+    return this.state.filteredLocations.map(location => {
+      return <SearchResults key={location.id} location={location} history={this.props.history}/>
+    })
   }
 
   findAllLocations = () => {
@@ -74,7 +67,7 @@ class SearchBox extends React.Component {
             :
             null}
         </div>
-        {this.props.filteredLocations.length !== 0 ? this.renderFilteredResults() : this.renderSearchResults()}
+        {this.state.filteredLocations.length !== 0 ? this.renderFilteredResults() : this.renderSearchResults()}
 
       </div>
     )

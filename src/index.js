@@ -18,34 +18,38 @@ import Wrapper from './components/Wrapper'
 import BookingMap from './components/BookingMap'
 import ClassLists from './components/ClassLists'
 
+let jwt = localStorage.getItem('jwt')
+let jwtInstructor = localStorage.getItem('jwtInstructor')
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Switch>
-      <Route path="/instructors/:customPath" render={routerProps => <Wrapper {...routerProps}/>} />
-      <Route exact path="/welcome" component={App} />
-      <Route exact path="/login" render={routerProps => <Login {...routerProps}/>} />
-      <Route exact path="/signup" render={routerProps => <SignUp {...routerProps}/>} />
-      <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
-      <Route exact path="/search" render={routerProps => <SearchContainer {...routerProps}/>} />
-      <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>
-      <Route exact path="/profile" render={routerProps => <ProfileContainer {...routerProps}/>}/>
-      <Route exact path="/profile/favorites" render={routerProps => <ProfileContainer {...routerProps}/>}/>
-      <Route exact path="/profile/reservations" render={routerProps => <ProfileContainer {...routerProps}/>}/>
-      <Route exact path="/reserve/booking_map" render={routerProps => <BookingMap {...routerProps}/>}/>
-      <Route exact path="/class_lists" render={routerProps => <ClassLists {...routerProps}/>}/>
-      <Route exact path="/flywheel_sports" render={routerProps => <StudioShowContainer {...routerProps}/>}/>
-      <Route exact path="/soulcycle" component={StudioShowContainer} />
-      <Route exact path="/peleton" component={StudioShowContainer} />
-      <Route exact path="/crank" component={StudioShowContainer} />
-      <Route exact path="/cyc_fitness" component={StudioShowContainer} />
-      <Route exact path="/ryde_fitness" component={StudioShowContainer} />
-      <Route exact path="/swerve_fitness" component={StudioShowContainer} />
-      <Route exact path="/sync_studio" component={StudioShowContainer} />
-      <Route exact path="/aqua_studio" component={StudioShowContainer} />
+        <Switch>
+        <Route path="/instructors/:customPath" render={routerProps => <Wrapper {...routerProps}/>} />
+        <Route exact path="/home" render={routerProps => <Home {...routerProps}/>} />
+        <Route exact path="/search" render={routerProps => <SearchContainer {...routerProps}/>} />
+        <Route exact path="/reserve" render={routerProps => <ReservationContainer {...routerProps}/>}/>
+        <Route exact path="/profile" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+        <Route exact path="/profile/favorites" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+        <Route exact path="/profile/reservations" render={routerProps => <ProfileContainer {...routerProps}/>}/>
+        <Route exact path="/reserve/booking_map" render={routerProps => <BookingMap {...routerProps}/>}/>
+        <Route exact path="/class_lists" render={routerProps => <ClassLists {...routerProps}/>}/>
+        <Route exact path="/flywheel_sports" render={routerProps => <StudioShowContainer {...routerProps}/>}/>
+        <Route exact path="/soulcycle" component={StudioShowContainer} />
+        <Route exact path="/peleton" component={StudioShowContainer} />
+        <Route exact path="/crank" component={StudioShowContainer} />
+        <Route exact path="/cyc_fitness" component={StudioShowContainer} />
+        <Route exact path="/ryde_fitness" component={StudioShowContainer} />
+        <Route exact path="/swerve_fitness" component={StudioShowContainer} />
+        <Route exact path="/sync_studio" component={StudioShowContainer} />
+        <Route exact path="/aqua_studio" component={StudioShowContainer} />
+        <Route exact path="/welcome" component={App} />
+        <Route exact path="/login" render={routerProps => <Login {...routerProps}/>} />
+        <Route exact path="/signup" render={routerProps => <SignUp {...routerProps}/>} />
+        <Redirect from="/" to="/welcome" />
+        </Switch>
+      }
 
-      <Redirect from="/" to="/welcome" />
-      </Switch>
     </Router>
   </Provider>
   , document.getElementById('root'));
