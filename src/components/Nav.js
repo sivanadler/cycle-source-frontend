@@ -10,18 +10,20 @@ import Home from './Home'
 const Nav = (props) => {
 
   function handleLogin(){
+    props.history.push('/login')
     props.toggleLogin()
   }
 
   function handleSignUp(){
+    props.history.push('/signup')
     props.newUser()
   }
 
   return (
   <div className="nav">
     <Router>
-    <NavLink to="/login" exact className="main-nav-link" onClick={handleLogin}>Log In</NavLink>
-    <NavLink to="/signup" exact className="main-nav-link" onClick={handleSignUp}>Sign Up</NavLink>
+      <NavLink to="/login" exact className="main-nav-link" onClick={handleLogin}>Log In</NavLink>
+      <NavLink to="/signup" exact className="main-nav-link" onClick={handleSignUp}>Sign Up</NavLink>
     </Router>
   </div>
   )

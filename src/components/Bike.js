@@ -13,6 +13,9 @@ class Bike extends React.Component {
     if (this.props.className === 'reserved-bike') {
       return null
     }
+    if (this.props.className === 'my-reserved-bike') {
+      return null
+    }
     if (this.props.editBike) {
       let selectedBike = parseInt(e.target.innerText)
       this.props.selectChangedBike(selectedBike)

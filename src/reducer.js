@@ -27,7 +27,8 @@ const initialState = {
   filterByStudio: null,
   InstructorReviews: [],
   changeBike: null,
-  setSelectedChangedBike: null
+  setSelectedChangedBike: null,
+  alreadyReservedBike: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -101,6 +102,8 @@ const reducer = (state=initialState, action) => {
       return {...state, setSelectedChangedBike: action.payload}
     case "UPDATE_USER_CLASSES":
       return {...state, userClasses: action.payload}
+    case "ALREADY_RESERVED":
+      return {...state, alreadyReservedBike: action.payload}
     default:
       return state
   }

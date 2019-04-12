@@ -151,7 +151,7 @@ class InstructorCalendar extends React.Component {
             this.setState({ showModal: true, event })}}
         />
       </div>
-        {this.state.showModal && <div className="modal"><InstructorModalWindow events={this.state.event} instructor={this.props.instructor} closeModal={this.closeModal}/></div>}
+        {this.state.showModal && <div className="modal"><InstructorModalWindow events={this.state.event} instructor={this.props.instructor} closeModal={this.closeModal} history={this.props.history}/></div>}
       </div>
     )
   }

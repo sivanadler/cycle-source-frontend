@@ -894,6 +894,16 @@ width: 85%;
   overflow-y: hidden;
 }
 
+.my-reserved-bike {
+  border: 2px solid black;
+  border-radius: 15em;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  margin: 20px;
+  background-color: pink;
+}
+
 /*
 .rbc-events-container {
   display: grid;

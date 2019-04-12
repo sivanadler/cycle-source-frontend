@@ -166,7 +166,7 @@ class InstructorShowContainer extends React.Component {
             </div>
             <InstructorProfile instructor={this.state.selectedInstructor}/>
             <InstructorReview instructor={this.state.selectedInstructor} currentUser={this.props.currentUser}/>
-            <InstructorCalendar instructor={this.state.selectedInstructor}/>
+            <InstructorCalendar history={this.props.history} instructor={this.state.selectedInstructor}/>
           </div>
         :
         null

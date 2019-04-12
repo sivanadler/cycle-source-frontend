@@ -53,7 +53,7 @@ class RiderForm extends React.Component {
   render() {
     return (
       <div>
-        <h1>Rider Form</h1>
+        <h1>Sign Up</h1>
         <form className="rider-sign-up" onSubmit={this.handleSubmit}>
           <label for="name">Full Name: </label><br/>
           <input type="text" name="name" value={this.state.name} onChange={this.handleOnChange}/><br/><br/>

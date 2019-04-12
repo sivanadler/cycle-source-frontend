@@ -75,6 +75,20 @@ class ProfileDetails extends React.Component {
     }
   }
 
+  getClassDateAndTime = (userClass) => {
+    if (this.props.spinClasses.length !== 0) {
+      let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
+      let date = moment(spinClass.start.toString()).format('llll').slice(0, 17)
+      let start = moment(spinClass.start.toString()).format('llll').slice(17, 30)
+      let end = moment(spinClass.end.toString()).format('llll').slice(17, 30)
+      return (
+        <div>
+          <h2>{date} ({start} - {end} )</h2>
+        </div>
+      )
+    }
+  }
+
 
   cancelClass = userClass => {
     UserClassAdapter.destroyUserClass(userClass.id)
@@ -123,6 +137,7 @@ class ProfileDetails extends React.Component {
               </span>
               <div className="profile-card-text">
                 <h1>{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
+                {this.getClassDateAndTime(userClass)}
                 <h3>Instructor: {this.getInstructorForCard(userClass)}</h3>
                 <p> {this.getLocationForCard(userClass)} </p>
                 <p>Bike: {userClass.bike} </p>

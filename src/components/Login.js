@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
 import wheelGif from '../images/wheel-gif.gif'
+import Nav from './Nav'
 
 class Login extends React.Component {
   state = {
@@ -18,7 +19,6 @@ class Login extends React.Component {
     if (this.state.checkedInstructor) {
       this.handleInstructorLogIn()
     } else {
-      debugger
       fetch("http://localhost:3000/api/v1/login", {
   			method: "POST",
   			headers: {
@@ -29,7 +29,6 @@ class Login extends React.Component {
   		})
   		.then(res => res.json())
   		.then(response => {
-        debugger
         if (response.user && this.state.checkedRider && response.user.user.role === 'rider') {
           localStorage.setItem('jwt', response.jwt)
           let history = this.props.history
@@ -82,34 +81,37 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
-        <span>
-          <h1 className="logo">CYCLE SOURCE</h1>
-        </span>
-        <span>
-          <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
-        </span>
-        <form onSubmit={this.handleSubmit}>
-        <div className="radio">
-          <h1>Log In</h1>
-          <h3>Please Check Off Your Account Type: </h3>
-          <label>
-            <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck}/>
-            Rider
-          </label>
+      <div>
+        <Nav history={this.props.history}/>
+        <div>
+          <span>
+            <h1 className="logo">CYCLE SOURCE</h1>
+          </span>
+          <span>
+            <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
+          </span>
+          <form onSubmit={this.handleSubmit}>
+          <div className="radio">
+            <h1>Log In</h1>
+            <h3>Please Check Off Your Account Type: </h3>
+            <label>
+              <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck}/>
+              Rider
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input type="radio" value="Instructor" checked={this.state.checkedInstructor} onChange={this.handleOnCheck}/>
+              Instructor
+            </label>
+          </div>
+            <label>Username: </label>
+            <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username}/> <br/>
+            <label>Password: </label>
+            <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password}/> <br/>
+            <input type="submit" name="submit" value="Log In" />
+          </form>
         </div>
-        <div className="radio">
-          <label>
-            <input type="radio" value="Instructor" checked={this.state.checkedInstructor} onChange={this.handleOnCheck}/>
-            Instructor
-          </label>
-        </div>
-          <label>Username: </label>
-          <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username}/> <br/>
-          <label>Password: </label>
-          <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password}/> <br/>
-          <input type="submit" name="submit" value="Log In" />
-        </form>
       </div>
     )
   }
