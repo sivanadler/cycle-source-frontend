@@ -19,7 +19,7 @@ class InstructorReview extends React.Component {
     let review = this.state.review
     let review_title = this.state.review_title
     let instructor_id = this.props.instructor.id
-    let user_id = this.state.currentUser.id
+    let user_id = this.props.currentUser.id
     InstructorReviewAdapter.createInstructorReview(rating, review, review_title, instructor_id, user_id)
     .then(review => {
       this.props.saveReview(review)

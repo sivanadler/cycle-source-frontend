@@ -12,6 +12,7 @@ class SearchBox extends React.Component {
 
   handleClearFilter = () => {
     this.props.clearFilterLocations()
+    this.renderSearchResults()
   }
 
   renderSearchResults = () => {
@@ -25,8 +26,8 @@ class SearchBox extends React.Component {
   }
 
   renderFilteredResults = () => {
-    debugger
     if (this.props.filteredLocations.length !== 0) {
+
       return this.props.filteredLocations.map(location => {
         return <SearchResults key={location.id} location={location} history={this.props.history}/>
       })

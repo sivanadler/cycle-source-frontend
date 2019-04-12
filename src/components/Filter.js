@@ -3,11 +3,15 @@ import { connect } from 'react-redux'
 
 class Filter extends React.Component {
   state = {
-    selectedVal: null
+    selectedVal: null,
+    isChecked: null
   }
 
   handleChange = e => {
     let studio = this.props.studios.find(studio => studio.name === e.target.value)
+    this.setState({
+      isChecked: e.target
+    })
     this.props.setFilterByStudio(studio)
   }
 
@@ -21,7 +25,12 @@ class Filter extends React.Component {
     })
   }
 
-  handlClearFilter = () => {
+  handlClearFilter = e => {
+    let input = this.state.isChecked
+    input.checked = false
+    this.setState({
+      isChecked: null
+    })
     this.props.clearFilterByStudio()
   }
 
@@ -32,7 +41,6 @@ class Filter extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="filter">
         <h1 className="filter-header">Filter:</h1>
