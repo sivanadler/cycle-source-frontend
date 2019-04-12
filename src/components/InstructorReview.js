@@ -85,22 +85,26 @@ class InstructorReview extends React.Component {
 
   getReviews = () => {
     let filteredReviews = this.props.instructorReviews.filter(review => review.instructor_id === this.props.instructor.id)
-    return filteredReviews.map(review => {
-      return (
-        <div className="review-card">
-          <h1>{review.review_title}</h1>
-          <h3>Posted by: {this.getUserName(review)}</h3>
-          <p>Rating:
-          <StarRatingComponent
-            name="rate"
-            starCount={5}
-            value={review.rating}
-          />
-          </p>
-          <p>{review.review_text}</p>
-        </div>
-      )
-    })
+    if (filteredReviews.length !== 0) {
+      return filteredReviews.map(review => {
+        return (
+          <div className="review-card">
+            <h1>{review.review_title}</h1>
+            <h3>Posted by: {this.getUserName(review)}</h3>
+            <p>Rating:
+            <StarRatingComponent
+              name="rate"
+              starCount={5}
+              value={review.rating}
+            />
+            </p>
+            <p>{review.review_text}</p>
+          </div>
+        )
+      })
+    } else {
+      return <h1>This Instructor Has No Reviews. Be The First ?</h1>
+    }
   }
 
   getUsers = () => {
@@ -110,10 +114,10 @@ class InstructorReview extends React.Component {
     })
   }
 
-  setCurrentUser = () => {
-    this.setState({
-      currentUser: this.props.currentUserPlease
-    })
+  getButtonToAddReview = () => {
+    return (
+      <button className="post-review-btn" onClick={this.renderReviewForm}>Post Review</button>
+    )
   }
 
   componentDidMount(){
@@ -121,20 +125,19 @@ class InstructorReview extends React.Component {
     .then(reviews => {
       this.props.setInstructorReviews(reviews)
     })
-    this.setCurrentUser()
     this.getUsers()
   }
 
   render() {
-    console.log(this.state.currentUser)
+    console.log(this.props.currentUser)
     return (
       <div className="reviews-div">
         <h1 className="header">REVIEWS</h1>
         <div className="button-div">
         {
-          this.state.currentUser && this.state.currentUser.role === "rider"
+          this.props.currentUser && this.props.currentUser.role === "rider"
           ?
-          <button className="post-review-btn" onClick={this.renderReviewForm}>Post Review</button>
+          this.getButtonToAddReview()
           :
           null
         }
@@ -153,7 +156,7 @@ class InstructorReview extends React.Component {
           ?
           this.getReviews()
           :
-          <h1>This Instructor Has No Reviews. Be The First ?</h1>
+          null
         }
       </div>
     )
@@ -170,6 +173,7 @@ const mapStateToProps = state => {
 
 const mapDispatchtoProps = dispatch => {
   return {
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
     toggleReviewForm: () => dispatch({ type: "TOGGLE_REVIEW_FORM"}),
     setInstructorReviews: (array) => dispatch({ type: "SET_INSTRUCTOR_REVIEWS", payload: array}),
     setUsers: (array) => dispatch({ type: "STORE_USERS", payload: array}),

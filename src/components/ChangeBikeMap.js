@@ -5,10 +5,16 @@ import InstructorAdapter from '../apis/InstructorAdapter'
 import remove from '../images/remove.png'
 import moment from 'moment'
 import UserClassAdapter from '../apis/UserClassAdapter'
+import LocationAdapter from '../apis/LocationAdapter'
+import StudioAdapter from '../apis/StudioAdapter'
+
 class ChangeBikeMap extends React.Component {
   state = {
     updated: null,
-    userClasses: []
+    userClasses: [],
+    instructors: [],
+    locations: [],
+    studios: []
   }
 
   componentDidMount(){
@@ -25,7 +31,7 @@ class ChangeBikeMap extends React.Component {
 
   getInstructor = () => {
     let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === this.state.updated.spin_class_id)
-    let instructor = this.props.instructors.find(instructor => instructor.id === spinClass.instructor_id)
+    let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
     return instructor.name
   }
 
@@ -42,7 +48,10 @@ class ChangeBikeMap extends React.Component {
   closeModalDone = () => {
     this.props.changeBikeNumber()
     this.props.changeUpdatedBikeNumber()
-    this.props.history.push('/profile/reservations')
+    this.props.history.push('/profile')
+    this.setState({
+      updated: null
+    })
   }
 
   getSpinClassInfo = () => {
@@ -67,7 +76,6 @@ class ChangeBikeMap extends React.Component {
   }
 
   confirmBooking = () => {
-    console.log(this.props)
     let spinClass = this.props.changeBike.spin_class_id
     let user_id = this.props.currentUser.id
     let bike = this.props.setSelectedChangedBike
@@ -77,6 +85,37 @@ class ChangeBikeMap extends React.Component {
       this.setState({
         updated: res
       })
+      let updated = this.state.userClasses.map(userClass => {
+        if (userClass.id === res.id) {
+          return userClass = res
+        } else {
+          return userClass
+        }
+      })
+      this.sendText(res)
+      this.props.updateUserClasses(updated)
+    })
+  }
+
+  sendText = (userClass) => {
+    let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === this.props.changeBike.spin_class_id)
+    let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
+    let studio = this.state.studios.find(studio => studio.id === spinClass.studio_id)
+    let location = this.state.locations.find(location => location.id === spinClass.location_id)
+
+    let date = moment(spinClass.start.toString()).format('llll').slice(0, 17)
+    let start = moment(spinClass.start.toString()).format('llll').slice(17, 30)
+    let end = moment(spinClass.end.toString()).format('llll').slice(17, 30)
+    let data = {
+      message: `You just changed your bike! You are now booked on bike ${userClass.bike} for ${spinClass.time} at ${studio.name} (${location.name}: ${location.address}) on ${date} from ${start} - ${end} with ${instructor.name}! See you then!! 😃`
+    }
+    fetch("http://localhost:3000/api/v1/send_text",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
     })
   }
 
@@ -118,7 +157,31 @@ class ChangeBikeMap extends React.Component {
       return <Bike number={bike} editBike={this.props.changeBike.bike} className={"bike"}/>}})
   }
 
+  findInstructors = () => {
+    InstructorAdapter.getInstructors()
+    .then(instructors => {
+      this.setState({ instructors })
+    })
+  }
+
+  findLocations = () => {
+    LocationAdapter.getLocations()
+    .then(locations => {
+      this.setState({ locations })
+    })
+  }
+
+  findStudios = () => {
+    StudioAdapter.getStudios()
+    .then(studios => {
+      this.setState({ studios })
+    })
+  }
+
   componentDidMount(){
+    this.findInstructors()
+    this.findLocations()
+    this.findStudios()
     UserClassAdapter.getUserClasses()
     .then(userClasses => {
       this.setState({ userClasses })
@@ -165,7 +228,9 @@ const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
     instructors: state.instructors,
-    setSelectedChangedBike: state.setSelectedChangedBike
+    setSelectedChangedBike: state.setSelectedChangedBike,
+    locations: state.locations,
+    studios: state.studios
   }
 }
 
@@ -173,7 +238,8 @@ const mapDispatchtoProps = dispatch => {
   return {
     storeInstructors: (array) => dispatch({ type: "GET_INSTRUCTORS", payload: array }),
     changeBikeNumber: () => dispatch({ type: "CHANGE_BIKE", payload: null}),
-    changeUpdatedBikeNumber: () => dispatch({ type: "SET_SELECTED_CHANGED_BIKE", payload: null})
+    changeUpdatedBikeNumber: () => dispatch({ type: "SET_SELECTED_CHANGED_BIKE", payload: null}),
+    updateUserClasses: (userClass) =>dispatch({ type: "UPDATE_USER_CLASSES", payload: userClass})
   }
 }
 

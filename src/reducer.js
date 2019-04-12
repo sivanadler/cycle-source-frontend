@@ -99,6 +99,8 @@ const reducer = (state=initialState, action) => {
       return {...state, changeBike: action.payload}
     case "SET_SELECTED_CHANGED_BIKE":
       return {...state, setSelectedChangedBike: action.payload}
+    case "UPDATE_USER_CLASSES":
+      return {...state, userClasses: action.payload}
     default:
       return state
   }

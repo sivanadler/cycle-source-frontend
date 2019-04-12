@@ -90,22 +90,26 @@ class ReviewsDiv extends React.Component {
 
   getReviews = () => {
     let filteredReviews = this.props.reviews.filter(review => review.studio_id === this.props.studio.id)
-    return filteredReviews.map(review => {
-      return (
-        <div className="review-card">
-          <h1>{review.review_title}</h1>
-          <h3>Posted by: {this.getUserName(review)}</h3>
-          <p>Rating:
-          <StarRatingComponent
-            name="rate"
-            starCount={5}
-            value={review.rating}
-          />
-          </p>
-          <p>{review.review_text}</p>
-        </div>
-      )
-    })
+    if (filteredReviews.length !== 0) {
+      return filteredReviews.map(review => {
+        return (
+          <div className="review-card">
+            <h1>{review.review_title}</h1>
+            <h3>Posted by: {this.getUserName(review)}</h3>
+            <p>Rating:
+            <StarRatingComponent
+              name="rate"
+              starCount={5}
+              value={review.rating}
+            />
+            </p>
+            <p>{review.review_text}</p>
+          </div>
+        )
+      })
+    } else {
+      return <h1>This Studio Has No Reviews. Be The First ?</h1>
+    }
   }
 
   componentDidMount(){
@@ -146,7 +150,7 @@ class ReviewsDiv extends React.Component {
           ?
           this.getReviews()
           :
-          <h1>This Studio Has No Reviews. Be The First ?</h1>
+          null
         }
       </div>
     )

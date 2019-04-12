@@ -31,13 +31,14 @@ class InstructorShowContainer extends React.Component {
      this.setState({
        selectedInstructor: instructor
      })
+     this.getMyFavorites()
   }
 
 
   //make sure this works
   handleFavorite = () => {
     if (this.state.favorited) {
-      let favorite = this.state.favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
+      let favorite = this.state.favorites.find(favorite => favorite.instructor_id === this.state.selectedInstructor.id)
       InstructorFavoriteAdapter.destroyInstructorFavorite(favorite)
       .then(res =>{
         this.getMyFavorites()
@@ -52,7 +53,6 @@ class InstructorShowContainer extends React.Component {
       InstructorFavoriteAdapter.createInstructorFavorite(instructor_id, currentUser_id)
       .then(favorite => {
         console.log(favorite)
-        debugger
           this.setState({
             favorited: true
           })
@@ -79,7 +79,56 @@ class InstructorShowContainer extends React.Component {
     }
   }
 
+  getCurrentUser = () => {
+    const jwt = localStorage.getItem('jwt')
+    const jwtInstructor = localStorage.getItem('jwtInstructor')
+    if (jwt) {
+      fetch("http://localhost:3000/api/v1/auto_login", {
+        headers: {
+          "Authorization": jwt
+        }
+      })
+        .then(res => res.json())
+        .then(response => {
+          if (response.errors) {
+            alert(response.errors)
+          } else {
+            this.props.setCurrentUser(response.user)
+          }
+        })
+    } else if (jwtInstructor) {
+      fetch("http://localhost:3000/api/v1/instructor_auto_login", {
+        headers: {
+          "Authorization": jwtInstructor
+        }
+      })
+        .then(res => res.json())
+        .then(response => {
+          if (response.errors) {
+            alert(response.errors)
+          } else {
+            this.props.setCurrentUser(response.instructor)
+          }
+        })
+    }
+  }
+  getMyFavorites = () => {
+    if (this.state.selectedInstructor) {
+      InstructorFavoriteAdapter.getInstructorFavorites()
+      .then(favorites => {
+        let favs = favorites.find(favorite => favorite.instructor_id === this.state.selectedInstructor.id)
+        if (favs) {
+          this.setState({
+            favorites: favorites,
+            favorited: true
+          })
+        }
+      })
+    }
+  }
+
   componentDidMount(){
+    this.getCurrentUser()
     InstructorAdapter.getInstructors()
     .then(instructors => {
       this.getInstructor(instructors)
@@ -87,7 +136,6 @@ class InstructorShowContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
       {
@@ -117,7 +165,7 @@ class InstructorShowContainer extends React.Component {
               </span>
             </div>
             <InstructorProfile instructor={this.state.selectedInstructor}/>
-            <InstructorReview instructor={this.state.selectedInstructor} currentUserPlease={this.props.currentUser}/>
+            <InstructorReview instructor={this.state.selectedInstructor} currentUser={this.props.currentUser}/>
             <InstructorCalendar instructor={this.state.selectedInstructor}/>
           </div>
         :
@@ -134,8 +182,15 @@ const mapStateToProps = state => {
     currentUser: state.currentUser,
     instructorReviews: state.instructorReviews,
     locations: state.locations,
-    studios: state.studios
+    studios: state.studios,
+    instructors: state.instructors
   }
 }
 
-export default connect(mapStateToProps)(InstructorShowContainer)
+const mapDispatchtoProps = dispatch => {
+  return{
+    setCurrentUser: (user) => dispatch({ type: "SET_CURRENT_USER", payload: user}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(InstructorShowContainer)
