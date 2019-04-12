@@ -68,8 +68,12 @@ const reducer = (state=initialState, action) => {
       return {...state, searchTerm: action.payload, isFetching: false}
     case "CLEAR_SEARCH_FILTER":
       return {...state, filteredLocations: [], searchTerm: null, searchCleared: true}
+    case "RESET_SEARCH_CLEARED":
+      return {...state, filteredLocations: [], searchTerm: null, searchCleared: false}
     case "SET_COORDINATES":
       return {...state, coordinates: [...state.coordinates, action.payload], filteredCoordinates: []}
+    case "RESET_COORDINATES":
+      return {...state, coordinates: [...state.coordinates, action.payload]}
     case "SET_FILTERED_COORDINATES":
       return {...state, filteredCoordinates: [...state.filteredCoordinates, action.payload], coordinates: [], filteredLocations: []}
     case "OPEN_BOOK_CLASS_WINDOW":
@@ -104,6 +108,8 @@ const reducer = (state=initialState, action) => {
       return {...state, userClasses: action.payload}
     case "ALREADY_RESERVED":
       return {...state, alreadyReservedBike: action.payload}
+    case "CLEAR_LOCATIONS":
+      return {...state, locations: []}
     default:
       return state
   }

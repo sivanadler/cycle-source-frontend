@@ -97,7 +97,15 @@ let coordinatesArray = []
     .then(res => {
       latPin = res.results[0].geometry.location.lat
       lngPin = res.results[0].geometry.location.lng
-      this.props.setCoordinates({latPin, lngPin, location})
+      if (this.props.filteredCoordinates.length !== 0) {
+        this.props.resetCoordinates({latPin, lngPin, location})
+      } else {
+        this.props.setCoordinates({latPin, lngPin, location})
+      }
+    })
+    .then(res => {
+      if (this.props.filteredLocations.length !== 0 && this.props.filteredCoordinates.length !== 0) {
+      }
     })
   }
 
@@ -113,8 +121,10 @@ let coordinatesArray = []
   }
 
    getUnFilteredLocations = () => {
-    this.props.locations.map(location => this.getGeoCode(location))
-    debugger
+    if (this.props.filteredCoordinates.length !== 0) {
+      this.props.resetSearchCleared()
+      this.props.locations.map(location => this.getGeoCode(location))
+    }
   }
 
    componentDidMount(){
@@ -175,7 +185,9 @@ let coordinatesArray = []
  const mapDispatchtoProps = dispatch => {
   return {
     setCoordinates: (coordinates) => dispatch({ type: "SET_COORDINATES", payload: coordinates }),
-    setFilteredCoordinates: (coordinates) => dispatch({ type: "SET_FILTERED_COORDINATES", payload: coordinates})
+    setFilteredCoordinates: (coordinates) => dispatch({ type: "SET_FILTERED_COORDINATES", payload: coordinates}),
+    resetCoordinates: (coordinates => dispatch({ type: "RESET_COORDINATES", payload: coordinates})),
+    resetSearchCleared: () => dispatch({ type: "RESET_SEARCH_CLEARED"})
   }
 }
 
