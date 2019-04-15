@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import StarRatingComponent from 'react-star-rating-component';
 import ReviewAdapter from '../apis/ReviewAdapter'
 import UserAdapter from '../apis/UserAdapter'
-
+import cycle from '../images/cycle.png'
 class ReviewsDiv extends React.Component {
   state = {
     rating: 1,
     review: "",
-    review_title: ""
+    review_title: "",
+    notFilledOut: false
   }
 
   renderReviewForm = () => {
@@ -27,6 +28,11 @@ class ReviewsDiv extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    if (this.state.review === "" || this.state.review_title === "") {
+      this.setState({
+        notFilledOut: true
+      })
+    } else {
     let rating = this.state.rating
     let review = this.state.review
     let review_title = this.state.review_title
@@ -38,34 +44,36 @@ class ReviewsDiv extends React.Component {
       this.setState({
         rating: 1,
         review: "",
-        review_title: ""
+        review_title: "",
+        notFilledOut: false,
       })
       this.getReviews()
-    })
+    })}
   }
 
   renderForm = () => {
     const { rating } = this.state
 
     return (
-      <div>
-      <h1>Write A Review For {this.props.studio.name}</h1>
-        <form onSubmit={this.handleSubmit}>
-          <h2>Review Title:</h2>
-          <input type="textarea" name="review_title" value={this.state.review_title} onChange={this.handleOnChange}/>
-          <br/>
-          <h2>Rating: {rating}</h2>
+      <div className="form">
+      <h1 className="form-header">REVIEW FOR {this.props.studio.name.toUpperCase()}</h1>
+        <form onSubmit={this.handleSubmit} className="form-content">
+          {this.state.notFilledOut ? <p className="invalid-text">These Fields Are All Required. Please Try Again.</p> : null}
+          <label className="review-form-label">Rating:</label>
           <StarRatingComponent
             name="rate"
             starCount={5}
             value={rating}
             onStarClick={this.onStarClick.bind(this)}
           />
-          <br/>
-          <h2>Review Text:</h2>
-          <input type="textarea" name="review" value={this.state.review} onChange={this.handleOnChange}/>
-          <br/>
-          <input type="submit" value="Submit Your Review" />
+          <br/><br/>
+          <label className="review-form-label">Title:</label>
+          <input type="textarea" name="review_title" value={this.state.review_title} onChange={this.handleOnChange} className="review-input" placeholder="Review Title"/>
+          <br/><br/>
+          <label className="review-form-label">Review:</label>
+          <input className="review-input" name="review" value={this.state.review} onChange={this.handleOnChange} placeholder="Write Your Review Here"/>
+          <br/><br/>
+          <input className="login-btn" type="submit" value="Submit Your Review" />
         </form>
       </div>
 
@@ -121,7 +129,6 @@ class ReviewsDiv extends React.Component {
   }
 
   render() {
-    console.log(this.props.reviews)
     const { rating } = this.state
 
     return (

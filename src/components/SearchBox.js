@@ -4,9 +4,9 @@ import SearchResults from "./SearchResults"
 // import Sort from "./Sort"
 import StudioAdapter from '../apis/StudioAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
-
 import { connect } from 'react-redux'
 import wheelGif from '../images/wheel-gif.gif'
+import remove from '../images/remove.png'
 
 class SearchBox extends React.Component {
 
@@ -56,13 +56,19 @@ class SearchBox extends React.Component {
     return (
       <div className="search-box">
         <div className="search-bar-div">
+          <p className="search-label">FIND YOUR RIDE</p>
+          <span className= "favorite-search" onClick={this.directToReservation}>
+            <span className="favorite-text-search">
+              <p>RESERVE A CLASS</p>
+            </span>
+          </span>
           <SearchBar />
           {
             this.props.searchTerm
             ?
             <span>
-              <h2 id="search-result-for"> Search Results For {this.props.searchTerm.toUpperCase()}: </h2>
               <h2 id="clear-filter" onClick={this.handleClearFilter}>Clear Filter</h2>
+              <h2 id="search-result-for"> Search Results For {this.props.searchTerm.toUpperCase()}: </h2>
             </span>
             :
             null}

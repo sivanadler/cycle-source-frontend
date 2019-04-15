@@ -88,8 +88,11 @@ class InstructorsDiv extends React.Component {
 
   render() {
     return (
-      <div className="instructors-div">
-        {this.renderInstructors()}
+      <div>
+        <h1 className="header-show">INSTRUCTORS</h1>
+        <div className="instructors-div">
+          {this.renderInstructors()}
+        </div>
       </div>
     )
   }

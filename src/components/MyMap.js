@@ -13,7 +13,8 @@ let coordinatesArray = []
  const mapStyles = {
   position: 'absolute',
   width: '50%',
-  height: '100%',
+  height: '83%',
+  float: 'left',
 };
 
 
@@ -58,7 +59,6 @@ let coordinatesArray = []
 
    renderFilteredMarkers = () => {
     if (this.props.filteredLocations.length !== 0) {
-      console.log("this");
       this.props.filteredLocations.map(location => this.getGeoFilteredCodes(location))
     }
     if (this.props.filteredCoordinates.length !== 0) {
@@ -135,7 +135,6 @@ let coordinatesArray = []
   }
 
    render() {
-    console.log(this.props.searchCleared);
     return (
       <div id="map">
         <Map

@@ -138,8 +138,10 @@ class Calendar extends React.Component {
           fontWeight: 'bold',
           border: '0px',
           display: 'block',
-          fontFamily: "sans-serif",
+          fontFamily: 'Roboto, sans-serif',
           textAlign: "center",
+          border: "1px solid white",
+          paddingTop: '5px'
       };
       };
       return {
@@ -154,8 +156,9 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div style={{ height: 1000 }}>
-      <h1>BOOK YOUR RIDE</h1>
+      <div style={{ height: 1250 }}>
+      <p className="search-label">BOOK YOUR RIDE</p>
+      <br/>
         <Filter />
         <BigCalendar
           step={30}

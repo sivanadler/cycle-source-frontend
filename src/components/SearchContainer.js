@@ -26,7 +26,9 @@ const SearchContainer = (props) => {
       :
       <Fragment >
         <SearchBox history={props.history}/>
-        <MyMap />
+        <div className="map-box">
+          <MyMap />
+        </div>
       </Fragment >
     }
   </div>

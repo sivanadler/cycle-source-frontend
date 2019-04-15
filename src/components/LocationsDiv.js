@@ -12,7 +12,7 @@ class LocationsDiv extends React.Component {
             <h3>{location.name}</h3>
             <p>{location.address}</p>
             <p>{location.phone_number}</p>
-            <p>{location.email}</p>
+            <a className="link" href={location.email}><p>{location.email}</p></a>
           </div>
         )
       }

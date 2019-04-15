@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import StarRatingComponent from 'react-star-rating-component';
 import ReviewAdapter from '../apis/ReviewAdapter'
-import wheel from '../images/cyclewheel.png'
+import more from '../images/more.png'
 
 class SearchResults extends React.Component {
   state = {
@@ -57,14 +57,10 @@ class SearchResults extends React.Component {
       <div className="">
         {this.props !== undefined
           ?
-          <div>
-            <span className= "favorite-search" onClick={this.directToReservation}>
-              <img className="wheel" src={wheel} alt="favorite" />
-              <span className="favorite-text-search">
-                <h1>RESERVE</h1>
-              </span>
+          <div className="search-result-card search-result-card-over">
+            <span>
+              <img className="more" src={more} alt="favorite" onClick={() => this.handleOnClick(this.props.location)}/>
             </span>
-          <div className="search-result-card" onClick={() => this.handleOnClick(this.props.location)}>
             <h2 className="search-result-header">{this.getStudioName()} {this.props.location.name}</h2>
             <StarRatingComponent
               className="stars"
@@ -75,7 +71,6 @@ class SearchResults extends React.Component {
             <p className="search-result-text">{this.props.location.address}</p>
             <p className="search-result-text">{this.props.location.phone_number}</p>
             <p className="search-result-text">{this.props.location.email}</p>
-          </div>
           </div>
           :
           null

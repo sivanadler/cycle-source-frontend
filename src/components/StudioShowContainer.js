@@ -10,7 +10,6 @@ import StudioAdapter from '../apis/StudioAdapter'
 import heart from '../images/heart.png'
 import HamburgerNav from './HamburgerNav'
 import Header from './Header'
-import wheel from '../images/cyclewheel.png'
 
 class StudioShowContainer extends React.Component {
   state = {
@@ -74,9 +73,8 @@ class StudioShowContainer extends React.Component {
               </span>
             </span>
             <span className= "favorite" onClick={this.directToReservation}>
-              <img className="wheel" src={wheel} alt="favorite" />
               <span className="favorite-text">
-                <h1>BOOK A CLASS</h1>
+                <h1> RESERVE A BIKE </h1>
               </span>
             </span>
           </div>
