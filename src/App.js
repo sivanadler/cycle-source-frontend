@@ -31,14 +31,13 @@ class App extends Component {
           <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
         </span>
         <span>
-          <h1 className="logo">CYCLE SOURCE</h1>
+          <h1 className="logo">CYCLE</h1>
+          <h1 className="logo">SOURCE</h1>
         </span>
         {this.props.loginClicked ? this.props.history.push("/login") : null}
         {this.props.newUser ? this.props.history.push("/signup") : null}
       </div>
-
-
-    );
+    )
   }
 }
 

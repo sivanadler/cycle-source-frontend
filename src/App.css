@@ -6,7 +6,7 @@ body {
 
 .wheel-gif {
   float: right;
-  height: 900px;
+  height: 1500px;
   position: inline-block;
   z-index: -1;
 }
@@ -21,27 +21,33 @@ body {
 
 .nav {
   color: white;
-  padding: 20px;
   background-color: black;
+  overflow: hidden;
+  padding: 20px;
 }
 
 .main-nav-link {
   color: white;
-  font-size: 30px;
   text-align: left;
   text-decoration: none;
   height: 100px;
-  padding: 15px;
+  padding: 14px 16px;
   margin: 20px;
   display: inline;
   vertical-align: middle;
+  font-family:'Roboto', sans-serif;
+  font-size: 40px;
 }
 
 .main-nav-link:hover {
   background-color: white;
-  height: 120px;
   color: black;
+  padding: 15px;
   text-decoration: none;
+  font-family:'Roboto', sans-serif;
+  font-size: 40px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 
@@ -88,10 +94,173 @@ body {
 }
 
 .logo {
-  font-size: 150px;
-  margin-left: 40px;
+  float: left;
+  font-size: 200px;
+  margin-left: 100px;
   font-family:'Roboto', sans-serif;
   vertical-align: middle;
+}
+
+.logo-login {
+  font-size: 200px;
+  text-align: center;
+  font-family:'Roboto', sans-serif;
+}
+
+.login-form {
+  z-index: 5;
+  background-color: white;
+  text-align: center;
+  border-radius: 15px;
+  padding: 40px;
+  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+
+}
+
+.login-header {
+  font-size: 80px;
+  font-family:'Roboto', sans-serif;
+}
+
+.login-subheader {
+  font-size: 30px;
+  font-family:'Roboto', sans-serif;
+}
+
+.login-input {
+  font-family:'Roboto', sans-serif;
+  padding: 20px;
+  width: 300px;
+  margin: 10px;
+  border-radius: 10em;
+  border:1px solid #ccc;
+  font-size: 20px;
+	letter-spacing: .8px;
+}
+
+.login-btn {
+  background-color: #55b1df;
+  border:1px solid #fff;
+  color:#fff;
+  font-size: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: bold;
+  cursor:pointer;
+  margin-top: 20px;
+}
+
+.login-btn:hover {
+  background-color: #fff;
+  border:1px solid #55b1df;
+  color:#55b1df;
+  font-size: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: bold;
+  cursor:pointer;
+}
+
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+  border-radius: 15em;
+}
+.option-input:hover {
+  background: #55b1df;
+}
+.option-input:checked {
+  background: #55b1df;
+  border-radius: 15em;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #55b1df;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+  border-radius: 15em;
+
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+
+.login-label {
+  font-size: 25px;
+  font-family:'Roboto', sans-serif;
+}
+
+.radio {
+  text-align: left;
+  margin-left: 320px;
+}
+
+.invalid-text {
+  color: red;
+  font-size: 15px;
 }
 
 .login {

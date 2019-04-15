@@ -48,8 +48,6 @@ ReactDOM.render(
         <Route exact path="/signup" render={routerProps => <SignUp {...routerProps}/>} />
         <Redirect from="/" to="/welcome" />
         </Switch>
-      }
-
     </Router>
   </Provider>
   , document.getElementById('root'));

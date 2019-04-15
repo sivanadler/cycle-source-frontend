@@ -10,7 +10,6 @@ import Header from './Header'
 class Home extends React.Component {
 
   render() {
-    console.log("am i logged in", this.props);
     return (
       <div className="">
         <span>

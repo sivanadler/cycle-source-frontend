@@ -127,22 +127,24 @@ class Calendar extends React.Component {
   }
 
   eventStyleGetter = (event, start, end, isSelected) => {
-    let studio = this.props.studios.find(studio => studio.id === event.studio_id)
-    var backgroundColor = studio.color;
-    var style = {
-        backgroundColor: backgroundColor,
-        borderRadius: '5px',
-        opacity: 0.8,
-        color: 'black',
-        fontWeight: 'bold',
-        border: '0px',
-        display: 'block',
-        fontFamily: "sans-serif",
-        textAlign: "center",
-    };
-    return {
-        style: style
-    };
+    if (this.props.studios.length !== 0) {
+      let studio = this.props.studios.find(studio => studio.id === event.studio_id)
+      var backgroundColor = studio.color;
+      var style = {
+          backgroundColor: backgroundColor,
+          borderRadius: '5px',
+          opacity: 0.8,
+          color: 'black',
+          fontWeight: 'bold',
+          border: '0px',
+          display: 'block',
+          fontFamily: "sans-serif",
+          textAlign: "center",
+      };
+      };
+      return {
+          style: style
+    }
   }
   closeModal = () => {
     this.setState({

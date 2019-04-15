@@ -54,10 +54,19 @@ class ChangeBikeMap extends React.Component {
     })
   }
 
+  convertUTCDateToLocalDate = date => {
+    var dateFormat = new Date(date)
+    var newDate = new Date(dateFormat.getTime()+dateFormat.getTimezoneOffset()*60*1000);
+    return newDate;
+  }
+
   getSpinClassInfo = () => {
     let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === this.props.changeBike.spin_class_id)
-    let startTime = moment(spinClass.start.toString()).format('llll')
-    let endTime = moment(spinClass.end.toString()).format('llll')
+    let date = moment(spinClass.start.toString()).format('llll').slice(0, 17)
+    let start = this.convertUTCDateToLocalDate(spinClass.start)
+    let end = this.convertUTCDateToLocalDate(spinClass.end)
+    let startSliced = moment(start.toString()).format('llll').slice(17, 30)
+    let endSliced = moment(end.toString()).format('llll').slice(17, 30)
     return (
       <div>
         <span onClick={this.closeModal}>
@@ -65,7 +74,7 @@ class ChangeBikeMap extends React.Component {
         </span>
         <h1>You Are Currently Reserved For:</h1>
         <h1>{spinClass.time}</h1>
-        <h1>{startTime} - {endTime}</h1>
+        <h1>{date} ({startSliced} - {endSliced} )</h1>
         <h1>Bike: {this.props.changeBike.bike}</h1>
         <img className="booking-map-instructor" src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile" />
         {this.getInstructorInfo(spinClass)}

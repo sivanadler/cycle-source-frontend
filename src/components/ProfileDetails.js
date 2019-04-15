@@ -30,7 +30,7 @@ class ProfileDetails extends React.Component {
   }
 
   getStudioNameForCard = (userClass) => {
-    if (this.props.spinClasses.length !== 0) {
+    if (this.props.spinClasses.length !== 0 && this.state.studiosArr.length !== 0) {
       let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
       let studio = this.state.studiosArr.find(studio => studio.id === spinClass.studio_id)
       return studio.name
@@ -38,7 +38,7 @@ class ProfileDetails extends React.Component {
   }
 
   getStudioLogo = (userClass) => {
-    if (this.props.spinClasses.length !== 0) {
+    if (this.props.spinClasses.length !== 0 && this.state.studiosArr.length !== 0) {
       let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
       let studio = this.state.studiosArr.find(studio => studio.id === spinClass.studio_id)
       return studio.logo
@@ -46,7 +46,7 @@ class ProfileDetails extends React.Component {
   }
 
   getStudioLogoFav = (favorite) => {
-    if (this.state.studiosArr.length !== 0) {
+    if (this.state.studiosArr.length !== 0 && this.state.studiosArr.length !== 0) {
       let studio = this.state.studiosArr.find(studio => studio.id === favorite.studio_id)
       return studio.logo
     }
@@ -75,15 +75,23 @@ class ProfileDetails extends React.Component {
     }
   }
 
+  convertUTCDateToLocalDate = date => {
+    var dateFormat = new Date(date)
+    var newDate = new Date(dateFormat.getTime()+dateFormat.getTimezoneOffset()*60*1000);
+    return newDate;
+  }
+
   getClassDateAndTime = (userClass) => {
     if (this.props.spinClasses.length !== 0) {
       let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === userClass.spin_class_id)
       let date = moment(spinClass.start.toString()).format('llll').slice(0, 17)
-      let start = moment(spinClass.start.toString()).format('llll').slice(17, 30)
-      let end = moment(spinClass.end.toString()).format('llll').slice(17, 30)
+      let start = this.convertUTCDateToLocalDate(spinClass.start)
+      let end = this.convertUTCDateToLocalDate(spinClass.end)
+      let startSliced = moment(start.toString()).format('llll').slice(17, 30)
+      let endSliced = moment(end.toString()).format('llll').slice(17, 30)
       return (
         <div>
-          <h2>{date} ({start} - {end} )</h2>
+          <h2>{date} ({startSliced} - {endSliced} )</h2>
         </div>
       )
     }

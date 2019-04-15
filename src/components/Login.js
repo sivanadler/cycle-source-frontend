@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
 import wheelGif from '../images/wheel-gif.gif'
+import username from '../images/username.png'
+import UserAdapter from '../apis/UserAdapter'
 import Nav from './Nav'
 
 class Login extends React.Component {
@@ -12,10 +14,34 @@ class Login extends React.Component {
     password: "",
     checkedRider: false,
     checkedInstructor: false,
+    notFilledOut: false,
+    notChecked: false,
+    users: []
   }
 
   handleSubmit = e => {
     e.preventDefault()
+    if (this.state.username === "" || this.state.password === "") {
+      this.setState({
+        notFilledOut: true
+      })
+    }
+    if (this.state.users) {
+      let usernames = []
+      this.state.users.map(user => {
+        usernames.push(user.username)
+      })
+      if (!usernames.includes(this.state.username)) {
+        this.setState({
+          notFilledOut: true
+        })
+      }
+    }
+    if (!this.state.checkedRider && !this.state.checkedInstructor) {
+      this.setState({
+        notChecked: true
+      })
+    }
     if (this.state.checkedInstructor) {
       this.handleInstructorLogIn()
     } else {
@@ -77,38 +103,45 @@ class Login extends React.Component {
     }
   }
 
+  componentDidMount(){
+    UserAdapter.getUsers()
+    .then(users => {
+      this.setState({ users })
+    })
+  }
+
   render() {
     return (
       <div>
         <Nav history={this.props.history}/>
         <div>
           <span>
-            <h1 className="logo">CYCLE SOURCE</h1>
+            <h1 className="logo-login">CYCLE SOURCE</h1>
           </span>
-          <span>
-            <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
-          </span>
-          <form onSubmit={this.handleSubmit}>
-          <div className="radio">
-            <h1>Log In</h1>
-            <h3>Please Check Off Your Account Type: </h3>
-            <label>
-              <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck}/>
-              Rider
-            </label>
+          <div className="login-form">
+            <form onSubmit={this.handleSubmit}>
+              <h1 className="login-header">LOG IN</h1>
+              <h3 className="login-subheader">Please Check Off Your Account Type: </h3>
+              {this.state.notChecked ? <p className="invalid-text">This Field is Required. Please Select Your Account Type.</p> : null}
+            <div className="radio">
+              <label className="login-label">
+                <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck} class="option-input checkbox"/>
+                Rider
+              </label>
+            </div>
+            <div className="radio">
+              <label className="login-label">
+                <input type="radio" value="Instructor" checked={this.state.checkedInstructor} onChange={this.handleOnCheck} class="option-input checkbox"/>
+                Instructor
+              </label>
+            </div>
+              <br/><br/>
+              {this.state.notFilledOut ? <p className="invalid-text">Invalid Username or Password. Please try again.</p> : null}
+              <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username} className="login-input" placeholder="Username"/> <br/>
+              <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password} className="login-input" placeholder="Password"/> <br/>
+              <input type="submit" name="submit" value="Log In" className="login-btn"/>
+            </form>
           </div>
-          <div className="radio">
-            <label>
-              <input type="radio" value="Instructor" checked={this.state.checkedInstructor} onChange={this.handleOnCheck}/>
-              Instructor
-            </label>
-          </div>
-            <label>Username: </label>
-            <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username}/> <br/>
-            <label>Password: </label>
-            <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password}/> <br/>
-            <input type="submit" name="submit" value="Log In" />
-          </form>
         </div>
       </div>
     )

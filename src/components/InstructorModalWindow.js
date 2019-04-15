@@ -31,7 +31,7 @@ class InstructorModalWindow extends React.Component {
   }
 
   getModalInfo = () => {
-    if (this.state.userClasses.length !== 0) {
+    if (this.state.userClasses.length !== 0 && this.state.instructor && this.state.location && this.state.studio) {
       let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id)
       if (foundUserClass && this.state.instructor && this.state.location && this.state.studio) {
         let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
@@ -53,33 +53,32 @@ class InstructorModalWindow extends React.Component {
             <p>Want to change your bike?</p>
             <button onClick={() => this.changeMyBike(this.props.events, foundUserClass)}>Change Bike</button>
           </div>
-        )}
-    } else {
-      if (this.state.instructor && this.state.location && this.state.studio) {
-        let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
-        let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
-        let date = moment(this.props.events.start.toString()).format('llll').slice(0,17)
-        let start = moment(this.props.events.start.toString()).format('llll').slice(17, 27)
-        let end = moment(this.props.events.end.toString()).format('llll').slice(17, 27)
-        return (
-          <div className="modal-main">
-            <div onClick={this.props.closeModal}>
-              <img className="remove" src={remove} alt="remove" />
-            </div>
-            <br/><br/>
-            <h1 className="modal-header">{this.props.events.title}</h1>
-            <a className="link" href={`/instructors/${instructorPath}`}>
-              <h1>Instructor: {this.state.instructor.name}</h1>
-              <img className="reserve-image" src={this.state.instructor.profile_pic} alt="profile" />
-            </a>
-            <h1>{date} from {start} - {end}</h1>
-            <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-            <h3>{this.state.location.name}</h3>
-            <h3>{this.state.location.address}</h3>
+          )
+        } else {
+          let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
+          let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
+          let date = moment(this.props.events.start.toString()).format('llll').slice(0,17)
+          let start = moment(this.props.events.start.toString()).format('llll').slice(17, 27)
+          let end = moment(this.props.events.end.toString()).format('llll').slice(17, 27)
+          return (
+            <div className="modal-main">
+              <div onClick={this.props.closeModal}>
+                <img className="remove" src={remove} alt="remove" />
+              </div>
+              <br/><br/>
+              <h1 className="modal-header">{this.props.events.title}</h1>
+              <a className="link" href={`/instructors/${instructorPath}`}>
+                <h1>Instructor: {this.state.instructor.name}</h1>
+                <img className="reserve-image" src={this.state.instructor.profile_pic} alt="profile" />
+              </a>
+              <h1>{date} from {start} - {end}</h1>
+              <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
+              <h3>{this.state.location.name}</h3>
+              <h3>{this.state.location.address}</h3>
 
-            <button onClick={this.bookThisClass}>RESERVE</button>
-          </div>
-        )
+              <button onClick={this.bookThisClass}>RESERVE</button>
+            </div>
+          )
       }
     }
   }
