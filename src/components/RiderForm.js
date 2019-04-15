@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from 'react-redux'
 import ActiveStorageProvider from 'react-activestorage-provider'
 import { DirectUploadProvider } from 'react-activestorage-provider'
+import upload from '../images/upload.png'
+import UserAdapter from '../apis/UserAdapter'
 
 class RiderForm extends React.Component {
   state = {
@@ -11,7 +13,10 @@ class RiderForm extends React.Component {
     selectedFile: null,
     profile_pic: "",
     city: "New York City",
-    role: "rider"
+    role: "rider",
+    notFilledOut: false,
+    users: [],
+    invalidUsername: false
   }
 
   handleOnChange = e => {
@@ -22,26 +27,41 @@ class RiderForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const formData = new FormData();
-    formData.append('name', this.state.name)
-    formData.append('username', this.state.username)
-    formData.append('password', this.state.password)
-    formData.append('photo', this.state.selectedFile)
-    formData.append('profile_pic', this.state.profile_pic)
-    formData.append('city', this.state.city)
-    formData.append('role', this.state.role)
-      console.log(formData);
-    fetch("http://localhost:3000/api/v1/users", {
-			method: "POST",
-			body: formData
-		})
-    .then(res => res.json())
-    .then(json => {
-      localStorage.setItem('jwt', json.jwt)
-      let history = this.props.history.history
-      history.push('/home')
-      this.props.setCurrentUser(json.user)
-    })
+    if (this.state.name === "" || this.state.username === "" || this.state.password === "" || this.state.selectedFile === "") {
+      this.setState({
+        notFilledOut: true
+      })
+    } else {
+      let usernames = []
+      this.state.users.map(user => {
+        usernames.push(user.username)
+      })
+      if (usernames.includes(this.state.username)) {
+        this.setState({
+          invalidUsername: true
+        })
+      } else {
+        const formData = new FormData();
+        formData.append('name', this.state.name)
+        formData.append('username', this.state.username)
+        formData.append('password', this.state.password)
+        formData.append('photo', this.state.selectedFile)
+        formData.append('profile_pic', this.state.profile_pic)
+        formData.append('city', this.state.city)
+        formData.append('role', this.state.role)
+          console.log(formData);
+        fetch("http://localhost:3000/api/v1/users", {
+    			method: "POST",
+    			body: formData
+    		})
+        .then(res => res.json())
+        .then(json => {
+          localStorage.setItem('jwt', json.jwt)
+          this.props.history.push('/home')
+          this.props.setCurrentUser(json.user)
+        })
+      }
+    }
   }
 
   fileSelectedHandler = (e) => {
@@ -50,22 +70,30 @@ class RiderForm extends React.Component {
     })
   }
 
+  componentDidMount(){
+    UserAdapter.getUsers()
+    .then(users => {
+      this.setState({ users })
+    })
+  }
+
   render() {
     return (
       <div>
-        <h1>Sign Up</h1>
-        <form className="rider-sign-up" onSubmit={this.handleSubmit}>
-          <label for="name">Full Name: </label><br/>
-          <input type="text" name="name" value={this.state.name} onChange={this.handleOnChange}/><br/><br/>
+        <form className="login-form" onSubmit={this.handleSubmit}>
+          <h1 className="login-header">Sign Up</h1>
+          {this.state.notFilledOut ? <p className="invalid-text">These Fields Are All Required. Please Try Again. </p> : null}
+          <input className="login-input" type="text" name="name" value={this.state.name} onChange={this.handleOnChange} placeholder="Full Name"/><br/><br/>
 
-          <label for="username">Username: </label><br/>
-          <input type="text" name="username" value={this.state.username} onChange={this.handleOnChange}/><br/><br/>
+          {this.state.invalidUsername ? <p className="invalid-text">This Username is Already Taken. Please Try Again. </p> : null}
 
-          <label for="password">Password: </label><br/>
-          <input type="password" name="password" value={this.state.password} onChange={this.handleOnChange}/><br/><br/>
+          <input className="login-input" type="text" name="username" value={this.state.username} onChange={this.handleOnChange} placeholder="Username"/><br/><br/>
 
-          <input type="file" onChange={this.fileSelectedHandler}/>
-          <input type="submit" value="Create Account" />
+          <input className="login-input" type="password" name="password" value={this.state.password} onChange={this.handleOnChange} placeholder="Password"/><br/><br/>
+          <div className="input-file-container">
+            <input className="input-file" type="file" onChange={this.fileSelectedHandler}/>
+          </div><br/><br/>
+          <input className="login-btn" type="submit" value="Create Account" />
         </form>
       </div>
     )
@@ -75,6 +103,7 @@ class RiderForm extends React.Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.loggedIn,
+    users: state.users
   }
 }
 

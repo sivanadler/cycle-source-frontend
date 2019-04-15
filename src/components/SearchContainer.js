@@ -18,13 +18,13 @@ const SearchContainer = (props) => {
       <Header />
     </span>
     <h1 className="search-header">CYCLE SOURCE</h1>
-    <br/>
+    <br/><br/>
     {
       props.selectedStudio
       ?
       <StudioShowContainer studio={props.selectedStudio} currentUser={props.currentUser}/>
       :
-        <Fragment >
+      <Fragment >
         <SearchBox history={props.history}/>
         <MyMap />
       </Fragment >

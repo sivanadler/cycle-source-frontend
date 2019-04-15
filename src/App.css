@@ -260,13 +260,58 @@ body {
 
 .invalid-text {
   color: red;
-  font-size: 15px;
+  font-size: 20px;
+  font-family:'Roboto', sans-serif;
+}
+
+.input-file-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border: 1px solid #ccc;
+  color: gray;
+  background-color: #ccc;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .login {
   float: right;
   position: inline-block;
   margin-right: 200px;
+}
+
+.home-logo {
+  font-size: 200px;
+  color: white;
+  margin-top: 60px;
+  padding-top: 150px;
+  margin-left: 100px;
+  font-family:'Roboto', sans-serif;
+  vertical-align: middle;
+  -webkit-text-stroke-width: 0.01px;
+  -webkit-text-stroke-color: white;
+}
+
+.home-logo-small {
+  font-size: 100px;
+  margin-left: 100px;
+  color: white;
+  font-family:'Roboto', sans-serif;
+  vertical-align: middle;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
+
+.wheel-gif-home {
+  float: right;
+  margin-top: 200px;
+  height: 1500px;
+  position: inline-block;
+  z-index: -1;
 }
 
 .collapsed-nav {
@@ -277,11 +322,26 @@ body {
   border-radius: 5px;
 }
 
+.home {
+  background: url('../src/images/spin.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1700px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-bottom: 60px;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+}
+
 .hamburger {
-  margin: 15px;
+  margin: 25px;
+  width: 50%;
   border-radius: 5px;
 }
 
+.unclicked {
+  width: 50%;
+}
 
 .exposed-nav {
   width: 35px;
@@ -301,10 +361,10 @@ body {
   z-index: 10000;
   position: inline;
   position:fixed;
-  width: 25%;
+  width: 20%;
   height: 100%;
-  top:51%;
-  left:13.25%;
+  top:50.75%;
+  left:10.45%;
   transform: translate(-50%,-50%);
   text-align: center;
   padding-bottom: 20px;
@@ -340,54 +400,101 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 46%;
-  height: 1300px;
+  height: 1500px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
   background-color: white;
   overflow: scroll;
-  z-index: 0;
+  z-index: -20;
 }
 
 .search-header {
+  font-family:'Roboto', sans-serif;
   text-align: center;
-  font-size: 80px;
+  font-size: 120px;
   display: inline;
-  margin-left: 35%;
+  margin-left: 37%;
 }
 
 .search-result-card {
-  background-color: rgb(0, 0, 0, 0.2);
+  font-family:'Roboto', sans-serif;
+  background-color: rgb(0, 0, 0, 0.15);
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .1);
   color: black;
-  margin: 20px;
+  margin: 30px;
   border-radius: 5px;
-  padding: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
 }
 
 .search-result-card:hover {
-  background-color: rgb(0, 0, 0, 0.8);
-  color: white;
-  margin: 20px;
+  font-family:'Roboto', sans-serif;
+  background-color: rgb(0, 0, 0, 0.3);
+  color: black;
+  margin: 30px;
   border-radius: 5px;
-  padding: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.search-result-header {
+  font-size: 30px;
+}
+
+.search-result-text {
+  font-size: 23px;
 }
 
 .search-bar {
+  background-color: white;
+  background-image: url('../src/images/search.png');
+  background-position: 10px 10px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 50px;
   height: 30px;
-  width: 60%;
+  width: 20%;
   margin-top: 30px;
-  border-radius: 10px;
+  border-radius: 10em;
   margin-left: 20px;
+  margin-right: 20px;
   z-index: 0;
+  font-family:'Roboto', sans-serif;
+  border:1px solid #ccc;
+  font-size: 20px;
+  letter-spacing: .8px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+.search-bar:focus {
+  width: 60%;
+  font-family:'Roboto', sans-serif;
+  border:1px solid #ccc;
+  font-size: 20px;
+  letter-spacing: .8px;
+  border-radius: 10em;
+}
+
+.input-container {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .search-bar-div {
   top: 0;
   margin-top: 0px;
+  text-align: center;
   background-color: white;
   padding: 10px;
   padding-bottom: 40px;
-  z-index: 5;
+  z-index: 0;
 }
 
 .search-container {
@@ -395,8 +502,11 @@ body {
 }
 
 .search-label {
+  font-family:'Roboto', sans-serif;
+  font-size: 70px;
   text-align: center;
   z-index: 0;
+  margin-bottom: 20px;
 }
 
 .sort {
@@ -483,7 +593,10 @@ body {
 }
 .logged-in-header {
   float: right;
-  margin-right: 30px;
+  text-align: right;
+  margin-right: 3%;
+  margin-top: 0px;
+  display: inline;
 }
 
 .calendar {

@@ -61,20 +61,20 @@ class SearchResults extends React.Component {
             <span className= "favorite-search" onClick={this.directToReservation}>
               <img className="wheel" src={wheel} alt="favorite" />
               <span className="favorite-text-search">
-                <h1>BOOK A CLASS</h1>
+                <h1>RESERVE</h1>
               </span>
             </span>
           <div className="search-result-card" onClick={() => this.handleOnClick(this.props.location)}>
-            <h2>{this.getStudioName()} {this.props.location.name}</h2>
+            <h2 className="search-result-header">{this.getStudioName()} {this.props.location.name}</h2>
             <StarRatingComponent
               className="stars"
               name="rate"
               starCount={5}
               value={this.getAvgRating()}
             />
-            <p>{this.props.location.address}</p>
-            <p>{this.props.location.phone_number}</p>
-            <p>{this.props.location.email}</p>
+            <p className="search-result-text">{this.props.location.address}</p>
+            <p className="search-result-text">{this.props.location.phone_number}</p>
+            <p className="search-result-text">{this.props.location.email}</p>
           </div>
           </div>
           :

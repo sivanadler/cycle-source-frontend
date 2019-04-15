@@ -15,10 +15,7 @@ const SignUp = (props) => {
   <div className="sign-up">
     <Nav history={props.history}/>
     <span>
-      <h1 className="logo">CYCLE SOURCE</h1>
-    </span>
-    <span>
-      <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
+      <h1 className="logo-login">CYCLE SOURCE</h1>
     </span>
     <RiderForm history={props.history}/>
   </div>

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import wheelGif from '../images/wheel-gif.gif'
+import spin from '../images/spin.jpg'
+
 import HamburgerNav from  './HamburgerNav'
 import Header from './Header'
 
@@ -11,20 +13,19 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <span>
-          <HamburgerNav />
-        </span>
-        <span>
-          <Header />
-        </span>
-        <span>
-          <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
-        </span>
-        <span>
-          <h1 className="logo">CYCLE SOURCE</h1>
-        </span>
-      </div>
+      <span>
+        <HamburgerNav />
+        <Header />
+        <br/>
+        <div className="home">
+          <span className="home-header">
+          </span>
+          <span className="home-header">
+          </span>
+          <h1 className="home-logo">CYCLE SOURCE</h1>
+          <p className="home-logo-small">find your ride.</p>
+        </div>
+      </span>
     )
   }
 }
