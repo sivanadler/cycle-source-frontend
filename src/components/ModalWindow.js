@@ -35,13 +35,12 @@ class ModalWindow extends React.Component {
               <img className="remove" src={remove} alt="remove" />
             </div>
             <br/><br/>
-            <h1 className="modal-header"> You Are Already Signed Up For {this.props.events.title}</h1>
-            <h1>{date} from {start} - {end}</h1>
-            <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-            <h3>You are currently on Bike {foundUserClass.bike}</h3>
-            <br/>
-            <p>Want to change your bike?</p>
-            <button onClick={() => this.changeMyBike(this.props.events, foundUserClass)}>Change Bike</button>
+            <h1 className="modal-header"> YOU ARE ALREADY SIGNED UP FOR: {this.props.events.title}</h1>
+            <h1>{date} ({start} - {end} )</h1>
+            <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name.toUpperCase()}</h1></a>
+            <p className="modal-text">You are currently on <strong>Bike {foundUserClass.bike}</strong></p>
+            <p className="modal-text">Want to change your bike?</p>
+            <button onClick={() => this.changeMyBike(this.props.events, foundUserClass)} className="login-btn">Change Bike</button>
           </div>
         )
       } else {
@@ -59,47 +58,19 @@ class ModalWindow extends React.Component {
               <br/><br/>
               <h1 className="modal-header">{this.props.events.title}</h1>
               <a className="link" href={`/instructors/${instructorPath}`}>
-                <h1>Instructor: {this.state.instructor.name}</h1>
+                <h1>{this.state.instructor.name.toUpperCase()}</h1>
                 <img className="reserve-image" src={this.state.instructor.profile_pic} alt="profile" />
               </a>
-              <h1>{date} from {start} - {end}</h1>
-              <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-              <h3>{this.state.location.name}</h3>
-              <h3>{this.state.location.address}</h3>
+              <h1>{date} ({start} - {end} )</h1>
+              <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name.toUpperCase()}</h1></a>
+              <p className="modal-text"><strong>LOCATION: </strong> {this.state.location.name} ({this.state.location.address})</p>
 
-              <button onClick={this.bookThisClass}>RESERVE</button>
+              <button onClick={this.bookThisClass} className="login-btn">RESERVE</button>
             </div>
           )
         }
       }
     }
-    // if (this.state.userClasses.length === 0) {
-    //   this.getUserClasses()
-    // }
-    // if (this.state.userClasses.length !== 0 ) {
-    //   let myUserClasses = this.state.userClasses.filter(userClass => userClass.user_id === this.props.currentUser.id)
-    //   let filteredUserClass = myUserClasses.filter(userClass => userClass.spin_class_id === this.props.events.class_id)
-    //   if (filteredUserClass) {
-    //     return (
-    //       <div className="modal-main">
-    //         <span onClick={this.props.closeModal}>
-    //           <img className="remove" src={remove} alt="remove" />
-    //         </span>
-    //         <h1>{this.props.events.title}</h1>
-    //         <a href={null}>
-    //           <h1>Instructor: {this.state.instructor.name}</h1>
-    //           <img src={this.state.instructor.profile_pic} alt="profile" />
-    //         </a>
-    //         <h1>{this.props.events.start.toString()}</h1>
-    //         <a href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-    //         <h4>{this.state.location.name}</h4>
-    //         <h4>{this.state.location.address}</h4>
-    //
-    //         <button onClick={this.bookThisClass}>RESERVE</button>
-    //       </div>
-    //     )
-    //   }
-    // }
   }
 
   changeMyBike = (spinClass, userClass) => {

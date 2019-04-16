@@ -81,7 +81,7 @@ class RiderForm extends React.Component {
     return (
       <div>
         <form className="login-form" onSubmit={this.handleSubmit}>
-          <h1 className="login-header">Sign Up</h1>
+          <h1 className="login-header">SIGN UP</h1>
           {this.state.notFilledOut ? <p className="invalid-text">These Fields Are All Required. Please Try Again. </p> : null}
           <input className="login-input" type="text" name="name" value={this.state.name} onChange={this.handleOnChange} placeholder="Full Name"/><br/><br/>
 

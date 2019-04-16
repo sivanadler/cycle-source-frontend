@@ -20,7 +20,7 @@ class ExposedNav extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='ham-modal'>
         <div className="exposed-hamburger" onClick={this.props.handleToggleHamburgerNav}>
           <div className="exposed-nav" ></div>
           <div className="exposed-nav" ></div>

@@ -9,6 +9,7 @@ import StudioAdapter from '../apis/StudioAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
 import remove from '../images/remove.png'
 import moment from 'moment'
+import success from '../images/success.png'
 
 class BookingMap extends React.Component {
   state = {
@@ -31,7 +32,7 @@ class BookingMap extends React.Component {
   getInstructorInfo = () => {
     if (this.props.bookThisClass && this.state.instructors.length !== 0) {
       let instructor = this.state.instructors.find(instructor => instructor.id === this.props.bookThisClass.instructor_id)
-      return <h1>{instructor.name}</h1>
+      return <h1>{instructor.name.toUpperCase()}</h1>
     }
   }
 
@@ -44,7 +45,7 @@ class BookingMap extends React.Component {
 
   renderBikes = () => {
     let myBike
-    let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+    let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51]
     let thisClass = this.props.bookThisClass.class_id
     if (this.state.userClasses.length === 0) {
       this.findUserClasses()
@@ -85,7 +86,6 @@ class BookingMap extends React.Component {
   }
 
   sendUpdatedText = (userClass) => {
-    debugger
     let spinClass = this.state.spinClasses.find(spinClass => spinClass.id === this.props.alreadyReservedBike.spin_class_id)
     let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
     let studio = this.state.studios.find(studio => studio.id === spinClass.studio_id)
@@ -161,6 +161,7 @@ class BookingMap extends React.Component {
   handleGoBack = () => {
     this.props.history.push('/reserve')
     this.props.closeBookClassWindow()
+    this.props.setSelectedBikeToFalse()
   }
 
   closeModal = () => {
@@ -173,17 +174,17 @@ class BookingMap extends React.Component {
     if (this.props.alreadyReservedBike) {
       return (
         <div className="booking-map">
-          <h3>Are you sure you want to change your bike to {this.props.selectedBike}?</h3>
-          <button onClick={this.confirmChange}>CHANGE BIKE</button>
-          <button onClick={this.handleGoBack}>GO BACK</button>
+          <h3 className="modal-text">Are you sure you want to change your bike to {this.props.selectedBike}?</h3>
+          <button className="login-btn" onClick={this.confirmChange}>CHANGE BIKE</button>
+          <button className="login-btn" onClick={this.handleGoBack}>GO BACK</button>
         </div>
       )
     } else {
       return (
         <div className="booking-map">
-          <h3>Are you sure you want to book bike {this.props.selectedBike}?</h3>
-          <button onClick={this.confirmBooking}>BOOK</button>
-          <button onClick={this.handleGoBack}>GO BACK</button>
+          <p className="modal-text">Are you sure you want to book bike {this.props.selectedBike}?</p>
+          <button className="login-btn" onClick={this.confirmBooking}>BOOK</button>
+          <button className="login-btn" onClick={this.handleGoBack}>GO BACK</button>
         </div>
       )
     }
@@ -202,6 +203,15 @@ class BookingMap extends React.Component {
     })
   }
 
+  getDateAndTime = () => {
+    let date = moment(this.props.bookThisClass.start.toString()).format('llll').slice(0, 17)
+    let start = moment(this.props.bookThisClass.start.toString()).format('llll').slice(17, 30)
+    let end = moment(this.props.bookThisClass.end.toString()).format('llll').slice(17, 30)
+    return (
+      <h1>{date} ({start} - {end} )</h1>
+    )
+  }
+
   componentDidMount(){
     this.getSpinClasses()
     this.getInstructorsPlease()
@@ -211,18 +221,26 @@ class BookingMap extends React.Component {
   }
 
   render() {
-    console.log(this.props.changeBike)
     return (
       <div className="modal">
         <div className="booking-map modal-main" >
           <span onClick={this.closeModal}>
             <img className="remove" src={remove} alt="remove" />
           </span>
-          <h1>{this.props.bookThisClass.title}</h1>
-          <h1>{this.props.bookThisClass.start.toString()}</h1>
-          {!this.props.selectedBike ? <h3>Select an available bike from the map below to make your reservation.</h3> : null}
+          <br/><br/>
+          <h1 className="modal-header">{this.props.bookThisClass.title}</h1>
+          {this.getDateAndTime()}
           {this.getInstructorInfo()}
           <img className="booking-map-instructor" src={this.getInstructorPhoto()} alt="profile" />
+          {!this.props.selectedBike ?
+            !this.props.changeBike
+            ?
+            <p className="modal-text">Select an available bike from the map below to make your reservation.</p>
+            :
+            <p className="modal-text">Select an available bike from the map below to change your reservation. Your current bike is highlighted.</p>
+            :
+            null
+          }
           <br/>
           {
             !this.props.selectedBike
@@ -238,8 +256,9 @@ class BookingMap extends React.Component {
               <span onClick={this.closeModal}>
                 <img className="remove" src={remove} alt="remove" />
               </span>
-              <h1>Success! You Have booked: </h1>
-              <h3>Bike {this.state.booked.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</h3>
+              <h1 className="modal-header">SUCCESS! YOU HAVE BOOKED: </h1>
+              <p className="modal-text">Bike {this.state.booked.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</p>
+              <img className="success" src={success} alt="success"/>
             </div>
             :
             null
@@ -252,8 +271,9 @@ class BookingMap extends React.Component {
               <span onClick={this.closeModal}>
                 <img className="remove" src={remove} alt="remove" />
               </span>
-              <h1>Success! You Changed Your Bike To: </h1>
-              <h3>Bike {this.state.updated.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</h3>
+              <h1 className="modal-header">SUCCESS! YOU HAVE CHANGED YOUR BIKE TO: </h1>
+              <p className="modal-text">Bike {this.state.updated.bike} for {this.props.bookThisClass.title} with {this.getInstructorInfo()}</p>
+              <img className="success" src={success} alt="success"/>
             </div>
             :
             null

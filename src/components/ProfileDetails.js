@@ -144,11 +144,11 @@ class ProfileDetails extends React.Component {
                 <img className="profile-studio-logo" src={this.getStudioLogo(userClass)}/>
               </span>
               <div className="profile-card-text">
-                <h1>{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
+                <h1 className="longer-strong">{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
                 {this.getClassDateAndTime(userClass)}
-                <h3>Instructor: {this.getInstructorForCard(userClass)}</h3>
-                <p> {this.getLocationForCard(userClass)} </p>
-                <p>Bike: {userClass.bike} </p>
+                <h2>{this.getInstructorForCard(userClass)}</h2>
+                <p className="reservation-card-header"> {this.getLocationForCard(userClass)} </p>
+                <p className="reservation-card-header">Bike: {userClass.bike} </p>
               </div>
             </div>
         )}
@@ -231,9 +231,9 @@ class ProfileDetails extends React.Component {
                 <br/>
               </span>
               <div className="profile-card-text">
-                <h1 className="favorites-h1">{instructor.name}</h1>
-                <p className="favorites-h1">{instructor.teaching_style}</p>
-                <p className="favorites-h1">Fun Fact: {instructor.fun_fact}</p>
+                <h1 className="longer-strong">{instructor.name.toUpperCase()}</h1>
+                <p className="reservation-card-header"><strong>TEACHING STYLE: </strong>{instructor.teaching_style}</p>
+                <p className="reservation-card-header"><strong>FUN FACT: </strong>{instructor.fun_fact}</p>
                 <br/>
               </div>
             </div>
@@ -263,9 +263,9 @@ class ProfileDetails extends React.Component {
                 <br/>
               </span>
               <div className="profile-card-text">
-                <h1 className="favorites-h1">{studio.name}</h1>
-                <p className="favorites-h1">{studio.bio}</p>
-                <a className="link" href={studio.website}><p className="favorites-h1">{studio.website}</p></a>
+                <h1 className="longer-strong">{studio.name.toUpperCase()}</h1>
+                <p className="reservation-card-header"><strong>BIO: </strong>{studio.bio}</p>
+                <p className="reservation-card-header"><strong>WEBSITE: </strong><a className="link" href={studio.website}>{studio.website}</a></p>
                 <br/>
               </div>
             </div>
@@ -328,7 +328,7 @@ class ProfileDetails extends React.Component {
         {this.props.myReservations
           ?
           <div>
-            <h1 className="favorites-h1">My Reservations </h1>
+            <h1 className="profile-details-strong">MY RESERVATIONS </h1>
             {this.getMyReservations()}
           </div>
           :
@@ -337,14 +337,15 @@ class ProfileDetails extends React.Component {
         {this.props.myFavorites
           ?
           <div>
-            <h1 className="favorites-h1"> My Favorites </h1>
+            <h1 className="profile-details-strong"> MY FAVORITES </h1>
             <div>
-            <h1>Studios: </h1>
+            <h1 className="strong-favorites">STUDIOS: </h1>
             {this.renderFavorites()}
             </div>
 
             <div>
-            <h1>Instructors: </h1>
+            <br/>
+            <h1 className="strong-favorites">INSTRUCTORS: </h1>
             {this.renderInstructorFavorites()}
             </div>
           </div>
