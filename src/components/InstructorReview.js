@@ -50,27 +50,26 @@ class InstructorReview extends React.Component {
     const { rating } = this.state
 
     return (
-      <div>
-      <h1>Write A Review For {this.props.instructor.name}</h1>
-        <form onSubmit={this.handleSubmit}>
-          <h2>Review Title:</h2>
-          <input type="textarea" name="review_title" value={this.state.review_title} onChange={this.handleOnChange}/>
-          <br/>
-          <h2>Rating: {rating}</h2>
+      <div className="form">
+      <h1 className="form-header">WRITE A REVIEW FOR {this.props.instructor.name.toUpperCase()}</h1>
+        <form onSubmit={this.handleSubmit} className="form-content">
+          <h1 className="review-form-label">RATING:</h1>
           <StarRatingComponent
             name="rate"
             starCount={5}
             value={rating}
             onStarClick={this.onStarClick.bind(this)}
           />
-          <br/>
-          <h2>Review Text:</h2>
-          <input type="textarea" name="review" value={this.state.review} onChange={this.handleOnChange}/>
-          <br/>
-          <input type="submit" value="Submit Your Review" />
+          <br/><br/>
+          <h1 className="review-form-label">TITLE:</h1>
+          <input type="textarea" name="review_title" value={this.state.review_title} onChange={this.handleOnChange} className="review-input" placeholder="Write your title here"/>
+          <br/><br/>
+          <h1 className="review-form-label">REVIEW:</h1>
+          <input type="textarea" name="review" value={this.state.review} onChange={this.handleOnChange} className="review-input" placeholder="Write your review here"/>
+          <br/><br/>
+          <input className="login-btn" type="submit" value="Submit Your Review" />
         </form>
       </div>
-
     )
   }
 
@@ -103,7 +102,7 @@ class InstructorReview extends React.Component {
         )
       })
     } else {
-      return <h1>This Instructor Has No Reviews. Be The First ?</h1>
+      return <h1 className="no-reviews">This Instructor Has No Reviews. Be The First ?</h1>
     }
   }
 
@@ -129,7 +128,6 @@ class InstructorReview extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentUser)
     return (
       <div className="reviews-div">
         <h1 className="header">REVIEWS</h1>

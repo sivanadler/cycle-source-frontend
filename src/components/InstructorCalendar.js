@@ -102,15 +102,17 @@ class InstructorCalendar extends React.Component {
   eventStyleGetter = (event, start, end, isSelected) => {
     var backgroundColor = 'pink';
     var style = {
-        backgroundColor: backgroundColor,
-        borderRadius: '5px',
-        opacity: 0.8,
-        color: 'black',
-        fontWeight: 'bold',
-        border: '0px',
-        display: 'block',
-        fontFamily: "sans-serif",
-        textAlign: "center",
+      backgroundColor: backgroundColor,
+      borderRadius: '5px',
+      opacity: 0.8,
+      color: 'black',
+      fontWeight: 'bold',
+      border: '0px',
+      display: 'block',
+      fontFamily: 'Roboto, sans-serif',
+      textAlign: "center",
+      border: "1px solid white",
+      paddingTop: '5px',
     };
     return {
         style: style
@@ -131,9 +133,9 @@ class InstructorCalendar extends React.Component {
 
   render() {
     return (
-      <div style={{ height: 1000, display: 'block' }}>
+      <div style={{ height: 1000, display: 'block'}}>
       <div className="instructor-calendar-div">
-        <h1>RIDE WITH ME:</h1>
+        <h1 className="header">RIDE WITH ME</h1>
         <BigCalendar
           step={30}
           views={['week']}

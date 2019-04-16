@@ -150,7 +150,7 @@ class InstructorShowContainer extends React.Component {
             </span>
             <h1 className="search-header">CYCLE SOURCE</h1>
             <div className="studio-show-header">
-              <h1 className="studio-head">{this.state.selectedInstructor.name}</h1>
+              <h1 className="studio-head">{this.state.selectedInstructor.name.toUpperCase()}</h1>
               <span className={this.state.favorited ? "favorited" : "favorite"} onClick={this.handleFavorite}>
                 <img className="heart" src={heart} alt="favorite" />
                 <span className="favorite-text">

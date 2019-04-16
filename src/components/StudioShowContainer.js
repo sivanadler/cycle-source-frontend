@@ -64,7 +64,7 @@ class StudioShowContainer extends React.Component {
             <img className="studio-logo" src={this.props.selectedStudio.logo} alt="logo" />
             </span>
             <span>
-            <h1 className="studio-head">{selectedStudio.name}</h1>
+            <h1 className="studio-head">{selectedStudio.name.toUpperCase()}</h1>
             </span>
             <span className={this.state.favorited ? "favorited" : "favorite"} onClick={this.handleFavorite}>
               <img className="heart" src={heart} alt="favorite" />
@@ -90,12 +90,14 @@ class StudioShowContainer extends React.Component {
   getMyFavorites = () => {
     FavoriteAdapter.getFavorites()
     .then(favorites => {
-      let favs = favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
-      if (favs) {
-        this.setState({
-          favorites: favorites,
-          favorited: true
-        })
+      if (this.props.selectedStudio) {
+        let favs = favorites.find(favorite => favorite.studio_id === this.props.selectedStudio.id)
+        if (favs) {
+          this.setState({
+            favorites: favorites,
+            favorited: true
+          })
+        }
       }
     })
   }

@@ -3,28 +3,28 @@ import React from "react";
 class InstructorProfile extends React.Component {
 
   render() {
-    console.log(this.props.instructor)
     return (
-      <span>
+      <div>
         {
           this.props.instructor
           ?
           <div className="instructor-profile">
-            <span className="instructor-pic-span">
+            <div>
+              <h1 className="header"> ABOUT ME</h1>
+            </div>
+            <div className="instructor-pic-span">
               <img src={this.props.instructor.profile_pic} className="instructor-pic2"/>
-              <span className="instructor-info">
-              <p><strong>Username:</strong> {this.props.instructor.username}</p>
-              <p><strong>Home Town: </strong> {this.props.instructor.hometown}</p>
-              <p><strong>Fun Fact:</strong> {this.props.instructor.fun_fact}</p>
-              <p><strong>Teaching Style: </strong> {this.props.instructor.teaching_style}</p>
-              </span>
-            </span>
-
+            </div>
+            <div className="instructor-info">
+              <strong className="strong">TEACHING STYLE:</strong> <p>{this.props.instructor.teaching_style}</p>
+              <strong className="strong">HOME TOWN: </strong> <p>{this.props.instructor.hometown}</p>
+              <strong className="strong">FUN FACT:</strong> <p>{this.props.instructor.fun_fact}</p>
+            </div>
           </div>
           :
           null
         }
-      </span>
+      </div>
     )
   }
 }

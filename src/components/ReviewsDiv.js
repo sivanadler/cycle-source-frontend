@@ -59,7 +59,7 @@ class ReviewsDiv extends React.Component {
       <h1 className="form-header">REVIEW FOR {this.props.studio.name.toUpperCase()}</h1>
         <form onSubmit={this.handleSubmit} className="form-content">
           {this.state.notFilledOut ? <p className="invalid-text">These Fields Are All Required. Please Try Again.</p> : null}
-          <label className="review-form-label">Rating:</label>
+          <h1 className="review-form-label">RATING:</h1>
           <StarRatingComponent
             name="rate"
             starCount={5}
@@ -67,10 +67,10 @@ class ReviewsDiv extends React.Component {
             onStarClick={this.onStarClick.bind(this)}
           />
           <br/><br/>
-          <label className="review-form-label">Title:</label>
+          <h1 className="review-form-label">TITLE:</h1>
           <input type="textarea" name="review_title" value={this.state.review_title} onChange={this.handleOnChange} className="review-input" placeholder="Review Title"/>
           <br/><br/>
-          <label className="review-form-label">Review:</label>
+          <h1 className="review-form-label">REVIEW:</h1>
           <input className="review-input" name="review" value={this.state.review} onChange={this.handleOnChange} placeholder="Write Your Review Here"/>
           <br/><br/>
           <input className="login-btn" type="submit" value="Submit Your Review" />
@@ -102,7 +102,7 @@ class ReviewsDiv extends React.Component {
       return filteredReviews.map(review => {
         return (
           <div className="review-card">
-            <h1>{review.review_title}</h1>
+            <h1 className="review-header">{review.review_title}</h1>
             <h3>Posted by: {this.getUserName(review)}</h3>
             <p>Rating:
             <StarRatingComponent
@@ -116,7 +116,7 @@ class ReviewsDiv extends React.Component {
         )
       })
     } else {
-      return <h1>This Studio Has No Reviews. Be The First ?</h1>
+      return <h1 className="no-reviews">This Studio Has No Reviews. Be The First ?</h1>
     }
   }
 
