@@ -4,7 +4,7 @@ import './App.css';
 import { Redirect } from 'react-router'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import wheelGif from './images/wheel-gif.gif'
+import cycle from './images/cycle.png'
 
 import Nav from './components/Nav'
 import Login from './components/Login'
@@ -25,15 +25,12 @@ class App extends Component {
   render() {
     return (
 
-      <div className="App">
+      <div  className="login-background">
         {this.props.currentUser ? <Redirect to='/home' /> : <Nav />}
-        <span>
-          <img className="wheel-gif" src={wheelGif} alt="spinny wheel" />
-        </span>
-        <span>
-          <h1 className="logo">CYCLE</h1>
-          <h1 className="logo">SOURCE</h1>
-        </span>
+        <div className="logo-login-div">
+          <h1 className="logo-login">CYCLE S<img className="wheelGif" src={cycle}/>URCE</h1>
+          <p className="logo-login-small">find your ride</p>
+        </div>
         {this.props.loginClicked ? this.props.history.push("/login") : null}
         {this.props.newUser ? this.props.history.push("/signup") : null}
       </div>

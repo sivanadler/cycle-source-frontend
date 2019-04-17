@@ -56,6 +56,7 @@ class ClassLists extends React.Component {
       <h1 className="search-header">CYCLE SOURCE</h1>
       <br/>
       <div className="class-cards-container">
+        <h1 className="header">MY CLASSES</h1>
         {this.state.spinClasses.length !== 0 ? this.renderSpinClasses() : null}
       </div>
       </div>

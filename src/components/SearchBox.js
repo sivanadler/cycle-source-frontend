@@ -46,6 +46,11 @@ class SearchBox extends React.Component {
     .then(locations => {this.props.storeLocations(locations)})
   }
 
+  directToReservation = () => {
+    this.props.history.push('/reserve')
+  }
+
+
   componentDidMount(){
     StudioAdapter.getStudios()
     .then(studios => {this.props.storeStudios(studios)})
@@ -67,7 +72,7 @@ class SearchBox extends React.Component {
             this.props.searchTerm
             ?
             <span>
-              <h2 id="clear-filter" onClick={this.handleClearFilter}>Clear Filter</h2>
+              <h2 id="clear-filter" onClick={this.handleClearFilter}><img className="remove-filter-icon" src={remove}/>CLEAR FILTER</h2>
               <h2 id="search-result-for"> Search Results For {this.props.searchTerm.toUpperCase()}: </h2>
             </span>
             :

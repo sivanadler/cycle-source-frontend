@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-  background-color: #FFF688;
+  background-color: #55b1df;
 }
 
 .wheel-gif {
@@ -20,19 +20,20 @@ body {
 }
 
 .nav {
+  vertical-align: middle;
   color: white;
-  background-color: black;
-  overflow: hidden;
-  padding: 20px;
+  height: 100px;
+  /* margin-top: 20px; */
+  background-color: #55b1df;
   font-family:'Roboto', sans-serif;
 }
 
 .profile-nav {
   color: black;
-  background-color: #686868;
-  overflow: hidden;
+  background-color: black;
   font-family:'Roboto', sans-serif;
   margin-top: 0px;
+  height: 120px;
   border-left: 1px solid black;
   border-top: 1px solid black;
   border-right: 1px solid black;
@@ -40,26 +41,34 @@ body {
 
 .main-nav-link {
   color: white;
+  font-size: 34px;
   text-align: left;
+  font-weight: bold;
   text-decoration: none;
   height: 100px;
-  padding: 14px 16px;
-  margin: 20px;
-  display: inline;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin-right: 20px;
+  width: 8%;
+  display: inline-block;
+  float: left;
   vertical-align: middle;
-  font-family:'Roboto', sans-serif;
-  font-size: 40px;
 }
 
 .main-nav-link:hover {
-  background-color: white;
-  color: black;
-  padding: 15px;
+  color: white;
+  background-color: black;
+  font-size: 34px;
+  text-align: left;
+  font-weight: bold;
   text-decoration: none;
-  font-family:'Roboto', sans-serif;
-  font-size: 40px;
-  border-radius: 10px;
-  overflow: hidden;
+  height: 80px;
+  padding-left: 40px;
+  margin-right: 20px;
+  width: 8%;
+  display: inline-block;
+  float: left;
+  vertical-align: middle;
 }
 
 
@@ -85,14 +94,14 @@ body {
   padding-left: 40px;
   padding-top: 20px;
   margin-right: 20px;
-  width: 16%;
+  width: 19%;
   display: inline-block;
   float: left;
   vertical-align: middle;
 }
 
 .prof-nav-link:hover {
-  color: #686868;
+  color: black;
   background-color: #ccc;
   font-size: 34px;
   text-align: left;
@@ -101,7 +110,7 @@ body {
   height: 100px;
   padding-left: 40px;
   margin-right: 20px;
-  width: 16%;
+  width: 19%;
   display: inline-block;
   float: left;
   vertical-align: middle;
@@ -137,6 +146,13 @@ body {
   padding-left: 20px;
 }
 
+.main-nav-link-text {
+  margin-top: 8px;
+  margin-bottom: auto;
+  margin-left: 30px;
+  padding-left: 20px;
+}
+
 .logo {
   float: left;
   font-size: 200px;
@@ -145,10 +161,36 @@ body {
   vertical-align: middle;
 }
 
+.logo-login-div {
+  background-color:rgb(255,255,255,0.9);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  padding: 3px;
+  border-radius: 10px;
+}
+
 .logo-login {
   font-size: 200px;
   text-align: center;
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
+}
+
+.logo-login-white {
+  color: white;
+  font-size: 200px;
+  text-align: center;
+  font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
+}
+
+.logo-login-small {
+  font-size: 160px;
+  text-align: center;
+  font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
 }
 
 .login-form {
@@ -161,12 +203,20 @@ body {
   margin-right: auto;
   margin-left: auto;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+}
 
+.login-background {
+  background: url('../src/images/spin.jpg');
+  letter-spacing: .8px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 2000px;
 }
 
 .login-header {
   font-size: 80px;
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
   color: #55b1df;
   font-weight: bold;
   width: 500px;
@@ -175,13 +225,39 @@ body {
   margin-right: auto;
 }
 
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  background: #55b1df;
+  font-family:'Roboto', sans-serif;
+  font-size: 20px;
+  letter-spacing: .8px;
+  color: white;
+  font-weight: bold;
+}
+
+input[type=file]::-webkit-file-upload-button:hover {
+  border: 1px solid #55b1df;
+  padding: 10px;
+  border-radius: 5px;
+  background: white;
+  font-family:'Roboto', sans-serif;
+  font-size: 20px;
+  letter-spacing: .8px;
+  color: #55b1df;
+  font-weight: bold;
+}
+
 .login-subheader {
   font-size: 30px;
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
 }
 
 .login-input {
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
   padding: 20px;
   width: 300px;
   margin: 10px;
@@ -209,6 +285,7 @@ body {
   border:1px solid #fff;
   color:#fff;
   font-size: 25px;
+  font-weight: bold;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
@@ -313,6 +390,7 @@ body {
 .login-label {
   font-size: 25px;
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
 }
 
 .radio {
@@ -324,17 +402,19 @@ body {
   color: red;
   font-size: 20px;
   font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
 }
 
 .input-file-container {
+  font-family:'Roboto', sans-serif;
+  letter-spacing: .8px;
   position: relative;
   overflow: hidden;
   display: inline-block;
   border: 1px solid #ccc;
-  color: gray;
-  background-color: #ccc;
-  padding: 8px 20px;
-  border-radius: 8px;
+  color: black;
+  padding: 13px;
+  border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -344,6 +424,12 @@ body {
   float: right;
   position: inline-block;
   margin-right: 200px;
+}
+
+.wheelGif {
+  height: 165px;
+  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .home-logo {
@@ -379,7 +465,7 @@ body {
 .collapsed-nav {
   width: 35px;
   height: 5px;
-  background-color: black;
+  background-color: white;
   margin: 6px 0;
   border-radius: 5px;
 }
@@ -388,15 +474,16 @@ body {
   background: url('../src/images/spin.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1700px;
-  margin-left: 60px;
+  height: 1800px;
+  /* margin-left: 60px;
   margin-right: 60px;
-  margin-bottom: 60px;
+  margin-bottom: 60px; */
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
 .hamburger {
   margin: 25px;
+  float: left;
   width: 50%;
   border-radius: 5px;
 }
@@ -433,6 +520,11 @@ body {
   border-radius: 10px;
 }
 
+.remove-filter-icon {
+  padding-right: 10px;
+  margin-top: 10px;
+}
+
 .ham-modal {
   position: fixed;
   top: 0;
@@ -446,10 +538,12 @@ body {
 }
 
 #map {
-  width: 47.2%;
+  width: 50%;
   float: right;
   height: 100%;
-  margin: 30px;
+  z-index: 0;
+  /* margin: 25px; */
+  overflow-x: hidden;
 }
 
 .pin {
@@ -459,11 +553,11 @@ body {
 
 .search-box {
   float: left;
-  margin-left: 30px;
+  margin-left: 60px;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 46%;
-  height: 1500px;
+  height: 1510px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
@@ -482,8 +576,9 @@ body {
 
 .search-result-card {
   font-family:'Roboto', sans-serif;
-  background-color: rgb(0, 0, 0, 0.15);
-  box-shadow: 0 7px 30px rgba(62, 9, 11, .1);
+  background-color: rgb(0, 0, 0, 0.09);
+  border: 1px solid black;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
   color: black;
   margin: 30px;
   border-radius: 5px;
@@ -492,17 +587,6 @@ body {
   padding-bottom: 10px;
 
 }
-
-/* .search-result-card:hover {
-  font-family:'Roboto', sans-serif;
-  background-color: rgb(0, 0, 0, 0.3);
-  color: black;
-  margin: 30px;
-  border-radius: 5px;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-} */
 
 .search-result-header {
   font-size: 30px;
@@ -516,8 +600,10 @@ body {
 #search-result-for {
   font-family:'Roboto', sans-serif;
   margin-left: 20px;
-  font-size: 30px;
+  margin-right: 20px;
+  font-size: 35px;
   color: #55b1df;
+  border-bottom: 3px solid #55b1df;
   margin-bottom: 20px;
 }
 
@@ -569,7 +655,7 @@ body {
 }
 
 .search-container {
-  z-index: 0
+  z-index: 0;
 }
 
 .search-label {
@@ -627,17 +713,16 @@ body {
 }
 
 .profile-details-strong {
-  background-color: #55b1df;
+  background-color: #687384;
   font-size: 65px;
   color: white;
   font-weight: bold;
-  width: 2633px;
+  width: 2410px;
   padding-left: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-right: 20px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  margin-left: 40px;
+  /* margin-right: 40px; */
 }
 
 .reserve-image {
@@ -682,31 +767,56 @@ body {
 }
 
 #clear-filter {
-  margin-top: 20px;
+  font-family:'Roboto', sans-serif;
+  margin-top: 30px;
   text-align: center;
   color: #55b1df;
   border-radius: 10px;
-  padding: 10px;
-  width: 200px;
-  height: 50px;
-  padding-top: 20px;
+  width: 250px;
+  font-size: 30px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
 }
 
+#clear-filter:hover {
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
+  border-radius: 10px;
+}
+
 
 .logged-in-header {
+  font-family:'Roboto', sans-serif;
+  letter-spacing: 0.8;
   float: right;
   text-align: right;
-  margin-right: 3%;
+  /* margin-right: 3%; */
   margin-top: 0px;
   display: inline;
+  font-size: 35px;
+  color: white;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+}
+
+.header-div {
+  float: right;
+  display: inline;
+  width: 30%;
 }
 
 .calendar {
-border-radius: 5px;
-float: right;
-width: 85%;
+  border-radius: 5px;
+  float: right;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family:'Roboto', sans-serif;
+  font-size: 19.5px;
 }
 
 .booking-map {
@@ -794,7 +904,7 @@ width: 85%;
   height: 220px;
   margin: 25px;
   z-index: 1;
-  background-color: #eee;
+  background-color: rgb(0, 0, 0, 0.09);
   letter-spacing: .8px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
 }
@@ -848,20 +958,20 @@ width: 85%;
 .header {
   font-family:'Roboto', sans-serif;
   top: 0;
-  background-color: #686868;
+  background-color: #687384;
   color: white;
   padding: 15px;
   margin-top: 0px;
   margin-bottom: 0px;
   letter-spacing: .8px;
-
+  text-align: left;
   /* border: 1px solid #55b1df; */
 }
 
 .header-show {
   font-family:'Roboto', sans-serif;
   top: 0;
-  background-color: #686868;
+  background-color: #687384;
   color: white;
   padding: 20px;
   margin-top: 0px;
@@ -1006,7 +1116,7 @@ width: 85%;
   padding-left: 25px;
   height: 260px;
   margin: 25px;
-  background-color: #eee;
+  background-color: rgb(0, 0, 0, 0.09);
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
   letter-spacing: .8px;
 }
@@ -1047,7 +1157,7 @@ width: 85%;
 }
 
 .instructor-card:hover {
-  background-color: #55b1df;
+  background-color: rgb(0, 0, 0, 0.2);
   color: black;
   text-align: center;
   float: left;
@@ -1055,8 +1165,8 @@ width: 85%;
 
 .favorite {
   float: right;
-  background-color: #676767;
-  border: 2px solid #686868;
+  background-color: #687384;
+  border: 2px solid black;
   color: white;
   border-radius: 10px;
   margin-right: 20px;
@@ -1122,7 +1232,7 @@ width: 85%;
   margin: 40px;
   border: 2px solid black;
   border-radius: 5px;
-  background-color: #efefef;
+  background-color: rgb(0, 0, 0, 0.09);
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
 }
 
@@ -1140,7 +1250,7 @@ width: 85%;
   float: right;
   height: 50px;
   padding: 15px;
-  margin-right: 60px;
+  margin-right: 40px;
   margin-top: 20px;
   border: 1px solid #aaa;
   border-radius: 15em;
@@ -1171,7 +1281,7 @@ width: 85%;
   padding: 15px;
   float: right;
   height: 50px;
-  margin-right: 60px;
+  margin-right: 40px;
   margin-top: 20px;
   border: 1px solid #aaa;
   border-radius: 15em;
@@ -1261,6 +1371,7 @@ width: 85%;
   margin-left: 30px;
   margin-right: 30px;
   border-radius: 5px;
+  font-weight: bold;
   color: white;
   background-color: #55b1df;
   font-size: 25px;
@@ -1284,7 +1395,7 @@ width: 85%;
 .filter-header {
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
-  background-color: #55b1df;
+  background-color: #687384;
   color: white;
   width: 370px;
   padding: 15px;
@@ -1378,8 +1489,15 @@ width: 85%;
 .star-icon {
   float: left;
   border-radius: 5px;
-  height: 70px;
-  padding-top: 6px;
+  height: 68px;
+  padding-top: 5.5px;
+  padding-right: 25px;
+}
+
+.login-icon {
+  float: left;
+  border-radius: 5px;
+  height: 55px;
   padding-right: 25px;
 }
 
@@ -1387,8 +1505,6 @@ width: 85%;
   width: 30%;
   height: 600px;
   float: left;
-  overflow-y: scroll;
-  overflow-x: hidden;
   border: 2px solid black;
   border-radius: 5px;
   background-color: white;
@@ -1397,8 +1513,8 @@ width: 85%;
   display: inline;
 }
 
-.instructor-pic2 {
-  background-color: #55b1df;
+.instructor-pic-span {
+  background-color: rgb(0, 0, 0, 0.3);
   border: 2px solid #ccc;
   padding-bottom: 70px;
   padding-top: 15px;
@@ -1410,17 +1526,17 @@ width: 85%;
   float: left;
   display: inline-block;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
-}
-
-.instructor-pic-span {
-  float: left;
-  height: 260px;
-  width: 200px;
   margin-left: 40px;
   margin-top: 6%;
-  margin-right: 175px;
+  margin-right: 50px;
   margin-bottom: 200px;
-  display: inline;
+}
+
+.instructor-pic2 {
+  background-color: white;
+  height: 270px;
+  width: 290px;
+  border-radius: 10px;
 }
 
 .instructor-info {
@@ -1444,10 +1560,10 @@ width: 85%;
   color: #55b1df;
   font-size: 35px;
   font-weight: bold;
-  width: 500px;
+  width: 400px;
   margin-left: 40px;
   padding-top: 10px;
-  border-bottom: 3px solid #55b1df;
+  /* border-bottom: 3px solid #55b1df; */
 }
 
 .longer-strong {
@@ -1482,6 +1598,7 @@ width: 85%;
 
 .change-bike {
   float: right;
+  display: block;
   height: 50px;
   margin-right: 30px;
   margin-top: 15px;
@@ -1519,7 +1636,7 @@ width: 85%;
 }
 
 .profile-studio-logo {
-  height: 100px;
+  height: 140px;
   float: left;
   margin-left: 10px;
   margin-top: 40px;
@@ -1529,16 +1646,18 @@ width: 85%;
 
 .profile-instructor-logo {
   height: 160px;
+  /* width: 100%; */
   float: left;
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  margin-right: 20px;
+  padding-left: 20px;
+  margin-left: auto;
+  margin-top: 30px;
+  margin-bottom: auto;
+  margin-right: auto;
 }
 
 
 .profile-card-text {
-  margin-left: 220px;
+  margin-left: 260px;
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
 }
@@ -1546,30 +1665,45 @@ width: 85%;
 .class-cards {
   float: left;
   background-color: white;
-  margin: 30px;
+  display: inline-block;
+  margin: 40px;
   text-align: center;
   padding: 10px;
-  height: 100%;
+  height: 800px;
+  width: 25%;
   border-radius: 10px;
-  height: 500px;
-  overflow: s
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+  border: 1px solid black;
 }
 
 .class-cards-header {
-  background-color: #efefef;
-  padding: 10px;
-  border-radius: 10px;
+  color: #55b1df;
+  font-size: 20px;
+  font-weight: bold;
+  width: 500px;
+  border-bottom: 3px solid #55b1df;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.class-cards-header-small {
+  color: #55b1df;
+  font-size: 30px;
+  /* font-weight: bold; */
 }
 
 .class-cards-container {
+  overflow-x: scroll;
+  border: 1px solid black;
   width: 90%;
-  background-color: black;
+  height: 1000px;
+  background-color: white;
   border-radius: 10px;
   margin-top: 100px;
-  margin-left: 100px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
 .my-reserved-bike {

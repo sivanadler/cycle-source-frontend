@@ -3,12 +3,9 @@ import { connect } from 'react-redux'
 
 class Header extends React.Component {
   handletitle = () => {
-    return (
-      <div>
-      <h1 className="logged-in-header">Welcome, {this.props.currentUser.name} !</h1>
-      </div>
-
-    )
+    if (this.props.currentUser) {
+      return   <h1 className="logged-in-header">WELCOME, {this.props.currentUser.name.toUpperCase()} !</h1>
+    }
   }
 
   componentDidMount(){
@@ -47,7 +44,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="header-div">
         {this.props.currentUser ? this.handletitle() : null}
       </div>
     )

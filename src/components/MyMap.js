@@ -12,11 +12,20 @@ let coordinatesArray = []
 
  const mapStyles = {
   position: 'absolute',
-  width: '50%',
-  height: '83%',
+  width: '1550px',
+  height: '1500px',
   float: 'left',
+  backgroundColor: 'white',
+  margin: '25px',
+  border: '10px solid white'
 };
 
+const markerStyle = {
+  color: 'pink'
+}
+
+
+var url
 
  class MyMap extends React.Component {
   state = {
@@ -42,12 +51,16 @@ let coordinatesArray = []
   };
 
    renderMarkers = () => {
+    var url = {
+      url: "http://google.com/mapfiles/ms/micons/purple.shadow.png"
+    }
     if (this.props.coordinates.length !== 0) {
       return this.props.coordinates.map(coordinate => {
         latPin = coordinate.latPin
         lngPin = coordinate.lngPin
         let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
         return (<Marker
+          // icon={url}
           onClick={this.onMarkerClick}
           name={"something"}
           position = {{lat: latPin, lng: lngPin}}
@@ -68,6 +81,7 @@ let coordinatesArray = []
         let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
         return (<Marker
           onClick={this.onMarkerClick}
+          // icon={url}
           name={"something"}
           position = {{lat: latPin, lng: lngPin}}
           name = {<div><h1>{studio.name}</h1><h2>{coordinate.location.name}</h2><h3>{coordinate.location.address}</h3></div>}
@@ -82,6 +96,7 @@ let coordinatesArray = []
       lngPin = coordinate.lngPin
       let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
       return (<Marker
+        // icon={url}
         onClick={this.onMarkerClick}
         name={"something"}
         position = {{lat: latPin, lng: lngPin}}

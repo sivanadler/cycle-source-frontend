@@ -46,7 +46,7 @@ class SpinClassCard extends React.Component {
   getStudioName = () => {
     if (this.state.studios.length !== 0) {
       let studio = this.state.studios.find(studio => studio.id === this.props.spinClass.studio_id)
-      return studio.name
+      return studio.name.toUpperCase()
     }
   }
 
@@ -74,21 +74,27 @@ class SpinClassCard extends React.Component {
       return myRiders.map(rider => {
         return (
           <div>
-            <p>{rider.name}: Bike {this.getBikeNum(rider)}</p>
+            <p className="modal-text"><strong>{rider.name.toUpperCase()}:</strong> Bike {this.getBikeNum(rider)}</p>
           </div>
         )
       })
     }
   }
 
+  convertUTCDateToLocalDate = date => {
+    var dateFormat = new Date(date)
+    var newDate = new Date(dateFormat.getTime()+dateFormat.getTimezoneOffset()*60*1000);
+    return newDate;
+  }
+
   getDateAndTime = () => {
     let spinClass = this.props.spinClass
-    let date = moment(spinClass.end.toString()).format('llll').slice(0, 17)
-    let start = moment(spinClass.start.toString()).format('llll').slice(17, 30)
-    let end = moment(spinClass.end.toString()).format('llll').slice(17, 30)
-    return <div><h3>{date}</h3> <h3>{start} - {end}</h3></div>
-
-    debugger
+    let start = this.convertUTCDateToLocalDate(spinClass.start)
+    let end = this.convertUTCDateToLocalDate(spinClass.end)
+    let date = moment(start.toString()).format('llll').slice(0, 17)
+    let startSliced = moment(start.toString()).format('llll').slice(17, 30)
+    let endSliced = moment(end.toString()).format('llll').slice(17, 30)
+    return <div><p className="class-cards-header-small">{date}</p> <p className="class-cards-header-small">{startSliced} - {endSliced}</p></div>
   }
 
   componentDidMount(){
@@ -106,7 +112,6 @@ class SpinClassCard extends React.Component {
           <h1>{this.getStudioName()}</h1>
           {this.getDateAndTime()}
         </div>
-        <h1>Riders Signed Up:</h1>
         {this.getListOfRiders()}
       </div>
     )

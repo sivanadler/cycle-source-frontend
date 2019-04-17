@@ -12,10 +12,10 @@ const SignUp = (props) => {
   }
   console.log(props)
   return (
-  <div className="sign-up">
+  <div className="login-background">
     <Nav history={props.history}/>
     <span>
-      <h1 className="logo-login">CYCLE SOURCE</h1>
+      <h1 className="logo-login-white">CYCLE SOURCE</h1>
     </span>
     <RiderForm history={props.history}/>
   </div>

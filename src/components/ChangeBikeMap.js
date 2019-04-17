@@ -7,6 +7,7 @@ import moment from 'moment'
 import UserClassAdapter from '../apis/UserClassAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
 import StudioAdapter from '../apis/StudioAdapter'
+import success from '../images/success.png'
 
 class ChangeBikeMap extends React.Component {
   state = {
@@ -19,13 +20,21 @@ class ChangeBikeMap extends React.Component {
 
   componentDidMount(){
     InstructorAdapter.getInstructors()
-    .then(instructors => this.props.storeInstructors(instructors))
+    .then(instructors => this.setState({ instructors }))
   }
 
   getInstructorInfo = spinClass => {
-    if (this.props.instructors && this.props.instructors.length !== 0) {
-      let instructor = this.props.instructors.find(instructor => instructor.id === spinClass.instructor_id)
-      return <h1>{instructor.name}</h1>
+    if (spinClass && this.state.instructors && this.state.instructors.length !== 0) {
+      let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
+      console.log(instructor);
+      return <h1>{instructor.name.toUpperCase()}</h1>
+    }
+  }
+
+  getInstructorPhoto = spinClass => {
+    if (this.state.instructors && this.state.instructors.length !== 0) {
+      let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
+      return instructor.profile_pic
     }
   }
 
@@ -72,14 +81,12 @@ class ChangeBikeMap extends React.Component {
         <span onClick={this.closeModal}>
           <img className="remove" src={remove} alt="remove" />
         </span>
-        <h1>You Are Currently Reserved For:</h1>
-        <h1>{spinClass.time}</h1>
+        <h1 className="modal-header">YOU ARE CURRENTLY RESERVED FOR: {spinClass.time}</h1>
         <h1>{date} ({startSliced} - {endSliced} )</h1>
-        <h1>Bike: {this.props.changeBike.bike}</h1>
-        <img className="booking-map-instructor" src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile" />
         {this.getInstructorInfo(spinClass)}
+        <img className="booking-map-instructor" src={this.getInstructorPhoto(spinClass)} alt="profile" />
         <br/>
-        <h3>To change your bike, select an available bike from the map below.</h3>
+        <p className="modal-text">Select an available bike from the map below to change your reservation. Your current bike is highlighted.</p>
       </div>
     )
   }
@@ -91,6 +98,7 @@ class ChangeBikeMap extends React.Component {
     let userClass = this.props.changeBike.id
     UserClassAdapter.updateUserClass(userClass, spinClass, user_id, bike)
     .then(res => {
+      debugger
       this.setState({
         updated: res
       })
@@ -130,27 +138,30 @@ class ChangeBikeMap extends React.Component {
 
   confirmChange = () => {
     let spinClass = this.props.spinClasses.find(spinClass => spinClass.id === this.props.changeBike.spin_class_id)
-    let startTime = moment(spinClass.start.toString()).format('llll')
-    let endTime = moment(spinClass.end.toString()).format('llll')
+    let date = moment(spinClass.start.toString()).format('llll').slice(0, 17)
+    let start = this.convertUTCDateToLocalDate(spinClass.start)
+    let end = this.convertUTCDateToLocalDate(spinClass.end)
+    let startSliced = moment(start.toString()).format('llll').slice(17, 30)
+    let endSliced = moment(end.toString()).format('llll').slice(17, 30)
     return (
       <div className="booking-map">
         <span onClick={this.closeModal}>
           <img className="remove" src={remove} alt="remove" />
         </span>
-        <h1>{spinClass.time}</h1>
-        <h1>{startTime} - {endTime}</h1>
-        <img className="booking-map-instructor" src="https://instructors.flywheelsports.com/510/Emily_Fayette_dfac98143c2a4f45b3d9e8b5f272feb950e141f7.jpg" alt="profile" />
+        <h1 className="modal-header">{spinClass.time}</h1>
+        <h1>{date} ({startSliced} - {endSliced} )</h1>
+        <img className="booking-map-instructor" src={this.getInstructorPhoto(spinClass)} alt="profile" />
         {this.getInstructorInfo(spinClass)}
         <br/>
-        <h3>Are you sure you want to book bike {this.props.setSelectedChangedBike}?</h3>
-        <button onClick={this.confirmBooking}>BOOK</button>
-        <button onClick={this.handleGoBack}>GO BACK</button>
+        <h3 className="modal-text">Are you sure you want to book <strong>Bike {this.props.setSelectedChangedBike}?</strong></h3>
+        <button className="login-btn" onClick={this.confirmBooking}>BOOK</button>
+        <button className="login-btn" onClick={this.handleGoBack}>GO BACK</button>
       </div>
     )
   }
 
   renderBikes = () => {
-    let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+    let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51]
     let thisClass = this.props.spinClasses.find(spinClass => spinClass.id === this.props.changeBike.spin_class_id)
     let filteredUserClasses = this.state.userClasses.filter(userClass => userClass.spin_class_id === thisClass.id)
     let filteredBikes = []
@@ -159,7 +170,7 @@ class ChangeBikeMap extends React.Component {
     })
     return bikes.map(bike => {
       if (this.props.changeBike.bike === bike) {
-        return <Bike number={bike} editBike={this.props.changeBike.bike} className={"edit-bike"}/>
+        return <Bike number={bike} editBike={this.props.changeBike.bike} className={"my-reserved-bike"}/>
       } else if (filteredBikes.includes(bike)){
         return <Bike number={bike} editBike={this.props.changeBike.bike} className={"reserved-bike"}/>
       } else {
@@ -221,8 +232,9 @@ class ChangeBikeMap extends React.Component {
             <span onClick={this.closeModalDone}>
               <img className="remove" src={remove} alt="remove" />
             </span>
-            <h1>Success! You Changed Your Bike!</h1>
-            <h3>Bike {this.state.updated.bike} for {this.getSpinClassTitle()} with {this.getInstructor()}</h3>
+            <h1 className="modal-header">SUCCESS! YOU HAVE CHANGED YOUR BIKE TO: </h1>
+            <p className="modal-text">Bike {this.state.updated.bike} with {this.getInstructorInfo()}</p>
+            <img className="success" src={success} alt="success"/>
           </div>
           :
           null

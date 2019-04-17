@@ -13,16 +13,13 @@ class ModalWindow extends React.Component {
     userClasses: [],
   }
 
-  //replace links to links on this website to show page
-  //replace instructor photo with seeded data
-
   bookThisClass = () => {
     this.props.openBookClassWindow(this.props.events)
   }
 
   getModalInfo = () => {
     if (this.state.userClasses.length !== 0) {
-      let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id)
+      let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id && userClass.user_id === this.props.currentUser.id)
       if (foundUserClass) {
         let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
         let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
@@ -44,8 +41,8 @@ class ModalWindow extends React.Component {
           </div>
         )
       } else {
-        if (this.state.instructor && this.state.location && this.state.studio) {
-          let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
+      if (this.state.instructor && this.state.location && this.state.studio) {
+        let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
           let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
           let date = moment(this.props.events.start.toString()).format('llll').slice(0,17)
           let start = moment(this.props.events.start.toString()).format('llll').slice(17, 27)

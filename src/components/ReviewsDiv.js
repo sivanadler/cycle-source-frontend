@@ -152,13 +152,7 @@ class ReviewsDiv extends React.Component {
           null
         }
 
-        {
-          this.props.reviews.length !== 0
-          ?
-          this.getReviews()
-          :
-          null
-        }
+        {this.getReviews()}
       </div>
     )
   }

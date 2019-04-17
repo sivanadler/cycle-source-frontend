@@ -16,6 +16,7 @@ class Login extends React.Component {
     checkedInstructor: false,
     notFilledOut: false,
     notChecked: false,
+    invalidRole: false,
     users: []
   }
 
@@ -26,25 +27,22 @@ class Login extends React.Component {
         notFilledOut: true
       })
     }
-    if (this.state.users) {
-      let usernames = []
-      this.state.users.map(user => {
-        usernames.push(user.username)
-      })
-      if (!usernames.includes(this.state.username)) {
-        this.setState({
-          notFilledOut: true
-        })
-      }
-    }
     if (!this.state.checkedRider && !this.state.checkedInstructor) {
       this.setState({
         notChecked: true
       })
     }
     if (this.state.checkedInstructor) {
-      this.handleInstructorLogIn()
-    } else {
+      if (this.state.users.length !== 0) {
+        let user = this.state.users.find(user => user.username === this.state.username)
+        if (user && user.role === 'rider' && this.state.checkedInstructor) {
+          this.setState({
+            invalidRole: true
+          })
+        } else {
+          this.handleInstructorLogIn()
+        }
+      }} else {
       fetch("http://localhost:3000/api/v1/login", {
   			method: "POST",
   			headers: {
@@ -112,17 +110,18 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login-background">
         <Nav history={this.props.history}/>
         <div>
           <span>
-            <h1 className="logo-login">CYCLE SOURCE</h1>
+            <h1 className="logo-login-white">CYCLE SOURCE</h1>
           </span>
           <div className="login-form">
             <form onSubmit={this.handleSubmit}>
               <h1 className="login-header">LOG IN</h1>
               <h3 className="login-subheader">Please Check Off Your Account Type: </h3>
               {this.state.notChecked ? <p className="invalid-text">This Field is Required. Please Select Your Account Type.</p> : null}
+              {this.state.invalidRole ? <p className="invalid-text">Looks like you checked the wrong account type. Please select the correct account type to continue.</p> : null}
             <div className="radio">
               <label className="login-label">
                 <input type="radio" name="rider" value="Rider" checked={this.state.checkedRider} onChange={this.handleOnCheck} class="option-input checkbox"/>

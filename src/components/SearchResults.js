@@ -39,10 +39,6 @@ class SearchResults extends React.Component {
     }
   }
 
-  directToReservation = () => {
-    this.props.history.push('/reserve')
-  }
-
   componentDidMount(){
     ReviewAdapter.getReviews()
     .then(reviews => {
@@ -57,7 +53,7 @@ class SearchResults extends React.Component {
       <div className="">
         {this.props !== undefined
           ?
-          <div className="search-result-card search-result-card-over">
+          <div className="search-result-card">
             <span>
               <img className="more" src={more} alt="favorite" onClick={() => this.handleOnClick(this.props.location)}/>
             </span>
@@ -70,7 +66,7 @@ class SearchResults extends React.Component {
             />
             <p className="search-result-text">{this.props.location.address}</p>
             <p className="search-result-text">{this.props.location.phone_number}</p>
-            <p className="search-result-text">{this.props.location.email}</p>
+            <p className="search-result-text link">{this.props.location.email}</p>
           </div>
           :
           null

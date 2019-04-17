@@ -32,7 +32,7 @@ class InstructorModalWindow extends React.Component {
 
   getModalInfo = () => {
     if (this.state.userClasses.length !== 0 && this.state.instructor && this.state.location && this.state.studio) {
-      let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id)
+      let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id && userClass.user_id === this.props.currentUser.id)
       if (foundUserClass && this.state.instructor && this.state.location && this.state.studio) {
         let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
         let instructorPath = this.state.instructor.name.toLowerCase().replace(" ","_")
@@ -45,13 +45,11 @@ class InstructorModalWindow extends React.Component {
               <img className="remove" src={remove} alt="remove" />
             </div>
             <br/><br/>
-            <h1 className="modal-header"> You Are Already Signed Up For {this.props.events.title}</h1>
-            <h1>{date} from {start} - {end}</h1>
-            <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-            <h3>You are currently on Bike {foundUserClass.bike}</h3>
-            <br/>
-            <p>Want to change your bike?</p>
-            <button onClick={() => this.changeMyBike(this.props.events, foundUserClass)}>Change Bike</button>
+            <h1 className="modal-header"> YOU ARE ALREADY SIGNED UP FOR {this.props.instructor.name.toUpperCase}'S '{this.props.events.title} CLASS</h1>
+            <h1 className="modal-text">{date} ({start} - {end} )</h1>
+            <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name.toUpperCase()}</h1></a>
+            <p className="modal-text">You are currently on <strong>Bike {foundUserClass.bike}</strong></p>
+            <button className="login-btn" onClick={() => this.changeMyBike(this.props.events, foundUserClass)}>Change Bike</button>
           </div>
           )
         } else {
@@ -68,15 +66,14 @@ class InstructorModalWindow extends React.Component {
               <br/><br/>
               <h1 className="modal-header">{this.props.events.title}</h1>
               <a className="link" href={`/instructors/${instructorPath}`}>
-                <h1>Instructor: {this.state.instructor.name}</h1>
+                <h1>{this.state.instructor.name.toUpperCase()}</h1>
                 <img className="reserve-image" src={this.state.instructor.profile_pic} alt="profile" />
               </a>
-              <h1>{date} from {start} - {end}</h1>
-              <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name}</h1></a>
-              <h3>{this.state.location.name}</h3>
-              <h3>{this.state.location.address}</h3>
+              <h1>{date} ({start} - {end} )</h1>
+              <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name.toUpperCase()}</h1></a>
+              <p className="modal-text"><strong>LOCATION: </strong> {this.state.location.name} ({this.state.location.address})</p>
 
-              <button onClick={this.bookThisClass}>RESERVE</button>
+              <button className="login-btn" onClick={this.bookThisClass}>Reserve</button>
             </div>
           )
       }

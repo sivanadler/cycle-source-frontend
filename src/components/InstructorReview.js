@@ -101,8 +101,6 @@ class InstructorReview extends React.Component {
           </div>
         )
       })
-    } else {
-      return <h1 className="no-reviews">This Instructor Has No Reviews. Be The First ?</h1>
     }
   }
 
@@ -154,7 +152,7 @@ class InstructorReview extends React.Component {
           ?
           this.getReviews()
           :
-          null
+          <h1 className="no-reviews">This Instructor Has No Reviews. Be The First ?</h1>
         }
       </div>
     )

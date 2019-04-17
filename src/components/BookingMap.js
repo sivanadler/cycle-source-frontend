@@ -44,6 +44,7 @@ class BookingMap extends React.Component {
   }
 
   renderBikes = () => {
+    console.log(this.props.alreadyReservedBike)
     let myBike
     let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51]
     let thisClass = this.props.bookThisClass.class_id
@@ -55,6 +56,8 @@ class BookingMap extends React.Component {
     if (filteredUserClasses.length !== 0) {
       filteredUserClasses.map(userClass => {
         if (this.props.alreadyReservedBike && userClass.bike !== this.props.alreadyReservedBike.bike) {
+          filteredBikes.push(userClass.bike)
+        } else if (!this.props.alreadyReservedBike){
           filteredBikes.push(userClass.bike)
         }
       })
@@ -182,7 +185,7 @@ class BookingMap extends React.Component {
     } else {
       return (
         <div className="booking-map">
-          <p className="modal-text">Are you sure you want to book bike {this.props.selectedBike}?</p>
+          <p className="modal-text">Are you sure you want to book <strong>Bike {this.props.selectedBike}?</strong></p>
           <button className="login-btn" onClick={this.confirmBooking}>BOOK</button>
           <button className="login-btn" onClick={this.handleGoBack}>GO BACK</button>
         </div>

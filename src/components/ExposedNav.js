@@ -42,7 +42,7 @@ class ExposedNav extends React.Component {
               <Fragment>
               <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}><img className="icon" src={home}/><p className="nav-link-text">Home</p></NavLink>
               <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}><img className="icon"src={search}/><p className="nav-link-text">Search</p></NavLink>
-              <NavLink to="/class_lists" exact className="nav-link" onClick={<Redirect to="/class_lists" />}><img className="icon" src={list}/><p className="nav-link-text">My ClassLists</p></NavLink>
+              <NavLink to="/class_lists" exact className="nav-link" onClick={<Redirect to="/class_lists" />}><img className="icon" src={list}/><p className="nav-link-text">My Class Lists</p></NavLink>
 
               <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}><img className="icon" src={logout}/><p className="nav-link-text">Log Out</p></NavLink>
               </Fragment>

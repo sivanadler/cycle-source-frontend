@@ -7,7 +7,6 @@ const CollapsedNav = (props) => {
     <div className="collapsed-nav" ></div>
     <div className="collapsed-nav" ></div>
     <div className="collapsed-nav" ></div>
-
   </div>
   )
 }

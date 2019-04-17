@@ -8,7 +8,7 @@ import StudioAdapter from '../apis/StudioAdapter'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import LocationAdapter from '../apis/LocationAdapter'
 import InstructorFavoriteAdapter from '../apis/InstructorFavoriteAdapter'
-
+import edit from '../images/edit.png'
 import remove from '../images/remove.png'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -138,11 +138,11 @@ class ProfileDetails extends React.Component {
                 <img className="remove-fav" src={remove} alt="remove" />
               </span>
               <span onClick={() => this.changeBike(userClass)}>
-                <h1 className="change-bike">Change Bike</h1>
+                <img className="remove-fav" src={edit} alt="remove" />
               </span>
-              <span>
+              <div>
                 <img className="profile-studio-logo" src={this.getStudioLogo(userClass)}/>
-              </span>
+              </div>
               <div className="profile-card-text">
                 <h1 className="longer-strong">{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
                 {this.getClassDateAndTime(userClass)}
