@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 
 class Header extends React.Component {
   handletitle = () => {
-    if (this.props.currentUser) {
-      return   <h1 className="logged-in-header">WELCOME, {this.props.currentUser.name.toUpperCase()} !</h1>
+    if (this.props.currentUser.user) {
+      return   <h1 className="logged-in-header">WELCOME, {this.props.currentUser.user.name.toUpperCase()} !</h1>
+    } else {
+    return  <h1 className="logged-in-header">WELCOME, {this.props.currentUser.name.toUpperCase()} !</h1>
     }
   }
 

@@ -70,7 +70,7 @@ class InstructorsDiv extends React.Component {
         return (
           <div className="instructor-card" onClick={() => this.handleRedirectToInstructors(instructor)}>
             <img src={instructor.profile_pic} alt="profile-picture" className="instructor-pic"/>
-            <h1 >{instructor.name}</h1>
+            <h1 >{instructor.name.toUpperCase()}</h1>
           </div>
         )
       })

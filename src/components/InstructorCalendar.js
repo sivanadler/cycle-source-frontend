@@ -100,7 +100,7 @@ class InstructorCalendar extends React.Component {
   }
 
   eventStyleGetter = (event, start, end, isSelected) => {
-    var backgroundColor = 'pink';
+    var backgroundColor = '#FFF688';
     var style = {
       backgroundColor: backgroundColor,
       borderRadius: '5px',

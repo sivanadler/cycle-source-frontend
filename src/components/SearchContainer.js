@@ -17,7 +17,9 @@ const SearchContainer = (props) => {
     <span>
       <Header />
     </span>
+    <div className="main-header-div">
     <h1 className="search-header">CYCLE SOURCE</h1>
+    </div>
     <br/><br/>
     {
       props.selectedStudio

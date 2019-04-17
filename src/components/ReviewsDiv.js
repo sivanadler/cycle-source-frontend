@@ -56,7 +56,7 @@ class ReviewsDiv extends React.Component {
 
     return (
       <div className="form">
-      <h1 className="form-header">REVIEW FOR {this.props.studio.name.toUpperCase()}</h1>
+      <p className="form-header">REVIEW FOR {this.props.studio.name.toUpperCase()}</p>
         <form onSubmit={this.handleSubmit} className="form-content">
           {this.state.notFilledOut ? <p className="invalid-text">These Fields Are All Required. Please Try Again.</p> : null}
           <h1 className="review-form-label">RATING:</h1>

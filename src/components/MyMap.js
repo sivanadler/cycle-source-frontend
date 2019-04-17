@@ -21,7 +21,6 @@ let coordinatesArray = []
 };
 
 const markerStyle = {
-  color: 'pink'
 }
 
 
@@ -52,7 +51,7 @@ var url
 
    renderMarkers = () => {
     var url = {
-      url: "http://google.com/mapfiles/ms/micons/purple.shadow.png"
+      url: "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
     }
     if (this.props.coordinates.length !== 0) {
       return this.props.coordinates.map(coordinate => {
@@ -60,6 +59,7 @@ var url
         lngPin = coordinate.lngPin
         let studio = this.props.studios.find(studio => studio.id === coordinate.location.studio_id)
         return (<Marker
+          style={markerStyle}
           // icon={url}
           onClick={this.onMarkerClick}
           name={"something"}

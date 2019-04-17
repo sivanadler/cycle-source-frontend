@@ -19,7 +19,7 @@ class Filter extends React.Component {
     return this.props.studios.map(studio => {
       return (
         <div>
-          <p className="inputs-ptag"><input type="radio" name="test" value={studio.name} onChange={this.handleChange} class="option-input checkbox"/>  {studio.name}</p>
+          <p className="inputs-ptag"><input type="radio" name="test" value={studio.name} onChange={this.handleChange} class="option-input checkbox"/>  {studio.name.toUpperCase()}</p>
         </div>
       )
     })

@@ -255,7 +255,7 @@ class ProfileDetails extends React.Component {
         return (
           <div>
             <span onClick={() => this.removeFavorite(favorite)}>
-              <img className="remove-fav" src={remove} alt="remove" />
+              <img className="remove-favorite" src={remove} alt="remove" />
             </span>
             <div className="favorites-cards" onClick={() => this.handleRedirectToShowPage(favorite)}>
               <span>

@@ -15,7 +15,7 @@ class Home extends React.Component {
     return (
       <span>
         <HamburgerNav />
-        <Header />
+        <Header history={this.props.history} />
         <br/>
         <div className="home">
           <span className="home-header">
