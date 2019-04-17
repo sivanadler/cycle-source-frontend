@@ -54,7 +54,6 @@ class Filter extends React.Component {
           :
           null
         }
-
         {this.props.filterByStudio ? this.clearFilter() : null}
       </div>
     )

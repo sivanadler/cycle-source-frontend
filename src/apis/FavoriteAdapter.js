@@ -10,7 +10,6 @@ export default class FavoriteAdapter {
       studio_id: studio_id,
       user_id: user_id
     }
-    console.log(data)
     return fetch('http://localhost:3000/api/v1/favorites',{
       method: "POST",
       headers: {

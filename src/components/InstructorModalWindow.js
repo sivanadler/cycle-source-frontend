@@ -84,7 +84,7 @@ class InstructorModalWindow extends React.Component {
     UserClassAdapter.getUserClasses()
     .then(userClasses => {
       this.setState({ userClasses })
-    }, console.log(this.state.userClasses))
+    })
   }
 
   getLocation = () => {

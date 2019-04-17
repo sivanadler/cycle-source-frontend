@@ -36,7 +36,6 @@ class ModalWindow extends React.Component {
             <h1>{date} ({start} - {end} )</h1>
             <a className="link" href={`/${studioPath}`}><h1>{this.state.studio.name.toUpperCase()}</h1></a>
             <p className="modal-text">You are currently on <strong>Bike {foundUserClass.bike}</strong></p>
-            <p className="modal-text">Want to change your bike?</p>
             <button onClick={() => this.changeMyBike(this.props.events, foundUserClass)} className="login-btn">Change Bike</button>
           </div>
         )
@@ -96,7 +95,6 @@ class ModalWindow extends React.Component {
   }
 
   render() {
-    console.log(this.state.userClasses)
     return (
       <div>
         {

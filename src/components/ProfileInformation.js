@@ -11,7 +11,6 @@ class ProfileInformation extends React.Component {
   }
 
   returnUserInfo = () => {
-    console.log(this.props.currentUser);
     return(
       <div>
         <img className="profile-picture" src={this.props.currentUser.imageUrl} alt="photo" />

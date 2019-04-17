@@ -31,15 +31,16 @@ class ExposedNav extends React.Component {
               this.props.currentUser.role === "rider"
               ?
               <Fragment>
+                <br/><br/><br/>
                 <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}><img className="icon" src={home}/><p className="nav-link-text">Home</p></NavLink>
                 <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}><img className="icon"src={search}/><p className="nav-link-text">Search</p></NavLink>
                 <NavLink to="/reserve" exact className="nav-link" onClick={<Redirect to="/reserve" />}><img className="icon"src={calendar}/><p className="nav-link-text">Reserve</p></NavLink>
                 <NavLink to="/profile" exact className="nav-link" onClick={<Redirect to="/profile" />}><img className="icon" src={avatar}/><p className="nav-link-text">My Profile</p></NavLink>
-
                 <NavLink to="/welcome" exact className="nav-link" onClick={this.logout}><img className="icon" src={logout}/><p className="nav-link-text">Log Out</p></NavLink>
               </Fragment>
               :
               <Fragment>
+              <br/><br/><br/>
               <NavLink to="/home" exact className="nav-link" onClick={<Redirect to="/home" />}><img className="icon" src={home}/><p className="nav-link-text">Home</p></NavLink>
               <NavLink to="/search" exact className="nav-link" onClick={<Redirect to="/search" />}><img className="icon"src={search}/><p className="nav-link-text">Search</p></NavLink>
               <NavLink to="/class_lists" exact className="nav-link" onClick={<Redirect to="/class_lists" />}><img className="icon" src={list}/><p className="nav-link-text">My Class Lists</p></NavLink>

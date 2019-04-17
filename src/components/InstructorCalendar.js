@@ -67,12 +67,6 @@ class InstructorCalendar extends React.Component {
     return newDate;
   }
 
-  getAddress = spinClass => {
-    if (this.props.locations.length !== 0) {
-      debugger
-    }
-  }
-
   getSpinClasses = (spinClasses) => {
     for (let i = 0; i < spinClasses.length; i++) {
       let start = moment.utc(spinClasses[i].start).toDate();
@@ -113,6 +107,7 @@ class InstructorCalendar extends React.Component {
       textAlign: "center",
       border: "1px solid white",
       paddingTop: '5px',
+      fontSize: '20px'
     };
     return {
         style: style

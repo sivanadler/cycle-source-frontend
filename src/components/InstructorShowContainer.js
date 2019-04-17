@@ -27,7 +27,6 @@ class InstructorShowContainer extends React.Component {
          return instructor
        }
      })
-     console.log(instructor)
      this.setState({
        selectedInstructor: instructor
      })
@@ -52,7 +51,6 @@ class InstructorShowContainer extends React.Component {
       let instructor_id = this.state.selectedInstructor.id
       InstructorFavoriteAdapter.createInstructorFavorite(instructor_id, currentUser_id)
       .then(favorite => {
-        console.log(favorite)
           this.setState({
             favorited: true
           })

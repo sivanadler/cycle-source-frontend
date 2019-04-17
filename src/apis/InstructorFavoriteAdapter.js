@@ -10,7 +10,6 @@ export default class InstructorFavoriteAdapter {
       instructor_id: instructor_id,
       user_id: user_id
     }
-    console.log(data)
     return fetch('http://localhost:3000/api/v1/instructor_favorites',{
       method: "POST",
       headers: {

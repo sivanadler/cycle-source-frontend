@@ -26,7 +26,6 @@ class Bike extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className={this.props.className} onClick={this.handleOnClick}>
         <h1>{this.props.number}</h1>

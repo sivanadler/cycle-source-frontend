@@ -10,7 +10,6 @@ const SignUp = (props) => {
   function handleUserType(e){
     props.selectUserType(e.target.value)
   }
-  console.log(props)
   return (
   <div className="login-background">
     <Nav history={props.history}/>

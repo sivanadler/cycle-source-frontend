@@ -26,7 +26,6 @@ class ChangeBikeMap extends React.Component {
   getInstructorInfo = spinClass => {
     if (spinClass && this.state.instructors && this.state.instructors.length !== 0) {
       let instructor = this.state.instructors.find(instructor => instructor.id === spinClass.instructor_id)
-      console.log(instructor);
       return <h1>{instructor.name.toUpperCase()}</h1>
     }
   }
@@ -98,7 +97,6 @@ class ChangeBikeMap extends React.Component {
     let userClass = this.props.changeBike.id
     UserClassAdapter.updateUserClass(userClass, spinClass, user_id, bike)
     .then(res => {
-      debugger
       this.setState({
         updated: res
       })
@@ -153,7 +151,7 @@ class ChangeBikeMap extends React.Component {
         <img className="booking-map-instructor" src={this.getInstructorPhoto(spinClass)} alt="profile" />
         {this.getInstructorInfo(spinClass)}
         <br/>
-        <h3 className="modal-text">Are you sure you want to book <strong>Bike {this.props.setSelectedChangedBike}?</strong></h3>
+        <p className="modal-text">Are you sure you want to change to <strong>Bike {this.props.setSelectedChangedBike}?</strong></p>
         <button className="login-btn" onClick={this.confirmBooking}>BOOK</button>
         <button className="login-btn" onClick={this.handleGoBack}>GO BACK</button>
       </div>
@@ -209,7 +207,6 @@ class ChangeBikeMap extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className={this.props.changeBike ? "modal" : "nothing"}>
         {
@@ -232,8 +229,8 @@ class ChangeBikeMap extends React.Component {
             <span onClick={this.closeModalDone}>
               <img className="remove" src={remove} alt="remove" />
             </span>
-            <h1 className="modal-header">SUCCESS! YOU HAVE CHANGED YOUR BIKE TO: </h1>
-            <p className="modal-text">Bike {this.state.updated.bike} with {this.getInstructorInfo()}</p>
+            <br/><br/><br/>
+            <h1 className="modal-header">SUCCESS! YOU HAVE CHANGED TO BIKE {this.state.updated.bike}</h1>
             <img className="success" src={success} alt="success"/>
           </div>
           :

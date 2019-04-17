@@ -44,7 +44,6 @@ class ClassLists extends React.Component {
   }
 
   render() {
-    console.log(this.state.spinClasses)
     return (
       <div>
       <span>

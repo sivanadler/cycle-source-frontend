@@ -1,7 +1,6 @@
 import React from "react"
 import Scheduler, {SchedulerData, ViewTypes, DATE_FORMAT} from 'react-big-scheduler'
 import 'react-big-scheduler/lib/css/style.css'
-import CalendarDay from './CalendarDay'
 import Calendar from './Calendar'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -17,7 +16,6 @@ class ScheduleContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props.history)
     return (
       <div className="schedule-container">
         {

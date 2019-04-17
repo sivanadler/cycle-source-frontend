@@ -50,7 +50,6 @@ class InstructorForm extends React.Component {
       teaching_style: this.state.teaching_style,
       role: "instructor"
     }
-    debugger
     fetch("http://localhost:3000/api/v1/instructors", {
 			method: "POST",
 			headers: {
@@ -61,7 +60,6 @@ class InstructorForm extends React.Component {
 		})
     .then(res => res.json())
     .then(json => {
-      debugger
       localStorage.setItem('jwtInstructor', json.jwt)
       let history = this.props.history.history
       history.push('/home')

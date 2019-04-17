@@ -2,7 +2,14 @@
 
 body {
   background-color: #55b1df;
+  background: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)), url('../src/images/spin.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 2400px;
+  margin-bottom: 0px;
+  margin-top: 60px;
 }
+
 
 .wheel-gif {
   float: right;
@@ -34,9 +41,6 @@ body {
   font-family:'Roboto', sans-serif;
   margin-top: 0px;
   height: 120px;
-  border-left: 1px solid black;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
 }
 
 .main-nav-link {
@@ -75,13 +79,14 @@ body {
 
 .nav-link {
   color: black;
-  font-size: 50px;
+  font-size: 55px;
   text-align: left;
   text-decoration: none;
   height: 100px;
   padding: 15px;
   margin-top: 20px;
   display: block;
+  border-radius: 5px;
   vertical-align: middle;
 }
 
@@ -170,7 +175,7 @@ body {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 12.5%;
   padding: 3px;
   border-radius: 10px;
 }
@@ -214,7 +219,7 @@ body {
   letter-spacing: .8px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 2000px;
+  height: 2200px;
 }
 
 .login-header {
@@ -299,6 +304,8 @@ input[type=file]::-webkit-file-upload-button:hover {
   text-decoration: bold;
   cursor:pointer;
   margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .login-btn:hover {
@@ -469,10 +476,10 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .collapsed-nav {
-  width: 35px;
-  height: 5px;
+  width: 38px;
+  height: 6px;
   background-color: white;
-  margin: 6px 0;
+  margin: 6px 0 0 10px;
   border-radius: 5px;
 }
 
@@ -480,8 +487,9 @@ input[type=file]::-webkit-file-upload-button:hover {
   background: url('../src/images/spin.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 2000px;
+  height: 2200px;
   margin-bottom: 0px;
+  margin-top: 80px;
   /* margin-left: 60px;
   margin-right: 60px;
   /* margin-bottom: 60px; */
@@ -493,6 +501,8 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin: 25px;
   float: left;
   width: 50%;
+  padding-top: 20px;
+  padding-left: 10px;
   border-radius: 5px;
 }
 
@@ -501,16 +511,17 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .exposed-nav {
-  width: 35px;
-  height: 5px;
+  width: 38px;
+  height: 6px;
   background-color: black;
-  margin: 6px 0;
+  margin: 6px 0 0 10px;
   border-radius: 5px;
   position: sticky;
 }
 
 .exposed-hamburger {
-  padding: 15px;
+  padding: 20px;
+  padding-top: 60px;
   position: sticky;
   height: 1000px;
   width: 200px;
@@ -518,10 +529,10 @@ input[type=file]::-webkit-file-upload-button:hover {
   z-index: 10000;
   position: inline;
   position:fixed;
-  width: 20%;
+  width: 18%;
   height: 100%;
   top:50.75%;
-  left:10.45%;
+  left:9.6%;
   transform: translate(-50%,-50%);
   text-align: center;
   padding-bottom: 20px;
@@ -565,7 +576,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 46%;
-  height: 1510px;
+  height: 1850px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
@@ -577,12 +588,17 @@ input[type=file]::-webkit-file-upload-button:hover {
 .search-header {
   font-family:'Roboto', sans-serif;
   text-align: center;
-  font-size: 120px;
+  font-size: 100px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 30px;
   margin-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 10%;
+  width: 200%;
+  color: white;
+  background-color: #55b1df;
+  box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
 }
 
 .search-result-card {
@@ -706,7 +722,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 .profile-information {
   width: 20%;
   float: left;
-  height: 1500px;
+  height: 1700px;
   background-color: white;
   margin-top: 20px;
   margin-left: 60px;
@@ -725,7 +741,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 .profile-details-text {
   font-family:'Roboto', sans-serif;
   margin-left: 30px;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .profile-details-strong {
@@ -733,7 +749,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   font-size: 65px;
   color: white;
   font-weight: bold;
-  width: 2410px;
+  width: 95.75%;
   padding-left: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -751,10 +767,10 @@ input[type=file]::-webkit-file-upload-button:hover {
 .profile-details-container {
   width: 75%;
   float: right;
-  height: 1500px;
+  height: 1700px;
   background-color: white;
   border-radius: 10px;
-  margin-right: 30px;
+  margin-right: 60px;
   overflow: scroll;
   margin-top: 20px;
   border: 1px solid black;
@@ -762,13 +778,13 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .schedule-container {
-  width: 2900px;
-  height: 1400px;
+  width: 90%;
+  height: 1600px;
   background-color: white;
-  margin-top: 30px;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   padding: 60px;
   border-radius: 5px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
@@ -804,13 +820,12 @@ input[type=file]::-webkit-file-upload-button:hover {
   cursor:pointer;
 }
 
-
 .logged-in-header {
   font-family:'Roboto', sans-serif;
   letter-spacing: 0.8;
   float: right;
   text-align: right;
-  margin-top: 0px;
+  margin-top: 40px;
   display: inline;
   font-size: 35px;
   color: white;
@@ -833,11 +848,47 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin-left: auto;
   margin-right: auto;
   font-family:'Roboto', sans-serif;
-  font-size: 19.5px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .booking-map {
   text-align: center;
+}
+
+div.rbc-header {
+  text-transform: uppercase;
+  z-index: 1;
+  height: 50px;
+  padding: 5px;
+  font-size: 30px;
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+div.rbc-day-bg {
+  margin-top: 15px;
+}
+
+span.rbc-toolbar-label {
+  text-transform: uppercase;
+  font-family:'Roboto', sans-serif;
+  font-size: 40px;
+  padding: 10px;
+  width: 85%;
+  color: black;
+  float: left;
+  display: inline;
+  text-align: left;
+  margin-right: 140px;
+  font-weight: bold;
+}
+
+div.rbc-toolbar {
+  font-family:'Roboto', sans-serif;
+  background-color: rgb(0, 0, 0, 0.04);
+  float: left;
+  padding: 10px;
+  border: 1px solid #ccc;
 }
 
 .booking-map-instructor {
@@ -863,7 +914,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   width: 100px;
   display: inline-block;
   margin: 20px;
-  background-color: grey;
+  background-color: #ccc;
 }
 
 .bike {
@@ -930,7 +981,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 .locations-div {
   font-family:'Roboto', sans-serif;
   width: 30%;
-  height: 600px;
+  height: 700px;
   float: left;
   overflow: scroll;
   border: 1px solid black;
@@ -945,7 +996,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .reviews-div {
   width: 58%;
-  height: 600px;
+  height: 700px;
   font-family:'Roboto', sans-serif;
   display: inline-block;
   overflow: scroll;
@@ -955,7 +1006,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin-top: 20px;
   margin-right: 50px;
   margin-left: 70px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
@@ -1143,7 +1194,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 .instructors-div {
   width: 91%;
   display: inline-block;
-  height: 450px;
+  height: 600px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -1173,6 +1224,9 @@ input[type=file]::-webkit-file-upload-button:hover {
   text-align: center;
   float: left;
   display: inline-block;
+  padding-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1369,10 +1423,14 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin-right: auto;
   z-index: 1200;
 }
+
 .modal-main {
   position:fixed;
   background: white;
-  width: 70%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 80px;
+  width: 65%;
   height: auto;
   top:50%;
   left:50%;
@@ -1386,15 +1444,18 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .modal-main2 {
   position:fixed;
-  border-radius: 10px;
   background: white;
-  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 80px;
+  border-radius: 10px;
+  width: 65%;
   height: 700px;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
   text-align: center;
-  padding: 40px;
+  /* padding: 40px; */
 }
 
 .modal-text {
@@ -1523,7 +1584,6 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .more:hover {
   cursor:pointer;
-  opacity: 1;
   visibility: visible;
   float: right;
   font-size: 20px;
@@ -1532,17 +1592,18 @@ input[type=file]::-webkit-file-upload-button:hover {
   background-color: white;
   color: #55b1df;
   border-radius: 5em;
-  padding: 10px;
-  margin-right: 10px;
+  padding: 5px;
+  margin-right: 20px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
 .icon {
   float: left;
   margin: 10px;
+  padding-left: 20px;
   border-radius: 5px;
   height: 80px;
-  padding-right: 25px;
+  padding-right: 35px;
 }
 
 .star-icon {
@@ -1562,7 +1623,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .instructor-profile {
   width: 30%;
-  height: 600px;
+  height: 700px;
   float: left;
   border: 2px solid black;
   border-radius: 5px;
@@ -1684,7 +1745,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   color: #55b1df;
   font-size: 50px;
   font-weight: bold;
-  width: 750px;
+  width: 770px;
   border-bottom: 3px solid #55b1df;
 }
 

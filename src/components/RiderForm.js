@@ -49,7 +49,6 @@ class RiderForm extends React.Component {
         formData.append('profile_pic', this.state.profile_pic)
         formData.append('city', this.state.city)
         formData.append('role', this.state.role)
-          console.log(formData);
         fetch("http://localhost:3000/api/v1/users", {
     			method: "POST",
     			body: formData

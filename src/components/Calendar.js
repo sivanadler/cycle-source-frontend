@@ -82,11 +82,6 @@ class Calendar extends React.Component {
     return newDate;
   }
 
-  getAddress = spinClass => {
-    if (this.props.locations.length !== 0) {
-      debugger
-    }
-  }
 
   getSpinClasses = (spinClasses) => {
     for (let i = 0; i < spinClasses.length; i++) {
@@ -108,13 +103,6 @@ class Calendar extends React.Component {
     })
     }
   }
-  //
-  // setRecurringSpinClasses = () => {
-  //   this.state.spinClasses.map(spinClass => {
-  //     var dueDate = moment().add(1,'week').format(spinClass.start)
-  //     debugger
-  //   })
-
 
   events = () => {
     if (this.props.filterByStudio) {
@@ -141,7 +129,8 @@ class Calendar extends React.Component {
           fontFamily: 'Roboto, sans-serif',
           textAlign: "center",
           border: "1px solid white",
-          paddingTop: '5px'
+          paddingTop: '5px',
+          fontSize: '20px'
       };
       };
       return {

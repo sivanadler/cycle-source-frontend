@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import InstructorAdapter from '../apis/InstructorAdapter'
 import InstructorShowContainer from './InstructorShowContainer'
+
 class InstructorsDiv extends React.Component {
   state = {
     spinClasses: [],
