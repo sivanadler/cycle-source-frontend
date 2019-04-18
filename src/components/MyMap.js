@@ -13,7 +13,7 @@ let coordinatesArray = []
  const mapStyles = {
   position: 'absolute',
   width: '47%',
-  height: '85%',
+  height: '80.5%',
   float: 'left',
   backgroundColor: 'white',
   margin: '25px',

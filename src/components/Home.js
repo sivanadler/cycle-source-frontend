@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import wheelGif from '../images/wheel-gif.gif'
 import spin from '../images/spin.jpg'
-
+import logo from '../images/logo.png'
 import HamburgerNav from  './HamburgerNav'
 import Header from './Header'
 
@@ -14,16 +14,19 @@ class Home extends React.Component {
   render() {
     return (
       <span>
-        <HamburgerNav />
-        <Header history={this.props.history} />
+        <div className="top">
+          <HamburgerNav />
+          <Header history={this.props.history} />
+        </div>
         <br/>
         <div className="home">
           <span className="home-header">
           </span>
           <span className="home-header">
           </span>
-          <h1 className="home-logo">CYCLE SOURCE</h1>
-          <p className="home-logo-small">find your ride.</p>
+          <div className="logo-login-div">
+            <img className="wheelGif" src={logo}/>
+          </div>
         </div>
       </span>
     )

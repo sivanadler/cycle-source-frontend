@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { Redirect } from 'react-router'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import cycle from './images/cycle.png'
-
+import logo from './images/logo.png'
 import Nav from './components/Nav'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
@@ -28,8 +28,7 @@ class App extends Component {
       <div  className="login-background">
         {this.props.currentUser ? <Redirect to='/home' /> : <Nav />}
         <div className="logo-login-div">
-          <h1 className="logo-login">CYCLE S<img className="wheelGif" src={cycle}/>URCE</h1>
-          <p className="logo-login-small">find your ride</p>
+          <img className="wheelGif" src={logo}/>
         </div>
         {this.props.loginClicked ? this.props.history.push("/login") : null}
         {this.props.newUser ? this.props.history.push("/signup") : null}

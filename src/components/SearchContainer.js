@@ -11,15 +11,17 @@ import Header from './Header'
 const SearchContainer = (props) => {
   return (
   <div className="search-container">
-    <span>
-      <HamburgerNav />
-    </span>
-    <span>
-      <Header />
-    </span>
-    <div className="main-header-div">
-    <h1 className="search-header">CYCLE SOURCE</h1>
-    </div>
+    <div className="top" >
+      <span>
+        <HamburgerNav />
+      </span>
+      <span>
+        <Header />
+      </span>
+      <div>
+        <h1 className="search-header">CYCLE SOURCE</h1>
+      </div>
+      </div>
     <br/><br/>
     {
       props.selectedStudio
