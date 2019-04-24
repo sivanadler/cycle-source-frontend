@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cycle Source
+by Sivan Adler
 
-## Available Scripts
 
-In the project directory, you can run:
+My final, solo project created during my time at the [Flatiron School](https://flatironschool.com/)
 
-### `npm start`
+![](https://www.youtube.com/watch?v=VolgRFBhA1A)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## TECHNOLOGIES
+- React
+- Redux
+- Ruby on Rails
+- Amazon Web Services (AWS)
+- Twilio
+- Google Maps API
+- React-Big-Calendar
+- Google-Maps-React
+- Custom CSS
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## DESCRIPTION
+Cycle Source is a web application that is designed to allow users to find and book spin classes near them. Cycle Source was built using a React/Redux front end and a Ruby on Rails back end. I used Amazon Web Services (AWS) to host my images and configured Twilio to send a confirmation text message notification to the user with the details of the specific class they just booked. Users have different authorizations based on whether they login as a rider or an instructor. As a rider, users are able to search for spin studios in their area, review a studio and/or an instructor, and book a spin class (choosing the specific bike they would like to use). As an instructor, users can see a list of all of their classes and the names of each rider that is currently signed up. Instructors cannot reserve spin classes or review studios/other instructors, but they can search and view that data.
 
-### `npm test`
+## INSTALL
+1. Clone down this repository to your local machine. 
+2. Clone down the [backend repository](https://github.com/sivanadler/cycle-source-backend) to your local machine.
+3. Run ```bundle install``` in your terminal after cloning down the backend repository. 
+4. Before launching the app, you'll need to launch our database. In your terminal for the backend repository, run ```rails db:create```, ```rails db:migrate```, and ```rails db:seed```.
+5. Run ```rails s``` in that same terminal session to launch our server.
+6. Once your server is running, run ```npm install``` in your terminal for the front-end cloned repository.
+7. Once you have installed the npm packages installed and you've started your rails server, run ``` npm start ``` in your terminal for the front-end repository. You will be prompted to start your server on another port (since your backend is already running). Type ```y``` to continue.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## CONTRIBUTORS GUIDE
+1. Fork and clone this repository.
+2. Fork and clone the [backend repository](https://github.com/sivanadler/cycle-source-backend) .
+3. Create your feature branch ```git checkout -b my-new-feature```.
+4. Commit your changes ```git commit -m 'Add some feature'```.
+5. Push to the branch ```git push origin my-new-feature```.
+6. Create a new Pull Request.
