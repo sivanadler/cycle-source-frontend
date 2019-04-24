@@ -4,8 +4,7 @@ by Sivan Adler
 
 My final, solo project created during my time at the [Flatiron School](https://flatironschool.com/)
 
-## CYCLE SOURCE VIDEO DEMO
-[![Cycle Source Video Demo](https://img.youtube.com/vi/VolgRFBhA1A/0.jpg)](https://www.youtube.com/watch?v=VolgRFBhA1A)
+### CYCLE SOURCE VIDEO DEMO
 
 
 ## TECHNOLOGIES
