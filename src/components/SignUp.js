@@ -5,6 +5,8 @@ import Nav from './Nav'
 import { connect } from 'react-redux'
 import wheelGif from '../images/wheel-gif.gif'
 
+
+//sign up component 
 const SignUp = (props) => {
 
   function handleUserType(e){
