@@ -25,7 +25,7 @@ const minTime = new Date();
    dayFormat: (date, localizer) =>
      localizer.format(date, 'DDD'),
  }
-
+//component for calendar on instructor show page.
 class InstructorCalendar extends React.Component {
   state = {
     spinClasses: [],
