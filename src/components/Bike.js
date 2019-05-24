@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 
+//this component represents each bike on the booking map
 class Bike extends React.Component {
   getInstructorInfo = () => {
     if (this.props.bookThisClass) {

@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux'
 
+
+//this component handles filtering on the calendar component, to see classes by spin studio
+
 class Filter extends React.Component {
   state = {
     selectedVal: null,

@@ -8,6 +8,7 @@ import logo from '../images/logo.png'
 import HamburgerNav from  './HamburgerNav'
 import Header from './Header'
 
+//User is directed to this component once logged in or signed up, home page. 
 
 class Home extends React.Component {
 

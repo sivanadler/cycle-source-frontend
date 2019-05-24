@@ -9,6 +9,8 @@ import LocationAdapter from '../apis/LocationAdapter'
 import StudioAdapter from '../apis/StudioAdapter'
 import success from '../images/success.png'
 
+//this component handles the map of bikes when a user is already signed up for that particular class, but wants to change their bike
+
 class ChangeBikeMap extends React.Component {
   state = {
     updated: null,

@@ -11,6 +11,9 @@ import remove from '../images/remove.png'
 import moment from 'moment'
 import success from '../images/success.png'
 
+
+//this component handles the map of bikes when a user is not already signed up for that particular class
+
 class BookingMap extends React.Component {
   state = {
     booked: null,
@@ -44,6 +47,7 @@ class BookingMap extends React.Component {
   }
 
   renderBikes = () => {
+    console.log(this.props.alreadyReservedBike)
     let myBike
     let bikes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51]
     let thisClass = this.props.bookThisClass.class_id

@@ -4,6 +4,8 @@ import Header from './Header'
 import { connect } from 'react-redux'
 import SpinClassAdapter from '../apis/SpinClassAdapter'
 import SpinClassCard from './SpinClassCard'
+
+//this component renders a list of users for each spin class. Instructors can see this for all of their classes when they log in
 class ClassLists extends React.Component {
   state = {
     spinClasses: [],

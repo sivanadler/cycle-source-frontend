@@ -2,6 +2,8 @@ import React from "react";
 import ExposedNav from './ExposedNav'
 import CollapsedNav from './CollapsedNav'
 
+//this component is the parent to both exposed and collapsed nav
+
 class HamburgerNav extends React.Component {
   state = {
     clicked: false

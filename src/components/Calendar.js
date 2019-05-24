@@ -27,6 +27,8 @@ const minTime = new Date();
      localizer.format(date, 'DDD'),
  }
 
+//this component is the calendar a user sees under the reserve tab of the nav bar, where spin classes show up on the calendar based on their date/time.
+
 class Calendar extends React.Component {
   state = {
     spinClasses: [],

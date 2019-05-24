@@ -9,6 +9,8 @@ import avatar from '../images/avatar1.png'
 import home from '../images/home.png'
 import list from '../images/list.png'
 
+//this component is the nav once clicked on, exposing the nav links
+
 class ExposedNav extends React.Component {
   logout = () => {
     let history = this.props.history

@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux'
 
+//this component is the header of the page, where a user sees the website name and 'welcome, username!'
+
 class Header extends React.Component {
   handletitle = () => {
     if (this.props.currentUser.user) {
