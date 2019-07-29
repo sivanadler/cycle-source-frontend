@@ -165,7 +165,7 @@ class Calendar extends React.Component {
           max = {this.state.maxTime}
           eventPropGetter={(this.eventStyleGetter)}
           onSelectEvent={(event) => {
-            this.setState({ showModal: true, event })}}
+            this.setState({ showModal: true, event }, () => console.log(this.state.showModal))}}
         />
 
         {this.state.showModal && <div className="modal"><ModalWindow events={this.state.event} closeModal={this.closeModal} history={this.props.history}/></div>}

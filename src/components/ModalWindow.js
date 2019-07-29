@@ -18,7 +18,7 @@ class ModalWindow extends React.Component {
   }
 
   getModalInfo = () => {
-    if (this.state.userClasses.length !== 0) {
+    if (this.state.userClasses !== []) {
       let foundUserClass = this.state.userClasses.find(userClass => userClass.spin_class_id === this.props.events.class_id && userClass.user_id === this.props.currentUser.id)
       if (foundUserClass) {
         let studioPath = this.state.studio.name.toLowerCase().replace(" ","_")
