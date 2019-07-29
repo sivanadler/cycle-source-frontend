@@ -35,7 +35,7 @@ body {
   vertical-align: middle;
   color: white;
   height: 140px;
-  padding-left: 60px;
+  /* padding-left: 60px; */
   background-color: #55b1df;
   font-family:'Roboto', sans-serif;
 }
@@ -46,18 +46,24 @@ body {
   font-family:'Roboto', sans-serif;
   margin-top: 0px;
   height: 120px;
+  width: 100%;
 }
 
 .main-nav-link {
   color: white;
-  font-size: 40px;
+  font-size: 45px;
+  height: 100px;
+  padding-top: 40px;
+  width: 8%;
+  display: inline-block;
+  cursor:pointer;
+  color: white;
   text-align: left;
   font-weight: bold;
   text-decoration: none;
   height: 100px;
   padding-left: 80px;
-  padding-top: 40px;
-  margin-right: 20px;
+  padding-right: 40px;
   width: 8%;
   display: inline-block;
   float: left;
@@ -67,14 +73,14 @@ body {
 .main-nav-link:hover {
   cursor:pointer;
   color: white;
-  background-color: black;
-  font-size: 34px;
+  background-color: #687384;
+  font-size: 45px;
   text-align: left;
   font-weight: bold;
   text-decoration: none;
-  height: 80px;
-  padding-left: 40px;
-  margin-right: 20px;
+  height: 100px;
+  padding-left: 80px;
+  padding-right: 40px;
   width: 8%;
   display: inline-block;
   float: left;
@@ -100,15 +106,15 @@ body {
 
 .prof-nav-link {
   color: white;
-  font-size: 34px;
+  font-size: 45px;
   text-align: left;
   font-weight: bold;
   text-decoration: none;
   height: 100px;
-  padding-left: 40px;
+  padding-left: 60px;
   padding-top: 20px;
   margin-right: 20px;
-  width: 19%;
+  width: 23%;
   display: inline-block;
   float: left;
   vertical-align: middle;
@@ -118,14 +124,14 @@ body {
   cursor:pointer;
   color: black;
   background-color: #ccc;
-  font-size: 34px;
+  font-size: 45px;
   text-align: left;
   font-weight: bold;
   text-decoration: none;
   height: 100px;
-  padding-left: 40px;
+  padding-left: 60px;
   margin-right: 20px;
-  width: 19%;
+  width: 23%;
   display: inline-block;
   float: left;
   vertical-align: middle;
@@ -174,6 +180,35 @@ body {
   padding-left: 20px;
 }
 
+.no-favorites {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 40px;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-family:'Roboto', sans-serif;
+}
+
+.no-favorites a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #55b1df;
+}
+
+.no-reservations {
+  text-align: center;
+  margin-top: 15%;
+  font-size: 60px;
+  font-family:'Roboto', sans-serif;
+}
+
+.no-reservations a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #55b1df;
+}
+
 .logo {
   float: left;
   font-size: 200px;
@@ -187,7 +222,7 @@ body {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 9%;
+  margin-top: 10%;
   border-radius: 10px;
   text-align: center;
 }
@@ -221,6 +256,7 @@ body {
   border-radius: 15px;
   padding: 40px;
   width: 25%;
+  margin-top: 5%;
   margin-right: auto;
   margin-left: auto;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
@@ -248,31 +284,36 @@ body {
 
 input[type=file]::-webkit-file-upload-button {
   border: 1px solid white;
-  padding: 10px;
+  padding: 15px;
   border-radius: 5px;
-  background: #55b1df;
+  /* background: #55b1df; */
   font-family:'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: .8px;
-  color: white;
-  font-weight: bold;
+  color: #55b1df;
+  font-weight: bolder;
+}
+
+.input-file {
+  margin-left: 200px;
 }
 
 input[type=file]::-webkit-file-upload-button:hover {
-  cursor:pointer;
-  border: 1px solid #55b1df;
-  padding: 10px;
+  border: 1px solid white;
+  padding: 15px;
   border-radius: 5px;
-  background: white;
   font-family:'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: .8px;
-  color: #55b1df;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #55b1df;
+  background-color: #55b1df;
   font-weight: bold;
 }
 
 .login-subheader {
-  font-size: 30px;
+  font-size: 40px;
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
 }
@@ -284,8 +325,8 @@ input[type=file]::-webkit-file-upload-button:hover {
   width: 300px;
   margin: 10px;
   border-radius: 10em;
-  border:1px solid #ccc;
-  font-size: 20px;
+  border:2px solid #ccc;
+  font-size: 30px;
 	letter-spacing: .8px;
   width: 30%;
   -webkit-transition: width 0.4s ease-in-out;
@@ -306,12 +347,9 @@ input[type=file]::-webkit-file-upload-button:hover {
   background-color: #55b1df;
   border:1px solid #fff;
   color:#fff;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 20px;
   border-radius: 10px;
   text-decoration: bold;
   cursor:pointer;
@@ -325,14 +363,14 @@ input[type=file]::-webkit-file-upload-button:hover {
   background-color: #fff;
   border:2px solid #55b1df;
   color:#55b1df;
-  font-size: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  font-size: 30px;
+  padding: 20px;
   border-radius: 10px;
   text-decoration: bold;
   cursor:pointer;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -380,7 +418,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .radio {
-  padding-left: 60px;
+  padding-left: 80px;
 }
 
 .option-input:hover {
@@ -420,7 +458,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .login-label {
-  font-size: 25px;
+  font-size: 30px;
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
 }
@@ -443,10 +481,10 @@ input[type=file]::-webkit-file-upload-button:hover {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 4px solid #ccc;
   color: black;
-  padding: 13px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 15em;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -760,21 +798,21 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .profile-details-text {
   font-family:'Roboto', sans-serif;
-  margin-left: 30px;
+  margin-left: 45px;
   font-size: 40px;
 }
 
 .profile-details-strong {
-  background-color: #687384;
-  font-size: 65px;
-  color: white;
+  font-size: 75px;
+  color: black;
   font-weight: bold;
-  width: 95.75%;
   padding-left: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 40px;
-  /* margin-right: 40px; */
+  padding-top: 50px;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-top: auto;
+  text-align: center;
+  border-bottom: 1px solid black;
 }
 
 .reserve-image {
@@ -1477,7 +1515,7 @@ div.rbc-toolbar {
 }
 
 .modal-text {
-  font-size: 30px;
+  font-size: 40px;
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
 }
@@ -1639,7 +1677,7 @@ div.rbc-toolbar {
 .login-icon {
   float: left;
   border-radius: 5px;
-  height: 55px;
+  height: 65px;
   padding-right: 25px;
 }
 
@@ -1692,7 +1730,7 @@ div.rbc-toolbar {
 
 .strong {
   color: #55b1df;
-  font-size: 35px;
+  font-size: 50px;
   font-weight: bold;
   width: 500px;
   border-bottom: 3px solid #55b1df;
@@ -1700,11 +1738,11 @@ div.rbc-toolbar {
 
 .strong-favorites {
   color: #55b1df;
-  font-size: 35px;
+  font-size: 50px;
   font-weight: bold;
   width: 400px;
   margin-left: 40px;
-  padding-top: 10px;
+  padding-top: 20px;
   /* border-bottom: 3px solid #55b1df; */
 }
 

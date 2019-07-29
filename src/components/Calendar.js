@@ -152,7 +152,7 @@ class Calendar extends React.Component {
       <br/>
         <Filter />
         <BigCalendar
-          step={30}
+          step={60}
           views={['week']}
           className="calendar"
           localizer={localizer}

@@ -153,6 +153,10 @@ class ProfileDetails extends React.Component {
             </div>
         )}
       })
+    } else {
+      return (
+        <p className="no-reservations">You are not signed up for any classes yet. Click <a href="/reserve">here</a> to reserve today! </p>
+      )
     }
   }
 
@@ -240,6 +244,10 @@ class ProfileDetails extends React.Component {
           </div>
         )
       })
+    } else {
+      return (
+        <p className="no-favorites">You currently have no favorite instructors. Click <a href="/search">here</a> to search for studios to see their instructors! </p>
+      )
     }
   }
 
@@ -272,6 +280,10 @@ class ProfileDetails extends React.Component {
           </div>
         )
       })
+    } else{
+      return (
+        <p className="no-favorites">You currently have no favorite studios. Click <a href="/search">here</a> to search for one! </p>
+      )
     }
   }
 
