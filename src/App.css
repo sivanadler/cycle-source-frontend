@@ -34,8 +34,8 @@ body {
 .nav {
   vertical-align: middle;
   color: white;
-  height: 100px;
-  /* margin-top: 20px; */
+  height: 140px;
+  padding-left: 60px;
   background-color: #55b1df;
   font-family:'Roboto', sans-serif;
 }
@@ -50,13 +50,13 @@ body {
 
 .main-nav-link {
   color: white;
-  font-size: 34px;
+  font-size: 40px;
   text-align: left;
   font-weight: bold;
   text-decoration: none;
   height: 100px;
-  padding-left: 40px;
-  padding-top: 20px;
+  padding-left: 80px;
+  padding-top: 40px;
   margin-right: 20px;
   width: 8%;
   display: inline-block;
@@ -87,7 +87,8 @@ body {
   font-size: 55px;
   text-align: left;
   text-decoration: none;
-  height: 100px;
+  margin-left: 20px;
+  height: 150px;
   padding: 15px;
   margin-top: 20px;
   display: block;
@@ -177,12 +178,12 @@ body {
 
 .logo-login-div {
   background-color:rgb(255,255,255,0.91);
-  width: 50%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
-  /* padding-right: 15px; */
+  margin-top: 13%;
   border-radius: 10px;
+  text-align: center;
 }
 
 .logo-login {
@@ -316,7 +317,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 .login-btn:hover {
   cursor:pointer;
   background-color: #fff;
-  border:1px solid #55b1df;
+  border:2px solid #55b1df;
   color:#55b1df;
   font-size: 25px;
   padding-left: 20px;
@@ -452,10 +453,11 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .wheelGif {
-  width: 100%;
-  height: 1000px;
+  width: 80%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .home-logo {
@@ -490,10 +492,10 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .collapsed-nav {
-  width: 38px;
-  height: 6px;
+  width: 60px;
+  height: 9px;
   background-color: white;
-  margin: 6px 0 0 10px;
+  margin: 9px 0 0 10px;
   border-radius: 5px;
 }
 /*
@@ -514,9 +516,9 @@ input[type=file]::-webkit-file-upload-button:hover {
   cursor:pointer;
   margin: 25px;
   float: left;
-  width: 50%;
-  padding-top: 20px;
-  padding-left: 10px;
+  width: 10%;
+  padding-top: 45px;
+  padding-left: 80px;
   border-radius: 5px;
 }
 
@@ -525,27 +527,26 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .exposed-nav {
-  width: 38px;
-  height: 6px;
+  width: 60px;
+  height: 9px;
   background-color: black;
-  margin: 6px 0 0 10px;
+  margin: 9px 0 0 60px;
   border-radius: 5px;
   position: sticky;
 }
 
 .exposed-hamburger {
-  padding: 20px;
-  padding-top: 60px;
+  padding-top: 120px;
   height: 1000px;
-  width: 200px;
+  /* width: 300px; */
   background-color: white;
   z-index: 10000;
   /* position: inline; */
   position:fixed;
-  width: 18%;
+  width: 20%;
   height: 100%;
   top: 50.75%;
-  left:9.6%;
+  left:10%;
   transform: translate(-50%,-50%);
   text-align: center;
   padding-bottom: 20px;
@@ -585,11 +586,11 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .search-box {
   float: left;
-  margin-left: 60px;
+  margin-left: 80px;
   margin-top: 90px;
   margin-bottom: 20px;
   width: 46%;
-  height: 1590px;
+  height: 1820px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
@@ -620,7 +621,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   border: 1px solid black;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
   color: black;
-  margin: 30px;
+  margin: 50px;
   border-radius: 5px;
   padding-left: 20px;
   padding-top: 10px;
@@ -632,11 +633,11 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .search-result-header {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .search-result-text {
-  font-size: 23px;
+  font-size: 30px;
 }
 
 
@@ -665,8 +666,8 @@ input[type=file]::-webkit-file-upload-button:hover {
   margin-right: 20px;
   z-index: 0;
   font-family:'Roboto', sans-serif;
-  border:1px solid #ccc;
-  font-size: 20px;
+  border:2px solid #ccc;
+  font-size: 30px;
   letter-spacing: .8px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
@@ -704,7 +705,7 @@ input[type=file]::-webkit-file-upload-button:hover {
 
 .search-label {
   font-family:'Roboto', sans-serif;
-  font-size: 70px;
+  font-size: 100px;
   text-align: center;
   z-index: 0;
   margin-bottom: 20px;
@@ -738,7 +739,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   height: 1700px;
   background-color: white;
   margin-top: 20px;
-  margin-left: 60px;
+  margin-left: 90px;
   border-radius: 5px;
   border: 1px solid black;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .2);
@@ -778,12 +779,12 @@ input[type=file]::-webkit-file-upload-button:hover {
 }
 
 .profile-details-container {
-  width: 75%;
+  width: 70%;
   float: right;
   height: 1700px;
   background-color: white;
   border-radius: 10px;
-  margin-right: 60px;
+  margin-right: 90px;
   overflow: scroll;
   margin-top: 20px;
   border: 1px solid black;
@@ -794,7 +795,7 @@ input[type=file]::-webkit-file-upload-button:hover {
   width: 90%;
   height: 1600px;
   background-color: white;
-  margin-top: 150px;
+  margin-top: 225px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
@@ -840,10 +841,10 @@ input[type=file]::-webkit-file-upload-button:hover {
   float: right;
   text-align: right;
   display: inline;
-  font-size: 35px;
+  font-size: 45px;
   color: white;
-  padding-right: 100px;
-  padding-top: 20px;
+  padding-right: 120px;
+  padding-top: 50px;
   padding-bottom: 20px;
   padding-left: 460px;
 }
@@ -851,11 +852,11 @@ input[type=file]::-webkit-file-upload-button:hover {
 .calendar {
   border-radius: 5px;
   float: right;
-  width: 85%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
   font-family:'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 26px;
   text-align: center;
 }
 
@@ -885,8 +886,10 @@ span.rbc-toolbar-label {
   color: black;
   float: left;
   display: inline;
-  text-align: left;
+  /* text-align: left; */
+  margin-top: 10px;
   margin-right: 140px;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
@@ -1055,7 +1058,7 @@ div.rbc-toolbar {
   /* border: 1px solid #55b1df; */
   margin-left: 4.5%;
   margin-right: auto;
-  width: 89.8%;
+  width: 89.6%;
   display: block;
   float: left;
   letter-spacing: .8px;
@@ -1402,7 +1405,7 @@ div.rbc-toolbar {
 .filter {
   float: left;
   height: 1250px;
-  width: 400px;
+  width: 550px;
   background-color: #efefef;
   border-radius: 5px;
   border:1px solid #ccc;
@@ -1416,7 +1419,7 @@ div.rbc-toolbar {
   font-size: 30px;
   border-bottom: 3px solid black;
   width: 350px;
-  margin-left: 5px;
+  margin-left: 20px;
 }
 
 .modal {
@@ -1489,16 +1492,16 @@ div.rbc-toolbar {
 
 .clear-filter {
   border: 2px solid white;
-  margin-top: 300px;
+  margin-top: 200px;
   margin-left: 30px;
   margin-right: 30px;
   border-radius: 5px;
-  font-weight: bold;
+  font-weight: normal;
   color: white;
   background-color: #55b1df;
-  font-size: 25px;
+  font-size: 35px;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
@@ -1520,7 +1523,7 @@ div.rbc-toolbar {
   letter-spacing: .8px;
   background-color: #687384;
   color: white;
-  width: 370px;
+  width: 520px;
   padding: 15px;
   margin-top: 0px;
   margin-bottom: 20px;
@@ -1535,7 +1538,7 @@ div.rbc-toolbar {
 }
 
 .inputs-ptag {
-  font-size: 23px;
+  font-size: 30px;
   font-family:'Roboto', sans-serif;
   letter-spacing: .8px;
 }
@@ -1577,7 +1580,7 @@ div.rbc-toolbar {
   cursor:pointer;
   background-color: white;
   color: #55b1df;
-  border: 1px solid #55b1df;
+  border: 2px solid #55b1df;
 }
 
 .more {
