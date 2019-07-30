@@ -1669,11 +1669,11 @@ div.rbc-toolbar {
 
 .more {
   float: right;
-  margin-right: 20px;
+  margin-right: 40px;
   margin-top: 20px;
   background-color: white;
   border-radius: 5em;
-  padding: 5px;
+  padding: 10px;
 }
 
 .more:hover {
@@ -1686,8 +1686,8 @@ div.rbc-toolbar {
   background-color: white;
   color: #55b1df;
   border-radius: 5em;
-  padding: 5px;
-  margin-right: 20px;
+  padding: 10px;
+  margin-right: 40px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
 }
 
