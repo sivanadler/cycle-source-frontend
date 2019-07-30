@@ -127,7 +127,7 @@ class InstructorReview extends React.Component {
 
   render() {
     return (
-      <div className="reviews-div">
+      <div className="instructor-reviews-div">
         <h1 className="header">REVIEWS</h1>
         <div className="button-div">
         {

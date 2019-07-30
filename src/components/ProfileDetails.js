@@ -91,7 +91,7 @@ class ProfileDetails extends React.Component {
       let endSliced = moment(end.toString()).format('llll').slice(17, 30)
       return (
         <div>
-          <h2>{date} ({startSliced} - {endSliced} )</h2>
+          <h2 className="reservation-sub-header">{date} ({startSliced} - {endSliced} )</h2>
         </div>
       )
     }
@@ -146,7 +146,7 @@ class ProfileDetails extends React.Component {
               <div className="profile-card-text">
                 <h1 className="longer-strong">{this.getStudioNameForCard(userClass)}: {this.getSpinClass(userClass)} </h1>
                 {this.getClassDateAndTime(userClass)}
-                <h2>{this.getInstructorForCard(userClass)}</h2>
+                <h2 className="reservation-sub-header">{this.getInstructorForCard(userClass)}</h2>
                 <p className="reservation-card-header"> {this.getLocationForCard(userClass)} </p>
                 <p className="reservation-card-header">Bike: {userClass.bike} </p>
               </div>

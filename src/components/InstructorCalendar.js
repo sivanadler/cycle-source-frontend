@@ -128,11 +128,11 @@ class InstructorCalendar extends React.Component {
 
   render() {
     return (
-      <div style={{ height: 1000, display: 'block'}}>
+      <div style={{ height: 1400, display: 'block'}}>
       <div className="instructor-calendar-div">
         <h1 className="header">RIDE WITH ME</h1>
         <BigCalendar
-          step={30}
+          step={60}
           views={['week']}
           className="instructor-calendar"
           localizer={localizer}
